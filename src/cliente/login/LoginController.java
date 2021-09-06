@@ -11,7 +11,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.net.Socket;
-import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -21,7 +20,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import model.Usuario;
 import util.comunicacao.CodificaMensagem;
-import util.comunicacao.DecodificaMensagem;
 
 /**
  *
