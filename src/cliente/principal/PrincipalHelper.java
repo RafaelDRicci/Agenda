@@ -20,8 +20,8 @@ public class PrincipalHelper {
     }
     
     public void setUsuario(Usuario usuario){
-        view.getjLabelUsuario().setText(usuario.toString());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        view.getJLabelNome().setText(usuario.toString());
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         //(sdf.format(usuario.getDataCadastro()));
         //view.getjLabelDataValidacao().setText(sdf.format(usuario.getDataValidacao()));
         view.getjLabelCargo().setText(usuario.getCargo());

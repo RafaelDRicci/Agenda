@@ -97,6 +97,7 @@ public abstract class RequisicaoCliente {
                         principal.preencheUsuario();
                         
                         principal.getLoginView().dispose();
+                        principal.setEnabled(true);
                         break;
                 }
             

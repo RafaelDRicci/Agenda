@@ -51,8 +51,12 @@ public class PrincipalController {
                 consomeMensagem.start();
             }
         
-        login.setVisible(true);
+        login.setLocationRelativeTo(view);
+        login.setAlwaysOnTop(true);
         login.setPrincipal(view);
+        login.setVisible(true);
+        view.setEnabled(false);
+        
            
     }
     

@@ -54,8 +54,8 @@ public class Servidor{
         Thread consumirRequisicao = new Thread(() -> loopConsomeRequisicao());
         consumirRequisicao.start();
         
-        Thread numeroAleatorio = new Thread(() -> geraNumeroAleatorio());
-        numeroAleatorio.start();
+        //Thread numeroAleatorio = new Thread(() -> geraNumeroAleatorio());
+        //numeroAleatorio.start();
         while(online){
             try {
                 

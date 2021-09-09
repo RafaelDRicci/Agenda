@@ -29,6 +29,7 @@ public class LoginView extends javax.swing.JFrame {
         controller.setTextFieldToUpper(jTextFieldUsuario);
         controller.verificaCaps(); 
         
+        
     }
 
     /**
