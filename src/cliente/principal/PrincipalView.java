@@ -26,7 +26,8 @@ public class PrincipalView extends javax.swing.JFrame {
         initComponents();
         //controller = new PrincipalController(this);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
+        jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
+       
     }
 
     /**
@@ -42,50 +43,224 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCima = new javax.swing.JPanel();
         jLabelAgenda = new javax.swing.JLabel();
         jPanelEsquerda = new javax.swing.JPanel();
-        jButton4 = new javax.swing.JButton();
         jPanelCentro = new javax.swing.JPanel();
         jPanelCentroCima = new javax.swing.JPanel();
+        jPanelCentroCentroCima = new javax.swing.JPanel();
+        jLabelRotina = new javax.swing.JLabel();
+        jPanelCentralSuperiorInferior = new javax.swing.JPanel();
+        jButtonFeitroRotina = new javax.swing.JButton();
+        jButtonJustificarRotina = new javax.swing.JButton();
+        jPanelCentroCentroCentro = new javax.swing.JPanel();
+        jLabelNomeRotina = new javax.swing.JLabel();
+        jLabelDataRotina = new javax.swing.JLabel();
+        jLabelDescricao = new javax.swing.JLabel();
+        jScrollPaneDescricao = new javax.swing.JScrollPane();
+        jTextAreaDescricao = new javax.swing.JTextArea();
+        jTextFieldPeriodoRotina = new javax.swing.JTextField();
+        jTextFieldDataRorina = new javax.swing.JTextField();
+        jTextFieldHoraRotina = new javax.swing.JTextField();
+        jLabelPeriodoRotina = new javax.swing.JLabel();
+        jTextFieldEstadoRotina = new javax.swing.JTextField();
+        jLabelHoraRotina = new javax.swing.JLabel();
+        jTextFieldNomeRotina = new javax.swing.JTextField();
+        jLabelEstadoRotina = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jButtonNovaRotina = new javax.swing.JButton();
+        jButtonEditarRotina = new javax.swing.JButton();
+        jButtonVincularRotina = new javax.swing.JButton();
+        jButtonListarRotinas = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         jScrollPaneRotinas = new javax.swing.JScrollPane();
         jTableRotinas = new javax.swing.JTable();
         jPanelBaixo = new javax.swing.JPanel();
-        jLabelNome = new javax.swing.JLabel();
-        jLabelCargo = new javax.swing.JLabel();
-        jLabelUnidade = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabelCargoUsuario = new javax.swing.JLabel();
+        jLabelUnidadeUsuario = new javax.swing.JLabel();
         jPanelDireita = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Agenda de Rotinas");
         setMinimumSize(new java.awt.Dimension(1200, 800));
 
         jPanelCima.setBackground(new java.awt.Color(0, 54, 65));
-        jPanelCima.setBorder(javax.swing.BorderFactory.createMatteBorder(5, 5, 5, 5, new java.awt.Color(151, 158, 0)));
+        jPanelCima.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
 
-        jLabelAgenda.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelAgenda.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabelAgenda.setForeground(new java.awt.Color(240, 240, 240));
         jLabelAgenda.setText("Agenda de Rotinas");
         jPanelCima.add(jLabelAgenda);
 
         getContentPane().add(jPanelCima, java.awt.BorderLayout.PAGE_START);
 
-        jPanelEsquerda.setBackground(new java.awt.Color(0, 54, 65));
+        jPanelEsquerda.setBackground(new java.awt.Color(151, 158, 0));
         jPanelEsquerda.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(151, 158, 0), 1, true));
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("jButton4");
-        jPanelEsquerda.add(jButton4);
-
         getContentPane().add(jPanelEsquerda, java.awt.BorderLayout.LINE_START);
 
         jPanelCentro.setBackground(new java.awt.Color(0, 54, 65));
-        jPanelCentro.setBorder(null);
         jPanelCentro.setLayout(new java.awt.GridLayout(2, 1));
 
         jPanelCentroCima.setBackground(new java.awt.Color(0, 54, 65));
+        jPanelCentroCima.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 10, 1, new java.awt.Color(151, 158, 0)));
         jPanelCentroCima.setForeground(new java.awt.Color(0, 54, 65));
+        jPanelCentroCima.setLayout(new java.awt.BorderLayout());
+
+        jPanelCentroCentroCima.setBackground(new java.awt.Color(0, 54, 65));
+        jPanelCentroCentroCima.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanelCentroCentroCima.setForeground(new java.awt.Color(240, 240, 240));
+
+        jLabelRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelRotina.setText("Rotina A");
+        jPanelCentroCentroCima.add(jLabelRotina);
+
+        jPanelCentroCima.add(jPanelCentroCentroCima, java.awt.BorderLayout.PAGE_START);
+
+        jPanelCentralSuperiorInferior.setBackground(new java.awt.Color(0, 51, 64));
+        jPanelCentralSuperiorInferior.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanelCentralSuperiorInferior.setForeground(new java.awt.Color(240, 240, 240));
+
+        jButtonFeitroRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonFeitroRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonFeitroRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonFeitroRotina.setText("Feito!");
+        jPanelCentralSuperiorInferior.add(jButtonFeitroRotina);
+
+        jButtonJustificarRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonJustificarRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonJustificarRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonJustificarRotina.setText("Justificar");
+        jPanelCentralSuperiorInferior.add(jButtonJustificarRotina);
+
+        jPanelCentroCima.add(jPanelCentralSuperiorInferior, java.awt.BorderLayout.PAGE_END);
+
+        jPanelCentroCentroCentro.setBackground(new java.awt.Color(0, 54, 65));
+        jPanelCentroCentroCentro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabelNomeRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelNomeRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelNomeRotina.setText("Nome:");
+        jPanelCentroCentroCentro.add(jLabelNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, -1));
+
+        jLabelDataRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelDataRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelDataRotina.setText("Data:");
+        jPanelCentroCentroCentro.add(jLabelDataRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+
+        jLabelDescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelDescricao.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelDescricao.setText("Descrição:");
+        jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, 20));
+
+        jTextAreaDescricao.setColumns(20);
+        jTextAreaDescricao.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
+        jTextAreaDescricao.setLineWrap(true);
+        jTextAreaDescricao.setRows(5);
+        jScrollPaneDescricao.setViewportView(jTextAreaDescricao);
+
+        jPanelCentroCentroCentro.add(jScrollPaneDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 760, 200));
+
+        jTextFieldPeriodoRotina.setEditable(false);
+        jTextFieldPeriodoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldPeriodoRotina.setText("Diário");
+        jTextFieldPeriodoRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPeriodoRotinaActionPerformed(evt);
+            }
+        });
+        jPanelCentroCentroCentro.add(jTextFieldPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 25));
+
+        jTextFieldDataRorina.setEditable(false);
+        jTextFieldDataRorina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldDataRorina.setText("7/10/2021");
+        jTextFieldDataRorina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldDataRorinaActionPerformed(evt);
+            }
+        });
+        jPanelCentroCentroCentro.add(jTextFieldDataRorina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 267, 25));
+
+        jTextFieldHoraRotina.setEditable(false);
+        jTextFieldHoraRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldHoraRotina.setText("7h");
+        jTextFieldHoraRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldHoraRotinaActionPerformed(evt);
+            }
+        });
+        jPanelCentroCentroCentro.add(jTextFieldHoraRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 270, -1));
+
+        jLabelPeriodoRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelPeriodoRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelPeriodoRotina.setText("Periodo:");
+        jPanelCentroCentroCentro.add(jLabelPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 80, -1));
+
+        jTextFieldEstadoRotina.setEditable(false);
+        jTextFieldEstadoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldEstadoRotina.setText("Em Vigor");
+        jTextFieldEstadoRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldEstadoRotinaActionPerformed(evt);
+            }
+        });
+        jPanelCentroCentroCentro.add(jTextFieldEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 270, -1));
+
+        jLabelHoraRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelHoraRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelHoraRotina.setText("Horários:");
+        jPanelCentroCentroCentro.add(jLabelHoraRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+
+        jTextFieldNomeRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldNomeRotina.setText("Rotina A");
+        jPanelCentroCentroCentro.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 270, -1));
+
+        jLabelEstadoRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabelEstadoRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelEstadoRotina.setText("Estado: ");
+        jPanelCentroCentroCentro.add(jLabelEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
+
+        jPanelCentroCima.add(jPanelCentroCentroCentro, java.awt.BorderLayout.CENTER);
+
+        jPanel2.setBackground(new java.awt.Color(0, 51, 64));
+        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanel2.setLayout(new java.awt.GridLayout(5, 1, 5, 5));
+
+        jButtonNovaRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonNovaRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonNovaRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonNovaRotina.setText("Nova");
+        jPanel2.add(jButtonNovaRotina);
+
+        jButtonEditarRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonEditarRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonEditarRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonEditarRotina.setText("Editar");
+        jPanel2.add(jButtonEditarRotina);
+
+        jButtonVincularRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonVincularRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonVincularRotina.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonVincularRotina.setText("Vincular");
+        jPanel2.add(jButtonVincularRotina);
+
+        jButtonListarRotinas.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonListarRotinas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonListarRotinas.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonListarRotinas.setText("Listar");
+        jPanel2.add(jButtonListarRotinas);
+
+        jButtonSair.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonSair.setForeground(new java.awt.Color(240, 240, 240));
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButtonSair);
+
+        jPanelCentroCima.add(jPanel2, java.awt.BorderLayout.LINE_START);
+
         jPanelCentro.add(jPanelCentroCima);
 
         jScrollPaneRotinas.setPreferredSize(new java.awt.Dimension(400, 350));
@@ -94,12 +269,12 @@ public class PrincipalView extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         jTableRotinas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTableRotinas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableRotinas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTableRotinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"7:00", null, null, null, null, null, null, null},
-                {"8:00", null, null, null, null, null, null, null},
-                {"9:00", null, null, null, null, null, null, null},
+                {"7:00", null, "Rotina A", "Rotina A", null, null, null, null},
+                {"8:00", null, null, "Rotina B", null, null, null, null},
+                {"9:00", null, null, "Rotina C", null, null, null, null},
                 {"10:00", null, null, null, null, null, null, null},
                 {"11:00", null, null, null, null, null, null, null},
                 {"12:00", null, null, null, null, null, null, null},
@@ -129,13 +304,13 @@ public class PrincipalView extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableRotinas.setToolTipText("");
         jTableRotinas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTableRotinas.setName(""); // NOI18N
         jTableRotinas.setPreferredSize(new java.awt.Dimension(400, 360));
         jTableRotinas.setRowHeight(30);
         jScrollPaneRotinas.setViewportView(jTableRotinas);
         jTableRotinas.getAccessibleContext().setAccessibleName("");
-        jTableRotinas.getAccessibleContext().setAccessibleDescription("");
 
         jPanelCentro.add(jScrollPaneRotinas);
         jScrollPaneRotinas.getAccessibleContext().setAccessibleName("");
@@ -143,50 +318,53 @@ public class PrincipalView extends javax.swing.JFrame {
         getContentPane().add(jPanelCentro, java.awt.BorderLayout.CENTER);
 
         jPanelBaixo.setBackground(new java.awt.Color(0, 54, 65));
-        jPanelBaixo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(151, 158, 0), 1, true));
+        jPanelBaixo.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
         jPanelBaixo.setLayout(new java.awt.GridLayout(3, 1));
 
-        jLabelNome.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelNome.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelNome.setText("Nome");
-        jPanelBaixo.add(jLabelNome);
+        jLabelNomeUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelNomeUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelNomeUsuario.setText("Nome");
+        jPanelBaixo.add(jLabelNomeUsuario);
 
-        jLabelCargo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelCargo.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelCargo.setText("Cargo");
-        jPanelBaixo.add(jLabelCargo);
+        jLabelCargoUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelCargoUsuario.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelCargoUsuario.setText("Cargo");
+        jPanelBaixo.add(jLabelCargoUsuario);
 
-        jLabelUnidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelUnidade.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelUnidade.setText("Unidade");
-        jPanelBaixo.add(jLabelUnidade);
+        jLabelUnidadeUsuario.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelUnidadeUsuario.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelUnidadeUsuario.setText("Unidade");
+        jPanelBaixo.add(jLabelUnidadeUsuario);
 
         getContentPane().add(jPanelBaixo, java.awt.BorderLayout.PAGE_END);
 
-        jPanelDireita.setBackground(new java.awt.Color(0, 54, 65));
-        jPanelDireita.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(151, 158, 0), 1, true));
-
-        jButton3.setText("jButton3");
-        jPanelDireita.add(jButton3);
-
+        jPanelDireita.setBackground(new java.awt.Color(151, 158, 0));
         getContentPane().add(jPanelDireita, java.awt.BorderLayout.LINE_END);
-
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenu1.add(jMenuItem1);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextFieldDataRorinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataRorinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldDataRorinaActionPerformed
+
+    private void jTextFieldPeriodoRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPeriodoRotinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldPeriodoRotinaActionPerformed
+
+    private void jTextFieldHoraRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHoraRotinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldHoraRotinaActionPerformed
+
+    private void jTextFieldEstadoRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstadoRotinaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldEstadoRotinaActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        controller.sair();
+    }//GEN-LAST:event_jButtonSairActionPerformed
 
     
     /**
@@ -225,24 +403,43 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonEditarRotina;
+    private javax.swing.JButton jButtonFeitroRotina;
+    private javax.swing.JButton jButtonJustificarRotina;
+    private javax.swing.JButton jButtonListarRotinas;
+    private javax.swing.JButton jButtonNovaRotina;
+    private javax.swing.JButton jButtonSair;
+    private javax.swing.JButton jButtonVincularRotina;
     private javax.swing.JLabel jLabelAgenda;
-    private javax.swing.JLabel jLabelCargo;
-    private javax.swing.JLabel jLabelNome;
-    private javax.swing.JLabel jLabelUnidade;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JLabel jLabelCargoUsuario;
+    private javax.swing.JLabel jLabelDataRotina;
+    private javax.swing.JLabel jLabelDescricao;
+    private javax.swing.JLabel jLabelEstadoRotina;
+    private javax.swing.JLabel jLabelHoraRotina;
+    private javax.swing.JLabel jLabelNomeRotina;
+    private javax.swing.JLabel jLabelNomeUsuario;
+    private javax.swing.JLabel jLabelPeriodoRotina;
+    private javax.swing.JLabel jLabelRotina;
+    private javax.swing.JLabel jLabelUnidadeUsuario;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBaixo;
+    private javax.swing.JPanel jPanelCentralSuperiorInferior;
     private javax.swing.JPanel jPanelCentro;
+    private javax.swing.JPanel jPanelCentroCentroCentro;
+    private javax.swing.JPanel jPanelCentroCentroCima;
     private javax.swing.JPanel jPanelCentroCima;
     private javax.swing.JPanel jPanelCima;
     private javax.swing.JPanel jPanelDireita;
     private javax.swing.JPanel jPanelEsquerda;
+    private javax.swing.JScrollPane jScrollPaneDescricao;
     private javax.swing.JScrollPane jScrollPaneRotinas;
     private javax.swing.JTable jTableRotinas;
+    private javax.swing.JTextArea jTextAreaDescricao;
+    private javax.swing.JTextField jTextFieldDataRorina;
+    private javax.swing.JTextField jTextFieldEstadoRotina;
+    private javax.swing.JTextField jTextFieldHoraRotina;
+    private javax.swing.JTextField jTextFieldNomeRotina;
+    private javax.swing.JTextField jTextFieldPeriodoRotina;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
@@ -265,30 +462,30 @@ public class PrincipalView extends javax.swing.JFrame {
     
     
     public JLabel getjLabelCargo() {
-        return jLabelCargo;
+        return jLabelCargoUsuario;
     }
 
     public void setjLabelCargo(JLabel jLabelCargo) {
-        this.jLabelCargo = jLabelCargo;
+        this.jLabelCargoUsuario = jLabelCargo;
     }
 
     public JLabel getjLabelUnidade() {
-        return jLabelUnidade;
+        return jLabelUnidadeUsuario;
     }
 
     public void setjLabelUnidade(JLabel jLabelUnidade) {
-        this.jLabelUnidade = jLabelUnidade;
+        this.jLabelUnidadeUsuario = jLabelUnidade;
     }
     public LoginView getLoginView(){
         return controller.getLoginView();
     }
     
     public JLabel getJLabelNome(){
-        return jLabelNome;
+        return jLabelNomeUsuario;
     }
     
     public void setJLabelNome(JLabel jLabelNome){
-        this.jLabelNome = jLabelNome;
+        this.jLabelNomeUsuario = jLabelNome;
     }
     
 }
