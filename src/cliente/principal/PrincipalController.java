@@ -6,8 +6,11 @@
 package cliente.principal;
 
 import cliente.RequisicaoCliente;
+import cliente.listarrotina.ListarRotinaView;
 import cliente.login.LoginController;
 import cliente.login.LoginView;
+import cliente.salvarrotina.SalvarRotinaView;
+import cliente.vincularrotina.VincularRotinaView;
 import java.io.IOException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -36,7 +39,7 @@ public class PrincipalController {
         filaMensagens = new LinkedBlockingQueue<>();
         recebeMensagem = new Thread (() -> recebeMensagens());
         consomeMensagem = new Thread (() -> consomeMensagens());
-        logar();
+        //logar();
        
     }
     
@@ -134,5 +137,29 @@ public class PrincipalController {
      
     public LoginView getLoginView(){
         return login;
+    }
+
+    void novaRotina() {
+        SalvarRotinaView salvarRotinca = new SalvarRotinaView();
+        salvarRotinca.setLocationRelativeTo(view);
+        salvarRotinca.setVisible(true);
+    }
+
+    void editarRotina() {
+        SalvarRotinaView salvarRotinca = new SalvarRotinaView();
+        salvarRotinca.setLocationRelativeTo(view);
+        salvarRotinca.setVisible(true);
+    }
+
+    void vincularRotina() {
+        VincularRotinaView vincularRotina = new VincularRotinaView();
+        vincularRotina.setLocationRelativeTo(view);
+        vincularRotina.setVisible(true);
+    }
+
+    void listarRotina() {
+        ListarRotinaView listarRotina = new ListarRotinaView();
+        listarRotina.setLocationRelativeTo(view);
+        listarRotina.setVisible(true);
     }
 }

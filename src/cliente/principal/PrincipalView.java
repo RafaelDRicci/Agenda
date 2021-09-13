@@ -24,7 +24,7 @@ public class PrincipalView extends javax.swing.JFrame {
     public PrincipalView() {
         
         initComponents();
-        //controller = new PrincipalController(this);
+        controller = new PrincipalController(this);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
        
@@ -50,6 +50,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentralSuperiorInferior = new javax.swing.JPanel();
         jButtonFeitroRotina = new javax.swing.JButton();
         jButtonJustificarRotina = new javax.swing.JButton();
+        jButtonDesvincular = new javax.swing.JButton();
         jPanelCentroCentroCentro = new javax.swing.JPanel();
         jLabelNomeRotina = new javax.swing.JLabel();
         jLabelDataRotina = new javax.swing.JLabel();
@@ -119,17 +120,20 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentralSuperiorInferior.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
         jPanelCentralSuperiorInferior.setForeground(new java.awt.Color(240, 240, 240));
 
-        jButtonFeitroRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonFeitroRotina.setBackground(new java.awt.Color(151, 158, 0));
         jButtonFeitroRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonFeitroRotina.setForeground(new java.awt.Color(240, 240, 240));
-        jButtonFeitroRotina.setText("Feito!");
+        jButtonFeitroRotina.setText("Feito");
         jPanelCentralSuperiorInferior.add(jButtonFeitroRotina);
 
-        jButtonJustificarRotina.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonJustificarRotina.setBackground(new java.awt.Color(151, 158, 0));
         jButtonJustificarRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonJustificarRotina.setForeground(new java.awt.Color(240, 240, 240));
         jButtonJustificarRotina.setText("Justificar");
         jPanelCentralSuperiorInferior.add(jButtonJustificarRotina);
+
+        jButtonDesvincular.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonDesvincular.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonDesvincular.setText("Desvincular");
+        jPanelCentralSuperiorInferior.add(jButtonDesvincular);
 
         jPanelCentroCima.add(jPanelCentralSuperiorInferior, java.awt.BorderLayout.PAGE_END);
 
@@ -226,31 +230,46 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jButtonNovaRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonNovaRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonNovaRotina.setForeground(new java.awt.Color(240, 240, 240));
         jButtonNovaRotina.setText("Nova");
+        jButtonNovaRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNovaRotinaActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonNovaRotina);
 
         jButtonEditarRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonEditarRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonEditarRotina.setForeground(new java.awt.Color(240, 240, 240));
         jButtonEditarRotina.setText("Editar");
+        jButtonEditarRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarRotinaActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonEditarRotina);
 
         jButtonVincularRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonVincularRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonVincularRotina.setForeground(new java.awt.Color(240, 240, 240));
         jButtonVincularRotina.setText("Vincular");
+        jButtonVincularRotina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVincularRotinaActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonVincularRotina);
 
         jButtonListarRotinas.setBackground(new java.awt.Color(151, 154, 0));
         jButtonListarRotinas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonListarRotinas.setForeground(new java.awt.Color(240, 240, 240));
         jButtonListarRotinas.setText("Listar");
+        jButtonListarRotinas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListarRotinasActionPerformed(evt);
+            }
+        });
         jPanel2.add(jButtonListarRotinas);
 
         jButtonSair.setBackground(new java.awt.Color(151, 154, 0));
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonSair.setForeground(new java.awt.Color(240, 240, 240));
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,6 +385,22 @@ public class PrincipalView extends javax.swing.JFrame {
         controller.sair();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
+    private void jButtonNovaRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovaRotinaActionPerformed
+        controller.novaRotina();
+    }//GEN-LAST:event_jButtonNovaRotinaActionPerformed
+
+    private void jButtonEditarRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarRotinaActionPerformed
+        controller.editarRotina();
+    }//GEN-LAST:event_jButtonEditarRotinaActionPerformed
+
+    private void jButtonVincularRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVincularRotinaActionPerformed
+        controller.vincularRotina();
+    }//GEN-LAST:event_jButtonVincularRotinaActionPerformed
+
+    private void jButtonListarRotinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarRotinasActionPerformed
+        controller.listarRotina();
+    }//GEN-LAST:event_jButtonListarRotinasActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -403,6 +438,7 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDesvincular;
     private javax.swing.JButton jButtonEditarRotina;
     private javax.swing.JButton jButtonFeitroRotina;
     private javax.swing.JButton jButtonJustificarRotina;

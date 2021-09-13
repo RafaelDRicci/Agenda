@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalHelper.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaView.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalView.java</file>
-            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/login/LoginController.java</file>
-            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/RequisicaoCliente.java</file>
-            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/Servidor.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/salvarrotina/SalvarRotinaHelper.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/salvarrotina/SalvarRotinaView.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/salvarrotina/SalvarRotinaController.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalController.java</file>
-            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/login/LoginView.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/listarrotina/ListarRotinaView.java</file>
         </group>
     </open-files>
 </project-private>
