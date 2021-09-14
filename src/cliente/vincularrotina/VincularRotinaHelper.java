@@ -10,5 +10,11 @@ package cliente.vincularrotina;
  * @author rafaeld
  */
 public class VincularRotinaHelper {
+
+    private VincularRotinaView view;
+    
+    VincularRotinaHelper(VincularRotinaView view) {
+        this.view = view;
+    }
     
 }

@@ -10,5 +10,11 @@ package cliente.listarrotina;
  * @author rafaeld
  */
 public class ListarRotinaHelper {
+
+    private ListarRotinaView view;
+    
+    ListarRotinaHelper(ListarRotinaView view) {
+        this.view = view;
+    }
     
 }

@@ -5,7 +5,6 @@
  */
 package cliente.principal;
 
-import java.text.SimpleDateFormat;
 import model.Usuario;
 
 /**
@@ -13,7 +12,7 @@ import model.Usuario;
  * @author rafaeld
  */
 public class PrincipalHelper {
-    PrincipalView view;
+    private PrincipalView view;
     
     public PrincipalHelper(PrincipalView view){
         this.view = view;

@@ -6,6 +6,7 @@
 package cliente.principal;
 
 import cliente.RequisicaoCliente;
+import cliente.justificarrotina.JustificarRotinaView;
 import cliente.listarrotina.ListarRotinaView;
 import cliente.login.LoginController;
 import cliente.login.LoginView;
@@ -39,7 +40,7 @@ public class PrincipalController {
         filaMensagens = new LinkedBlockingQueue<>();
         recebeMensagem = new Thread (() -> recebeMensagens());
         consomeMensagem = new Thread (() -> consomeMensagens());
-        //logar();
+        logar();
        
     }
     
@@ -161,5 +162,11 @@ public class PrincipalController {
         ListarRotinaView listarRotina = new ListarRotinaView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
+    }
+
+    void desvincularRotina() {
+        JustificarRotinaView justificarRotina = new JustificarRotinaView();
+        justificarRotina.setLocationRelativeTo(view);
+        justificarRotina.setVisible(true);
     }
 }

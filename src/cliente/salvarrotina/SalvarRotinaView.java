@@ -11,11 +11,11 @@ package cliente.salvarrotina;
  */
 public class SalvarRotinaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NovaRotinaView
-     */
+    private SalvarRotinaController controller;
+    
     public SalvarRotinaView() {
-        initComponents();
+        controller = new SalvarRotinaController(this);
+        initComponents();    
     }
 
     /**
@@ -42,14 +42,15 @@ public class SalvarRotinaView extends javax.swing.JFrame {
         jComboBoxPeriodo = new javax.swing.JComboBox<>();
         jComboBoxUnidade = new javax.swing.JComboBox<>();
         jLabelDataLimite = new javax.swing.JLabel();
-        jComboBoxDataLimite = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
+        jTextFieldDataLimite = new javax.swing.JTextField();
         jPanelTopo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelPrincipal.setBackground(new java.awt.Color(0, 54, 65));
         jPanelPrincipal.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
@@ -97,6 +98,11 @@ public class SalvarRotinaView extends javax.swing.JFrame {
         jButtonCancelar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
         jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, -1));
 
         jLabelPeriodo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -116,10 +122,10 @@ public class SalvarRotinaView extends javax.swing.JFrame {
         jLabelDataLimite.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDataLimite.setText("Data Limite:");
         jPanelFundo.add(jLabelDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
-
-        jComboBoxDataLimite.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanelFundo.add(jComboBoxDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 260, -1));
         jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 730, 10));
+
+        jTextFieldDataLimite.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanelFundo.add(jTextFieldDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 260, -1));
 
         jPanelPrincipal.add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
@@ -141,6 +147,10 @@ public class SalvarRotinaView extends javax.swing.JFrame {
     private void jTextFieldNomeRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNomeRotinaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNomeRotinaActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        controller.cancelar();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,7 +191,6 @@ public class SalvarRotinaView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JComboBox<String> jComboBoxDataLimite;
     private javax.swing.JComboBox<String> jComboBoxPeriodo;
     private javax.swing.JComboBox<String> jComboBoxUnidade;
     private javax.swing.JLabel jLabel1;
@@ -196,6 +205,7 @@ public class SalvarRotinaView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaDescricao;
+    private javax.swing.JTextField jTextFieldDataLimite;
     private javax.swing.JTextField jTextFieldNomeRotina;
     // End of variables declaration//GEN-END:variables
 }

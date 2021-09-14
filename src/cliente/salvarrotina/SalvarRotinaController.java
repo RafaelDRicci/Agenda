@@ -10,5 +10,17 @@ package cliente.salvarrotina;
  * @author rafaeld
  */
 public class SalvarRotinaController {
+
+    private SalvarRotinaView view;
+    private SalvarRotinaHelper helper;
+    
+    public SalvarRotinaController(SalvarRotinaView view) {
+        this.view = view;
+        helper = new SalvarRotinaHelper(view);
+    }
+    
+    public void cancelar(){
+        view.dispose();
+    }
     
 }

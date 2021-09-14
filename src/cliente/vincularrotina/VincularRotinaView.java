@@ -11,10 +11,11 @@ package cliente.vincularrotina;
  */
 public class VincularRotinaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VincularRotinaView
-     */
+    private VincularRotinaController controller;
+    
+    
     public VincularRotinaView() {
+        controller = new VincularRotinaController(this);
         initComponents();
     }
 
@@ -48,7 +49,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jLabelPeriodo = new javax.swing.JLabel();
         jComboBoxHora = new javax.swing.JComboBox<>();
         jTextFieldHora = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonApagaHora = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jPanelReagendavel = new javax.swing.JPanel();
         jRadioButtonReagendavelNao = new javax.swing.JRadioButton();
@@ -62,12 +63,13 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jLabelHoraFixa = new javax.swing.JLabel();
         jRadioButtonHoraFixaSim = new javax.swing.JRadioButton();
         jRadioButtonHoraFixaNao = new javax.swing.JRadioButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jScrollPaneObeservacao = new javax.swing.JScrollPane();
         jTextAreaObservacao = new javax.swing.JTextArea();
         jPanelTopo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelPrincipal.setBackground(new java.awt.Color(0, 51, 65));
         jPanelPrincipal.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
@@ -136,6 +138,11 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.setToolTipText("");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
+            }
+        });
         jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 590, -1, -1));
 
         jLabelPeriodo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -154,9 +161,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jTextFieldHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jPanelFundo.add(jTextFieldHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 180, 30));
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("<--");
-        jPanelFundo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 60, 20));
+        jButtonApagaHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonApagaHora.setText("<--");
+        jPanelFundo.add(jButtonApagaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 60, 20));
 
         jSeparator1.setBackground(new java.awt.Color(151, 158, 0));
         jSeparator1.setForeground(new java.awt.Color(240, 240, 240));
@@ -243,9 +250,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
 
         jTextAreaObservacao.setColumns(20);
         jTextAreaObservacao.setRows(5);
-        jScrollPane1.setViewportView(jTextAreaObservacao);
+        jScrollPaneObeservacao.setViewportView(jTextAreaObservacao);
 
-        jPanelFundo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 410, 120));
+        jPanelFundo.add(jScrollPaneObeservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 450, 410, 120));
 
         jPanelPrincipal.add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
@@ -280,6 +287,10 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private void jRadioButtonHoraFixaSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonHoraFixaSimActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonHoraFixaSimActionPerformed
+
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
+        controller.cancelar();
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,7 +331,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGrouHoraFixa;
     private javax.swing.ButtonGroup buttonGroupPrioritario;
     private javax.swing.ButtonGroup buttonGroupReagendavel;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonApagaHora;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JComboBox<String> jComboBoxData;
@@ -352,7 +363,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButtonHoraFixaSim;
     private javax.swing.JRadioButton jRadioButtonReagendavelNao;
     private javax.swing.JRadioButton jRadioButtonReagendavelSim;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPaneObeservacao;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaObservacao;
     private javax.swing.JTextField jTextFieldHora;

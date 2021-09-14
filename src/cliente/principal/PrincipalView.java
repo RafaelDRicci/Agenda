@@ -16,7 +16,7 @@ import model.Usuario;
  */
 public class PrincipalView extends javax.swing.JFrame {
 
-    PrincipalController controller;
+    private PrincipalController controller;
     
     /**
      * Creates new form PrincipalView
@@ -26,7 +26,7 @@ public class PrincipalView extends javax.swing.JFrame {
         initComponents();
         controller = new PrincipalController(this);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
+        //jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
        
     }
 
@@ -48,9 +48,8 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentroCentroCima = new javax.swing.JPanel();
         jLabelRotina = new javax.swing.JLabel();
         jPanelCentralSuperiorInferior = new javax.swing.JPanel();
-        jButtonFeitroRotina = new javax.swing.JButton();
-        jButtonJustificarRotina = new javax.swing.JButton();
-        jButtonDesvincular = new javax.swing.JButton();
+        jButtonFeito = new javax.swing.JButton();
+        jButtonJustificar = new javax.swing.JButton();
         jPanelCentroCentroCentro = new javax.swing.JPanel();
         jLabelNomeRotina = new javax.swing.JLabel();
         jLabelDataRotina = new javax.swing.JLabel();
@@ -65,7 +64,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelHoraRotina = new javax.swing.JLabel();
         jTextFieldNomeRotina = new javax.swing.JTextField();
         jLabelEstadoRotina = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelBotoes = new javax.swing.JPanel();
         jButtonNovaRotina = new javax.swing.JButton();
         jButtonEditarRotina = new javax.swing.JButton();
         jButtonVincularRotina = new javax.swing.JButton();
@@ -106,7 +105,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentroCima.setLayout(new java.awt.BorderLayout());
 
         jPanelCentroCentroCima.setBackground(new java.awt.Color(0, 54, 65));
-        jPanelCentroCentroCima.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanelCentroCentroCima.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(151, 158, 0)));
         jPanelCentroCentroCima.setForeground(new java.awt.Color(240, 240, 240));
 
         jLabelRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -117,23 +116,23 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentroCima.add(jPanelCentroCentroCima, java.awt.BorderLayout.PAGE_START);
 
         jPanelCentralSuperiorInferior.setBackground(new java.awt.Color(0, 51, 64));
-        jPanelCentralSuperiorInferior.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanelCentralSuperiorInferior.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(151, 158, 0)));
         jPanelCentralSuperiorInferior.setForeground(new java.awt.Color(240, 240, 240));
 
-        jButtonFeitroRotina.setBackground(new java.awt.Color(151, 158, 0));
-        jButtonFeitroRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonFeitroRotina.setText("Feito");
-        jPanelCentralSuperiorInferior.add(jButtonFeitroRotina);
+        jButtonFeito.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonFeito.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonFeito.setText("Feito");
+        jPanelCentralSuperiorInferior.add(jButtonFeito);
 
-        jButtonJustificarRotina.setBackground(new java.awt.Color(151, 158, 0));
-        jButtonJustificarRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonJustificarRotina.setText("Justificar");
-        jPanelCentralSuperiorInferior.add(jButtonJustificarRotina);
-
-        jButtonDesvincular.setBackground(new java.awt.Color(151, 158, 0));
-        jButtonDesvincular.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButtonDesvincular.setText("Desvincular");
-        jPanelCentralSuperiorInferior.add(jButtonDesvincular);
+        jButtonJustificar.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonJustificar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonJustificar.setText("Justificar");
+        jButtonJustificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonJustificarActionPerformed(evt);
+            }
+        });
+        jPanelCentralSuperiorInferior.add(jButtonJustificar);
 
         jPanelCentroCima.add(jPanelCentralSuperiorInferior, java.awt.BorderLayout.PAGE_END);
 
@@ -195,7 +194,7 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jLabelPeriodoRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelPeriodoRotina.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelPeriodoRotina.setText("Periodo:");
+        jLabelPeriodoRotina.setText("Período:");
         jPanelCentroCentroCentro.add(jLabelPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 80, -1));
 
         jTextFieldEstadoRotina.setEditable(false);
@@ -213,6 +212,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelHoraRotina.setText("Horários:");
         jPanelCentroCentroCentro.add(jLabelHoraRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
 
+        jTextFieldNomeRotina.setEditable(false);
         jTextFieldNomeRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldNomeRotina.setText("Rotina A");
         jPanelCentroCentroCentro.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 270, -1));
@@ -224,9 +224,9 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jPanelCentroCima.add(jPanelCentroCentroCentro, java.awt.BorderLayout.CENTER);
 
-        jPanel2.setBackground(new java.awt.Color(0, 51, 64));
-        jPanel2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(151, 158, 0)));
-        jPanel2.setLayout(new java.awt.GridLayout(5, 1, 5, 5));
+        jPanelBotoes.setBackground(new java.awt.Color(0, 51, 64));
+        jPanelBotoes.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(151, 158, 0)));
+        jPanelBotoes.setLayout(new java.awt.GridLayout(5, 1, 5, 5));
 
         jButtonNovaRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonNovaRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -236,7 +236,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 jButtonNovaRotinaActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonNovaRotina);
+        jPanelBotoes.add(jButtonNovaRotina);
 
         jButtonEditarRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonEditarRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -246,7 +246,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 jButtonEditarRotinaActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonEditarRotina);
+        jPanelBotoes.add(jButtonEditarRotina);
 
         jButtonVincularRotina.setBackground(new java.awt.Color(151, 154, 0));
         jButtonVincularRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -256,7 +256,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 jButtonVincularRotinaActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonVincularRotina);
+        jPanelBotoes.add(jButtonVincularRotina);
 
         jButtonListarRotinas.setBackground(new java.awt.Color(151, 154, 0));
         jButtonListarRotinas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -266,7 +266,7 @@ public class PrincipalView extends javax.swing.JFrame {
                 jButtonListarRotinasActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonListarRotinas);
+        jPanelBotoes.add(jButtonListarRotinas);
 
         jButtonSair.setBackground(new java.awt.Color(151, 154, 0));
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -276,9 +276,9 @@ public class PrincipalView extends javax.swing.JFrame {
                 jButtonSairActionPerformed(evt);
             }
         });
-        jPanel2.add(jButtonSair);
+        jPanelBotoes.add(jButtonSair);
 
-        jPanelCentroCima.add(jPanel2, java.awt.BorderLayout.LINE_START);
+        jPanelCentroCima.add(jPanelBotoes, java.awt.BorderLayout.LINE_START);
 
         jPanelCentro.add(jPanelCentroCima);
 
@@ -401,6 +401,10 @@ public class PrincipalView extends javax.swing.JFrame {
         controller.listarRotina();
     }//GEN-LAST:event_jButtonListarRotinasActionPerformed
 
+    private void jButtonJustificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJustificarActionPerformed
+        controller.desvincularRotina();
+    }//GEN-LAST:event_jButtonJustificarActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -438,10 +442,9 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonDesvincular;
     private javax.swing.JButton jButtonEditarRotina;
-    private javax.swing.JButton jButtonFeitroRotina;
-    private javax.swing.JButton jButtonJustificarRotina;
+    private javax.swing.JButton jButtonFeito;
+    private javax.swing.JButton jButtonJustificar;
     private javax.swing.JButton jButtonListarRotinas;
     private javax.swing.JButton jButtonNovaRotina;
     private javax.swing.JButton jButtonSair;
@@ -457,8 +460,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPeriodoRotina;
     private javax.swing.JLabel jLabelRotina;
     private javax.swing.JLabel jLabelUnidadeUsuario;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelBaixo;
+    private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCentralSuperiorInferior;
     private javax.swing.JPanel jPanelCentro;
     private javax.swing.JPanel jPanelCentroCentroCentro;

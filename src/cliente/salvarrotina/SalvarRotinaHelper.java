@@ -10,5 +10,11 @@ package cliente.salvarrotina;
  * @author rafaeld
  */
 public class SalvarRotinaHelper {
+
+    private SalvarRotinaView view;
+    
+    SalvarRotinaHelper(SalvarRotinaView view) {
+        this.view = view;
+    }
     
 }

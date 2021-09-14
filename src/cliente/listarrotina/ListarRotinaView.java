@@ -12,8 +12,10 @@ package cliente.listarrotina;
  */
 public class ListarRotinaView extends javax.swing.JFrame {
 
-    /** Creates new form ListarRotinaView */
+    private ListarRotinaController controller;
+    
     public ListarRotinaView() {
+        controller = new ListarRotinaController(this);
         initComponents();
     }
 
@@ -27,34 +29,70 @@ public class ListarRotinaView extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanelFundo = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelTopo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jPanelBaixo = new javax.swing.JPanel();
+        jButtonDesvincular = new javax.swing.JButton();
+        jButtonEditar = new javax.swing.JButton();
+        jButtonVoltar = new javax.swing.JButton();
+        jPanelCentro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jTableRotinas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelFundo.setBackground(new java.awt.Color(0, 51, 65));
         jPanelFundo.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
         jPanelFundo.setLayout(new java.awt.BorderLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 51, 64));
-        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 10, 1, new java.awt.Color(151, 158, 0)));
+        jPanelTopo.setBackground(new java.awt.Color(0, 51, 64));
+        jPanelTopo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 10, 1, new java.awt.Color(151, 158, 0)));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Todas as Rotinas");
         jLabel1.setToolTipText("");
-        jPanel1.add(jLabel1);
+        jPanelTopo.add(jLabel1);
 
-        jPanelFundo.add(jPanel1, java.awt.BorderLayout.PAGE_START);
+        jPanelFundo.add(jPanelTopo, java.awt.BorderLayout.PAGE_START);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jPanelBaixo.setBackground(new java.awt.Color(0, 51, 65));
+        jPanelBaixo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, new java.awt.Color(151, 158, 0)));
+
+        jButtonDesvincular.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonDesvincular.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonDesvincular.setText("Desvincular");
+        jPanelBaixo.add(jButtonDesvincular);
+
+        jButtonEditar.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonEditar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonEditar.setText("Editar");
+        jButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditarActionPerformed(evt);
+            }
+        });
+        jPanelBaixo.add(jButtonEditar);
+
+        jButtonVoltar.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonVoltar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVoltarActionPerformed(evt);
+            }
+        });
+        jPanelBaixo.add(jButtonVoltar);
+
+        jPanelFundo.add(jPanelBaixo, java.awt.BorderLayout.PAGE_END);
+
+        jPanelCentro.setBackground(new java.awt.Color(0, 51, 65));
+
+        jTableRotinas.setBackground(new java.awt.Color(240, 240, 240));
+        jTableRotinas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTableRotinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -65,25 +103,24 @@ public class ListarRotinaView extends javax.swing.JFrame {
                 "Rotina", "Período", "Horário", "Data"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableRotinas);
 
-        jPanelFundo.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        jPanelCentro.add(jScrollPane1);
 
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1);
-
-        jButton2.setText("jButton2");
-        jPanel2.add(jButton2);
-
-        jButton3.setText("jButton3");
-        jPanel2.add(jButton3);
-
-        jPanelFundo.add(jPanel2, java.awt.BorderLayout.PAGE_END);
+        jPanelFundo.add(jPanelCentro, java.awt.BorderLayout.CENTER);
 
         getContentPane().add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVoltarActionPerformed
+        controller.voltar();
+    }//GEN-LAST:event_jButtonVoltarActionPerformed
+
+    private void jButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarActionPerformed
+        controller.editarRotina();
+    }//GEN-LAST:event_jButtonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,15 +158,16 @@ public class ListarRotinaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonDesvincular;
+    private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelBaixo;
+    private javax.swing.JPanel jPanelCentro;
     private javax.swing.JPanel jPanelFundo;
+    private javax.swing.JPanel jPanelTopo;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableRotinas;
     // End of variables declaration//GEN-END:variables
 
 }
