@@ -35,12 +35,8 @@ public class SalvarRotinaView extends javax.swing.JFrame {
         jTextFieldNomeRotina = new javax.swing.JTextField();
         jLabelDescricao = new javax.swing.JLabel();
         jLabelNomeRotina = new javax.swing.JLabel();
-        jLabelUnidade = new javax.swing.JLabel();
         jButtonCadastrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
-        jLabelPeriodo = new javax.swing.JLabel();
-        jComboBoxPeriodo = new javax.swing.JComboBox<>();
-        jComboBoxUnidade = new javax.swing.JComboBox<>();
         jLabelDataLimite = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTextFieldDataLimite = new javax.swing.JTextField();
@@ -58,14 +54,14 @@ public class SalvarRotinaView extends javax.swing.JFrame {
 
         jPanelFundo.setBackground(new java.awt.Color(0, 54, 65));
         jPanelFundo.setMinimumSize(new java.awt.Dimension(760, 340));
-        jPanelFundo.setPreferredSize(new java.awt.Dimension(750, 345));
+        jPanelFundo.setPreferredSize(new java.awt.Dimension(455, 485));
         jPanelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTextAreaDescricao.setColumns(20);
         jTextAreaDescricao.setRows(5);
         jScrollPane1.setViewportView(jTextAreaDescricao);
 
-        jPanelFundo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 370, 240));
+        jPanelFundo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 410, 240));
 
         jTextFieldNomeRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTextFieldNomeRotina.addActionListener(new java.awt.event.ActionListener() {
@@ -73,27 +69,22 @@ public class SalvarRotinaView extends javax.swing.JFrame {
                 jTextFieldNomeRotinaActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 260, -1));
+        jPanelFundo.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 410, -1));
 
         jLabelDescricao.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelDescricao.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDescricao.setText("Descrição:");
-        jPanelFundo.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 20));
+        jPanelFundo.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, 20));
 
         jLabelNomeRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelNomeRotina.setForeground(new java.awt.Color(240, 240, 240));
         jLabelNomeRotina.setText("Nome:");
-        jPanelFundo.add(jLabelNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
-
-        jLabelUnidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelUnidade.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelUnidade.setText("Unidade:");
-        jPanelFundo.add(jLabelUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+        jPanelFundo.add(jLabelNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jButtonCadastrar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonCadastrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonCadastrar.setText("Salvar");
-        jPanelFundo.add(jButtonCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 300, -1, -1));
+        jPanelFundo.add(jButtonCadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, -1, -1));
 
         jButtonCancelar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -103,29 +94,16 @@ public class SalvarRotinaView extends javax.swing.JFrame {
                 jButtonCancelarActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 300, -1, -1));
-
-        jLabelPeriodo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelPeriodo.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelPeriodo.setText("Período:");
-        jPanelFundo.add(jLabelPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
-
-        jComboBoxPeriodo.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBoxPeriodo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Diário", "Semanal", "Mensal", "Único" }));
-        jPanelFundo.add(jComboBoxPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 260, -1));
-
-        jComboBoxUnidade.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jComboBoxUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Técnologia", "Crédito" }));
-        jPanelFundo.add(jComboBoxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 260, -1));
+        jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 430, -1, -1));
 
         jLabelDataLimite.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelDataLimite.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDataLimite.setText("Data Limite:");
-        jPanelFundo.add(jLabelDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, -1));
-        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 730, 10));
+        jPanelFundo.add(jLabelDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 430, 10));
 
         jTextFieldDataLimite.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanelFundo.add(jTextFieldDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 260, -1));
+        jPanelFundo.add(jTextFieldDataLimite, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 410, -1));
 
         jPanelPrincipal.add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
@@ -191,14 +169,10 @@ public class SalvarRotinaView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCadastrar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JComboBox<String> jComboBoxPeriodo;
-    private javax.swing.JComboBox<String> jComboBoxUnidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDataLimite;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelNomeRotina;
-    private javax.swing.JLabel jLabelPeriodo;
-    private javax.swing.JLabel jLabelUnidade;
     private javax.swing.JPanel jPanelFundo;
     private javax.swing.JPanel jPanelPrincipal;
     private javax.swing.JPanel jPanelTopo;

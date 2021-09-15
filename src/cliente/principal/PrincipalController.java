@@ -40,7 +40,7 @@ public class PrincipalController {
         filaMensagens = new LinkedBlockingQueue<>();
         recebeMensagem = new Thread (() -> recebeMensagens());
         consomeMensagem = new Thread (() -> consomeMensagens());
-        logar();
+        //logar();
        
     }
     
