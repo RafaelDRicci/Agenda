@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cliente.principal;
+package util.cliente;
 
 /**
  *
  * @author rafaeld
  */
 
+import cliente.principal.*;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;

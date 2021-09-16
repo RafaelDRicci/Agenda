@@ -5,12 +5,8 @@
  */
 package cliente.vincularrotina;
 
-import java.awt.Component;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 public class VincularRotinaView extends javax.swing.JFrame {
 
     private VincularRotinaController controller;
-    private DefaultListModel listModelMes;
     
     public VincularRotinaView() {
         controller = new VincularRotinaController(this);
@@ -52,8 +47,6 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabelPeriodo = new javax.swing.JLabel();
-        jComboBoxHora = new javax.swing.JComboBox<>();
-        jTextFieldHora = new javax.swing.JTextField();
         jButtonApagaHora = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPaneObeservacao = new javax.swing.JScrollPane();
@@ -62,16 +55,13 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jComboBoxMes = new javax.swing.JComboBox<>();
         jButtonApagaMes = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextFieldDia = new javax.swing.JTextField();
         jComboBoxDia = new javax.swing.JComboBox<>();
-        jButtonApagaDia = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jComboBoxDiaSemana = new javax.swing.JComboBox<>();
         jButtonApagaDiaSemana = new javax.swing.JButton();
         jLabelDiasUtil = new javax.swing.JLabel();
         jComboBoxDiaUtil = new javax.swing.JComboBox<>();
         jButtonApagaDiaUtil = new javax.swing.JButton();
-        jTextFieldDiaUtil = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
@@ -79,6 +69,14 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jListDiaSemana = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jListMes = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListHorario = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListDiaUtil = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListDia = new javax.swing.JList<>();
+        jButtonApagaDia = new javax.swing.JButton();
+        jComboBoxHora = new javax.swing.JComboBox<>();
         jPanelTopo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -90,7 +88,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jPanelPrincipal.setLayout(new java.awt.BorderLayout());
 
         jPanelFundo.setBackground(new java.awt.Color(0, 51, 65));
-        jPanelFundo.setPreferredSize(new java.awt.Dimension(915, 470));
+        jPanelFundo.setPreferredSize(new java.awt.Dimension(1000, 550));
         jPanelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -135,12 +133,12 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jLabelHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelHora.setForeground(new java.awt.Color(240, 240, 240));
         jLabelHora.setText("Horarios:");
-        jPanelFundo.add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 150, -1, -1));
+        jPanelFundo.add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 260, -1, -1));
 
         jLabelObservacao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelObservacao.setForeground(new java.awt.Color(240, 240, 240));
         jLabelObservacao.setText("Observação:");
-        jPanelFundo.add(jLabelObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+        jPanelFundo.add(jLabelObservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
 
         jButtonRegistrar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonRegistrar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -150,7 +148,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jButtonRegistrarActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 420, -1, -1));
+        jPanelFundo.add(jButtonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 510, -1, -1));
 
         jButtonCancelar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -161,45 +159,37 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jButtonCancelarActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 420, -1, -1));
+        jPanelFundo.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 510, -1, -1));
 
         jLabelPeriodo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelPeriodo.setForeground(new java.awt.Color(240, 240, 240));
         jLabelPeriodo.setText("Período:");
         jPanelFundo.add(jLabelPeriodo, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, -1, -1));
 
-        jComboBoxHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBoxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h" }));
-        jComboBoxHora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxHoraActionPerformed(evt);
-            }
-        });
-        jPanelFundo.add(jComboBoxHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 140, 60, 30));
-
-        jTextFieldHora.setEditable(false);
-        jTextFieldHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanelFundo.add(jTextFieldHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 170, 270, -1));
-
         jButtonApagaHora.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonApagaHora.setText("<--");
-        jPanelFundo.add(jButtonApagaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 140, -1, -1));
+        jButtonApagaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApagaHoraActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jButtonApagaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, -1, -1));
 
         jSeparator1.setBackground(new java.awt.Color(151, 158, 0));
         jSeparator1.setForeground(new java.awt.Color(240, 240, 240));
-        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 900, 10));
+        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 960, 10));
 
         jTextAreaObservacao.setColumns(20);
         jTextAreaObservacao.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextAreaObservacao.setRows(5);
         jScrollPaneObeservacao.setViewportView(jTextAreaObservacao);
 
-        jPanelFundo.add(jScrollPaneObeservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 830, 120));
+        jPanelFundo.add(jScrollPaneObeservacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 450, 180));
 
         jLabelDias.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelDias.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDias.setText("Dia(s):");
-        jPanelFundo.add(jLabelDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 90, -1, -1));
+        jPanelFundo.add(jLabelDias, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, -1, -1));
 
         jComboBoxMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBoxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
@@ -208,7 +198,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jComboBoxMesActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 40, 80, -1));
+        jPanelFundo.add(jComboBoxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 80, -1));
 
         jButtonApagaMes.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonApagaMes.setText("<--");
@@ -217,39 +207,26 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jButtonApagaMesActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonApagaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 70, 50, -1));
+        jPanelFundo.add(jButtonApagaMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 50, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(240, 240, 240));
         jLabel2.setText("Mês(es):");
-        jPanelFundo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, 20));
-
-        jTextFieldDia.setEditable(false);
-        jTextFieldDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextFieldDia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDiaActionPerformed(evt);
-            }
-        });
-        jPanelFundo.add(jTextFieldDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 110, 270, -1));
+        jPanelFundo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 260, -1, 20));
 
         jComboBoxDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBoxDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        jPanelFundo.add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 80, 60, -1));
-
-        jButtonApagaDia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButtonApagaDia.setText("<--");
-        jButtonApagaDia.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonApagaDiaActionPerformed(evt);
+                jComboBoxDiaActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonApagaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 80, -1, -1));
+        jPanelFundo.add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, 60, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(240, 240, 240));
         jLabel3.setText("Dia(s) da Semana:");
-        jPanelFundo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, -1, -1));
+        jPanelFundo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 260, -1, 20));
 
         jComboBoxDiaSemana.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBoxDiaSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado" }));
@@ -259,7 +236,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jComboBoxDiaSemanaActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jComboBoxDiaSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, 80, -1));
+        jPanelFundo.add(jComboBoxDiaSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 80, 20));
 
         jButtonApagaDiaSemana.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jButtonApagaDiaSemana.setText("<--");
@@ -269,54 +246,95 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jButtonApagaDiaSemanaActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonApagaDiaSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, -1, -1));
+        jPanelFundo.add(jButtonApagaDiaSemana, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 307, -1, -1));
 
         jLabelDiasUtil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelDiasUtil.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDiasUtil.setText("Dia(s) Útil(eis):");
-        jPanelFundo.add(jLabelDiasUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 30, -1, -1));
+        jPanelFundo.add(jLabelDiasUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 260, -1, -1));
 
         jComboBoxDiaUtil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBoxDiaUtil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1°", "2°", "3°", "4°", "5°", "6°", "7°", "8°", "9°", "10°", "11°", "12°", "13°", "14°", "15°", "16°", "17°", "18°", "19°", "20°", "21°", "22°", "23°" }));
         jComboBoxDiaUtil.setEnabled(false);
-        jPanelFundo.add(jComboBoxDiaUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 20, -1, -1));
+        jComboBoxDiaUtil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDiaUtilActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jComboBoxDiaUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 280, 60, -1));
 
         jButtonApagaDiaUtil.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButtonApagaDiaUtil.setText("<--");
         jButtonApagaDiaUtil.setEnabled(false);
-        jPanelFundo.add(jButtonApagaDiaUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 20, -1, -1));
-
-        jTextFieldDiaUtil.setEditable(false);
-        jTextFieldDiaUtil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jTextFieldDiaUtil.setEnabled(false);
-        jPanelFundo.add(jTextFieldDiaUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 270, -1));
+        jButtonApagaDiaUtil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApagaDiaUtilActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jButtonApagaDiaUtil, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 310, -1, -1));
 
         jCheckBox1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(240, 240, 240));
         jCheckBox1.setText("Reagendável");
-        jPanelFundo.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 250, -1, -1));
+        jPanelFundo.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 130, -1));
 
         jCheckBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(240, 240, 240));
         jCheckBox2.setText("Prioritário");
-        jPanelFundo.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
+        jPanelFundo.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 130, -1));
 
         jCheckBox3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(240, 240, 240));
         jCheckBox3.setText("Horário Fixo");
-        jPanelFundo.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, -1, -1));
+        jPanelFundo.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 130, -1));
 
         jListDiaSemana.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jListDiaSemana.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jListDiaSemana);
 
-        jPanelFundo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 100, 140));
+        jPanelFundo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 280, 100, 190));
 
         jListMes.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jListMes.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(jListMes);
 
-        jPanelFundo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 40, 100, 140));
+        jPanelFundo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 100, 190));
+
+        jListHorario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jListHorario.setModel(new DefaultListModel());
+        jScrollPane3.setViewportView(jListHorario);
+
+        jPanelFundo.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 280, 100, 190));
+
+        jListDiaUtil.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jListDiaUtil.setModel(new DefaultListModel());
+        jScrollPane4.setViewportView(jListDiaUtil);
+
+        jPanelFundo.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 280, 100, 190));
+
+        jListDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jListDia.setModel(new DefaultListModel());
+        jScrollPane5.setViewportView(jListDia);
+
+        jPanelFundo.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 280, 100, 190));
+
+        jButtonApagaDia.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jButtonApagaDia.setText("<--");
+        jButtonApagaDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApagaDiaActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jButtonApagaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 310, -1, -1));
+
+        jComboBoxHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBoxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h" }));
+        jComboBoxHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxHoraActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jComboBoxHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 280, -1, -1));
 
         jPanelPrincipal.add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
@@ -340,21 +358,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
-    private void jComboBoxHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHoraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxHoraActionPerformed
-
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         controller.cancelar();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
-
-    private void jTextFieldDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDiaActionPerformed
-
-    private void jButtonApagaDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaDiaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonApagaDiaActionPerformed
 
     private void jComboBoxPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPeriodoActionPerformed
          
@@ -362,37 +368,37 @@ public class VincularRotinaView extends javax.swing.JFrame {
             case 0:
                 jComboBoxMes.setEnabled(true);
                 jButtonApagaMes.setEnabled(true);
-                jListMes.setEnabled(true);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                jListDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                jTextFieldDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                
                 jComboBoxDia.setEnabled(true);
                 jButtonApagaDia.setEnabled(true);
-                jTextFieldDia.setEnabled(true);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 break;
             case 1:
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
-                jListMes.setEnabled(false);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                jListDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                jTextFieldDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                
                 jComboBoxDia.setEnabled(false);
                 jButtonApagaDia.setEnabled(false);
-                jTextFieldDia.setEnabled(false);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 break;
                 
@@ -400,19 +406,18 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
-                jListMes.setEnabled(false);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(true);
                 jButtonApagaDiaSemana.setEnabled(true);
-                jListDiaSemana.setEnabled(true);
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                jTextFieldDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                
                 jComboBoxDia.setEnabled(false);
                 jButtonApagaDia.setEnabled(false);
-                jTextFieldDia.setEnabled(false);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 break;
                 
@@ -420,19 +425,18 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
-                jListMes.setEnabled(false);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                jListDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(true);
                 jButtonApagaDiaUtil.setEnabled(true);
-                jTextFieldDiaUtil.setEnabled(true);
                
                 jComboBoxDia.setEnabled(false);
                 jButtonApagaDia.setEnabled(false);
-                jTextFieldDia.setEnabled(false);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 break;
                 
@@ -440,19 +444,18 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
-                jListMes.setEnabled(false);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                jListDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                jTextFieldDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                
                 jComboBoxDia.setEnabled(true);
                 jButtonApagaDia.setEnabled(true);
-                jTextFieldDia.setEnabled(true);
                 
                 break;
                 
@@ -460,19 +463,18 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 
                 jComboBoxMes.setEnabled(true);
                 jButtonApagaMes.setEnabled(true);
-                jListMes.setEnabled(true);
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                jListDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                jTextFieldDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                
                 jComboBoxDia.setEnabled(true);
                 jButtonApagaDia.setEnabled(true);
-                jTextFieldDia.setEnabled(true);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 break;
         }
@@ -483,20 +485,85 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPeriodoItemStateChanged
 
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
-        ((DefaultListModel)jListMes.getModel()).addElement(jComboBoxMes.getSelectedItem());
+        DefaultListModel listModel = (DefaultListModel)jListMes.getModel();
+        Object selectedItem = jComboBoxMes.getSelectedItem();
+        
+        if(jComboBoxPeriodo.getSelectedIndex() == 0){
+            listModel.clear();
+            listModel.addElement(selectedItem);
+        } else 
+        if(!listModel.contains(selectedItem)){
+            listModel.addElement(selectedItem);
+        } else JOptionPane.showMessageDialog(this,(String)selectedItem+" já esta na ista", "Lista de Meses", 1);
+        
     }//GEN-LAST:event_jComboBoxMesActionPerformed
 
     private void jButtonApagaMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaMesActionPerformed
-        ((DefaultListModel)jListMes.getModel()).remove(jListDiaSemana.getSelectedIndex());
+        ((DefaultListModel)jListMes.getModel()).removeElementAt(jListMes.getSelectedIndex());
     }//GEN-LAST:event_jButtonApagaMesActionPerformed
 
     private void jComboBoxDiaSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaSemanaActionPerformed
-        ((DefaultListModel)jListDiaSemana.getModel()).addElement(jComboBoxDiaSemana.getSelectedItem());
+        DefaultListModel listModel = (DefaultListModel)jListDiaSemana.getModel();
+        Object selectedItem = jComboBoxDiaSemana.getSelectedItem();
+        if(!listModel.contains(selectedItem)){
+            listModel.addElement(selectedItem);
+        } else JOptionPane.showMessageDialog(this,(String)selectedItem+" já está na lista", "Lista de Semanas", 1);
     }//GEN-LAST:event_jComboBoxDiaSemanaActionPerformed
 
     private void jButtonApagaDiaSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaDiaSemanaActionPerformed
-        ((DefaultListModel)jListDiaSemana.getModel()).remove(jComboBoxDiaSemana.getSelectedIndex());
+        ((DefaultListModel)jListDiaSemana.getModel()).remove(jListDiaSemana.getSelectedIndex());
     }//GEN-LAST:event_jButtonApagaDiaSemanaActionPerformed
+
+    private void jComboBoxDiaUtilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaUtilActionPerformed
+        DefaultListModel listModel = (DefaultListModel)jListDiaUtil.getModel();
+        Object selectedItem = jComboBoxDiaUtil.getSelectedItem();
+        if(!listModel.contains(selectedItem)){
+            listModel.addElement(selectedItem);
+        } else JOptionPane.showMessageDialog(this, (String)selectedItem+" dia útil já está na lista", "Dias úteis", 1);
+    }//GEN-LAST:event_jComboBoxDiaUtilActionPerformed
+
+    private void jButtonApagaDiaUtilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaDiaUtilActionPerformed
+        int index = jListDiaUtil.getSelectedIndex();
+        if(!(index < 0)){
+          ((DefaultListModel)jListDiaUtil.getModel()).removeElementAt(index);  
+        }
+    }//GEN-LAST:event_jButtonApagaDiaUtilActionPerformed
+
+    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
+        DefaultListModel listModel = (DefaultListModel)jListDia.getModel();
+        Object selectedItem = jComboBoxDia.getSelectedItem();
+        
+        if(jComboBoxPeriodo.getSelectedIndex() == 0){
+            listModel.clear();
+            listModel.addElement(selectedItem);
+        } else
+        
+        if(!listModel.contains(selectedItem)){
+            listModel.addElement(selectedItem);
+        } else JOptionPane.showMessageDialog(this,(String)selectedItem+" dia já está na lista", "Dias do mês", 1);
+    }//GEN-LAST:event_jComboBoxDiaActionPerformed
+
+    private void jButtonApagaDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaDiaActionPerformed
+        int index = jListDia.getSelectedIndex();
+        if(!(index < 0)){
+            ((DefaultListModel)jListDia.getModel()).removeElementAt(index);
+        }
+    }//GEN-LAST:event_jButtonApagaDiaActionPerformed
+
+    private void jComboBoxHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHoraActionPerformed
+        DefaultListModel listModel = (DefaultListModel) jListHorario.getModel();
+        Object selectedItem = jComboBoxHora.getSelectedItem();
+        if(!listModel.contains(selectedItem)){
+            listModel.addElement(selectedItem);
+        } else JOptionPane.showMessageDialog(this, (String)selectedItem+" já está na lista", "Horário", 1);
+    }//GEN-LAST:event_jComboBoxHoraActionPerformed
+
+    private void jButtonApagaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaHoraActionPerformed
+        int index = jListHorario.getSelectedIndex();
+        if(!(index < 0)){
+            ((DefaultListModel)jListHorario.getModel()).removeElementAt(index);
+        }
+    }//GEN-LAST:event_jButtonApagaHoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -567,18 +634,21 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPeriodo;
     private javax.swing.JLabel jLabelRotina;
     private javax.swing.JLabel jLabelUnidade;
+    private javax.swing.JList<String> jListDia;
     private javax.swing.JList<String> jListDiaSemana;
+    private javax.swing.JList<String> jListDiaUtil;
+    private javax.swing.JList<String> jListHorario;
     private javax.swing.JList<String> jListMes;
     private javax.swing.JPanel jPanelFundo;
     private javax.swing.JPanel jPanelPrincipal;
     private javax.swing.JPanel jPanelTopo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPaneObeservacao;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea jTextAreaObservacao;
-    private javax.swing.JTextField jTextFieldDia;
-    private javax.swing.JTextField jTextFieldDiaUtil;
-    private javax.swing.JTextField jTextFieldHora;
     // End of variables declaration//GEN-END:variables
 }

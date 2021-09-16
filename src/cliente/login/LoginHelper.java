@@ -6,7 +6,7 @@
 package cliente.login;
 
 import model.Usuario;
-import util.criptografia.Criptografia;
+import util.cliente.Criptografia;
 
 /**
  *
