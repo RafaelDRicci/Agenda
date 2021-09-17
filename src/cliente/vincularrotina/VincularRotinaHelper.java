@@ -5,6 +5,8 @@
  */
 package cliente.vincularrotina;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author rafaeld
@@ -15,6 +17,12 @@ public class VincularRotinaHelper {
     
     VincularRotinaHelper(VincularRotinaView view) {
         this.view = view;
+    }
+
+    void addJComboBoxDia(ArrayList<Integer> nDias) {
+        nDias.forEach(dia -> {
+            view.getjComboBoxDia().addItem(dia);
+        });
     }
     
 }

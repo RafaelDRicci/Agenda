@@ -71,10 +71,10 @@ public class LoginView extends javax.swing.JFrame {
         jPanelFundo2.setForeground(new java.awt.Color(0, 102, 0));
         jPanelFundo2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelCaps.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabelCaps.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelCaps.setForeground(new java.awt.Color(255, 0, 0));
         jLabelCaps.setText("CAPSLOCK ATIVADO!");
-        jPanelFundo2.add(jLabelCaps, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 140, 20));
+        jPanelFundo2.add(jLabelCaps, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 160, 20));
         jPanelFundo2.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 370, -1));
         jPanelFundo2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 370, -1));
 

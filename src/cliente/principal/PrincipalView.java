@@ -6,9 +6,11 @@
 package cliente.principal;
 
 import cliente.login.LoginView;
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import model.Usuario;
+import util.cliente.ColorirTabelaRotinas;
 
 /**
  *
@@ -26,7 +28,7 @@ public class PrincipalView extends javax.swing.JFrame {
         initComponents();
         controller = new PrincipalController(this);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
-        //jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
+        jTableRotinas.setDefaultRenderer(Object.class, new ColorirTabelaRotinas());
        
     }
 
@@ -410,6 +412,8 @@ public class PrincipalView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        Locale br = new Locale("pt", "BR");
+        Locale.setDefault(br);
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

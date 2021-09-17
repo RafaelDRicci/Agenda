@@ -10,7 +10,6 @@ package util.cliente;
  * @author rafaeld
  */
 
-import cliente.principal.*;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
@@ -24,18 +23,18 @@ public class ColorirTabelaRotinas extends DefaultTableCellRenderer{
         super.getTableCellRendererComponent(jTable, value, isSelected, hasFocus, row, column);
         
         Object text = jTable.getValueAt(row, 2);
-        Object text2 = jTable.getValueAt(3, column);
         
-        Color c = Color.WHITE;
+        
+        
         
         if(text != null && "Rotina A".equals(text.toString())){
-            c = Color.RED;
+            
         }
         
         
         
-        setBackground(c);
-        
+        setBackground(Color.WHITE);
+        setForeground(Color.BLACK);
         
         return this;
     }
