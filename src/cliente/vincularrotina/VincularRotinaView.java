@@ -5,9 +5,12 @@
  */
 package cliente.vincularrotina;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import util.cliente.Data;
 
 /**
  *
@@ -18,8 +21,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private VincularRotinaController controller;
     
     public VincularRotinaView() {
-        controller = new VincularRotinaController(this);
         initComponents();
+        controller = new VincularRotinaController(this);
+        controller.preencerAno();
     }
 
     /**
@@ -31,9 +35,6 @@ public class VincularRotinaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroupReagendavel = new javax.swing.ButtonGroup();
-        buttonGroupPrioritario = new javax.swing.ButtonGroup();
-        buttonGrouHoraFixa = new javax.swing.ButtonGroup();
         jPanelPrincipal = new javax.swing.JPanel();
         jPanelFundo = new javax.swing.JPanel();
         jLabelRotina = new javax.swing.JLabel();
@@ -87,13 +88,19 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Vincular Rotina");
+        setMinimumSize(new java.awt.Dimension(1190, 640));
+        setPreferredSize(new java.awt.Dimension(1190, 660));
         setResizable(false);
 
         jPanelPrincipal.setBackground(new java.awt.Color(0, 51, 65));
         jPanelPrincipal.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
+        jPanelPrincipal.setMinimumSize(new java.awt.Dimension(1190, 630));
+        jPanelPrincipal.setPreferredSize(new java.awt.Dimension(1190, 630));
         jPanelPrincipal.setLayout(new java.awt.BorderLayout());
 
         jPanelFundo.setBackground(new java.awt.Color(0, 51, 65));
+        jPanelFundo.setMinimumSize(new java.awt.Dimension(1170, 560));
         jPanelFundo.setPreferredSize(new java.awt.Dimension(1000, 550));
         jPanelFundo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -183,7 +190,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
 
         jSeparator1.setBackground(new java.awt.Color(151, 158, 0));
         jSeparator1.setForeground(new java.awt.Color(240, 240, 240));
-        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 1120, 10));
+        jPanelFundo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 500, 1140, 10));
 
         jTextAreaObservacao.setColumns(20);
         jTextAreaObservacao.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
@@ -199,6 +206,16 @@ public class VincularRotinaView extends javax.swing.JFrame {
 
         jComboBoxMes.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jComboBoxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+        jComboBoxMes.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxMesItemStateChanged(evt);
+            }
+        });
+        jComboBoxMes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxMesMouseClicked(evt);
+            }
+        });
         jComboBoxMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxMesActionPerformed(evt);
@@ -396,69 +413,96 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jComboBoxPeriodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPeriodoActionPerformed
-         
+        
+        ((DefaultListModel)jListMes.getModel()).removeAllElements();
+        ((DefaultListModel)jListMes.getModel()).removeAllElements();
+        ((DefaultListModel)jListAno.getModel()).removeAllElements();
+        ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
+        ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
+        ((DefaultListModel)jListHorario.getModel()).removeAllElements();
         switch (jComboBoxPeriodo.getSelectedIndex()){
-            case 0:
-                jComboBoxMes.setEnabled(true);
-                jButtonApagaMes.setEnabled(true);
-                ((DefaultListModel)jListMes.getModel()).removeAllElements();
-                
-                jComboBoxDiaSemana.setEnabled(false);
-                jButtonApagaDiaSemana.setEnabled(false);
-                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
-                
-                jComboBoxDiaUtil.setEnabled(false);
-                jButtonApagaDiaUtil.setEnabled(false);
-                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
-               
+            case 0: //Data Única
                 jComboBoxDia.setEnabled(true);
                 jButtonApagaDia.setEnabled(true);
-                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
-                break;
-            case 1:
-                jComboBoxMes.setEnabled(false);
-                jButtonApagaMes.setEnabled(false);
-                ((DefaultListModel)jListMes.getModel()).removeAllElements();
+                
+                jComboBoxMes.setEnabled(true);
+                jButtonApagaMes.setEnabled(true);
+                
+                
+                jComboBoxAno.setEnabled(true);
+                jButtonApagaAno.setEnabled(true);
+                
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
-                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
+                
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
-                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
-               
+                
+
+                break;
+            case 1: //Diário
                 jComboBoxDia.setEnabled(false);
                 jButtonApagaDia.setEnabled(false);
                 ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
+                jComboBoxMes.setEnabled(false);
+                jButtonApagaMes.setEnabled(false);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
+                
+                jComboBoxAno.setEnabled(false);
+                jButtonApagaAno.setEnabled(false);
+                ((DefaultListModel)jListAno.getModel()).removeAllElements();
+                
+                jComboBoxDiaSemana.setEnabled(false);
+                jButtonApagaDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
+                
+                jComboBoxDiaUtil.setEnabled(false);
+                jButtonApagaDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
+ 
                 break;
                 
-            case 2:
+            case 2: //Semanal
+                
+                jComboBoxDia.setEnabled(false);
+                jButtonApagaDia.setEnabled(false);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
                 ((DefaultListModel)jListMes.getModel()).removeAllElements();
+                
+                jComboBoxAno.setEnabled(false);
+                jButtonApagaAno.setEnabled(false);
+                ((DefaultListModel)jListAno.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(true);
                 jButtonApagaDiaSemana.setEnabled(true);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
                 
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
                 ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
-               
+                
+                break;
+             
+             case 3: //Dia Útil/Mês
+                
                 jComboBoxDia.setEnabled(false);
                 jButtonApagaDia.setEnabled(false);
                 ((DefaultListModel)jListDia.getModel()).removeAllElements();
-                
-                break;
-                
-             case 3:
-                
+                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
                 ((DefaultListModel)jListMes.getModel()).removeAllElements();
+                
+                jComboBoxAno.setEnabled(false);
+                jButtonApagaAno.setEnabled(false);
+                ((DefaultListModel)jListAno.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
@@ -466,19 +510,23 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 
                 jComboBoxDiaUtil.setEnabled(true);
                 jButtonApagaDiaUtil.setEnabled(true);
-               
-                jComboBoxDia.setEnabled(false);
-                jButtonApagaDia.setEnabled(false);
-                ((DefaultListModel)jListDia.getModel()).removeAllElements();
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
                 
                 break;
                 
-            case 4:
+            case 4: //Dia/Mês
+                
+                jComboBoxDia.setEnabled(true);
+                jButtonApagaDia.setEnabled(true);
+                ((DefaultListModel)jListDia.getModel()).removeAllElements();
                 
                 jComboBoxMes.setEnabled(false);
                 jButtonApagaMes.setEnabled(false);
                 ((DefaultListModel)jListMes.getModel()).removeAllElements();
-                controller.preencherDias();
+                
+                jComboBoxAno.setEnabled(false);
+                jButtonApagaAno.setEnabled(false);
+                ((DefaultListModel)jListAno.getModel()).removeAllElements();
                 
                 jComboBoxDiaSemana.setEnabled(false);
                 jButtonApagaDiaSemana.setEnabled(false);
@@ -487,29 +535,30 @@ public class VincularRotinaView extends javax.swing.JFrame {
                 jComboBoxDiaUtil.setEnabled(false);
                 jButtonApagaDiaUtil.setEnabled(false);
                 ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
-               
-                jComboBoxDia.setEnabled(true);
-                jButtonApagaDia.setEnabled(true);
-                
                 break;
                 
-             case 5:
+             case 5: //Anual
                 
-                jComboBoxMes.setEnabled(true);
-                jButtonApagaMes.setEnabled(true);
-                
-                jComboBoxDiaSemana.setEnabled(false);
-                jButtonApagaDiaSemana.setEnabled(false);
-                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
-                
-                jComboBoxDiaUtil.setEnabled(false);
-                jButtonApagaDiaUtil.setEnabled(false);
-                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
-               
                 jComboBoxDia.setEnabled(true);
                 jButtonApagaDia.setEnabled(true);
                 ((DefaultListModel)jListDia.getModel()).removeAllElements();
+                 
+                jComboBoxMes.setEnabled(true);
+                jButtonApagaMes.setEnabled(true);
+                ((DefaultListModel)jListMes.getModel()).removeAllElements();
                 
+                jComboBoxAno.setEnabled(false);
+                jButtonApagaAno.setEnabled(false);
+                ((DefaultListModel)jListAno.getModel()).removeAllElements();
+                
+                jComboBoxDiaSemana.setEnabled(false);
+                jButtonApagaDiaSemana.setEnabled(false);
+                ((DefaultListModel)jListDiaSemana.getModel()).removeAllElements();
+                
+                jComboBoxDiaUtil.setEnabled(false);
+                jButtonApagaDiaUtil.setEnabled(false);
+                ((DefaultListModel)jListDiaUtil.getModel()).removeAllElements();
+
                 break;
         }
     }//GEN-LAST:event_jComboBoxPeriodoActionPerformed
@@ -519,20 +568,29 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxPeriodoItemStateChanged
 
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
+        String mes;
+        if(getjComboBoxMes().isEnabled()){
+            mes = (String) getjComboBoxMes().getSelectedItem(); 
+        } else mes = "Janeiro";
+            
+        int ano = Calendar.getInstance().get(Calendar.YEAR);
+        ArrayList<Integer> nDias = Data.nDiasMes(mes, ano);
         
-        controller.preencherDias();
+        getjComboBoxDia().removeAllItems();
+        nDias.forEach(dia -> {
+            getjComboBoxDia().addItem(dia);
+        });
         
         DefaultListModel listModel = (DefaultListModel)jListMes.getModel();
         Object selectedItem = jComboBoxMes.getSelectedItem();
         
-        if(jComboBoxPeriodo.getSelectedIndex() == 0){
+        if(jComboBoxPeriodo.getSelectedIndex() == 0 || jComboBoxPeriodo.getSelectedIndex() == 5){
             listModel.clear();
             listModel.addElement(selectedItem);
         } else 
         if(!listModel.contains(selectedItem)){
             listModel.addElement(selectedItem);
         } else JOptionPane.showMessageDialog(this,(String)selectedItem+" já esta na ista", "Lista de Meses", 1);
-        
     }//GEN-LAST:event_jComboBoxMesActionPerformed
 
     private void jButtonApagaMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaMesActionPerformed
@@ -583,7 +641,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
         DefaultListModel listModel = (DefaultListModel)jListDia.getModel();
         Object selectedItem = jComboBoxDia.getSelectedItem();
         
-        if(jComboBoxPeriodo.getSelectedIndex() == 0){
+        System.out.println(evt.paramString());
+        
+        if(jComboBoxPeriodo.getSelectedIndex() == 0 || jComboBoxPeriodo.getSelectedIndex() == 5){
             listModel.clear();
             listModel.addElement(selectedItem);
         } else
@@ -616,12 +676,22 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonApagaHoraActionPerformed
 
     private void jComboBoxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAnoActionPerformed
-        // TODO add your handling code here:
+        
+        ((DefaultListModel)jListAno.getModel()).removeAllElements();
+        ((DefaultListModel)jListAno.getModel()).addElement(jComboBoxAno.getSelectedItem());
     }//GEN-LAST:event_jComboBoxAnoActionPerformed
 
     private void jButtonApagaAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaAnoActionPerformed
-        // TODO add your handling code here:
+        ((DefaultListModel)jListAno.getModel()).removeElement(jListAno.getSelectedValue());
     }//GEN-LAST:event_jButtonApagaAnoActionPerformed
+
+    private void jComboBoxMesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxMesMouseClicked
+       
+    }//GEN-LAST:event_jComboBoxMesMouseClicked
+
+    private void jComboBoxMesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxMesItemStateChanged
+        
+    }//GEN-LAST:event_jComboBoxMesItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -659,9 +729,6 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGrouHoraFixa;
-    private javax.swing.ButtonGroup buttonGroupPrioritario;
-    private javax.swing.ButtonGroup buttonGroupReagendavel;
     private javax.swing.JButton jButtonApagaAno;
     private javax.swing.JButton jButtonApagaDia;
     private javax.swing.JButton jButtonApagaDiaSemana;
@@ -673,7 +740,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JComboBox<String> jComboBoxAno;
+    private javax.swing.JComboBox<Integer> jComboBoxAno;
     private javax.swing.JComboBox<Integer> jComboBoxDia;
     private javax.swing.JComboBox<String> jComboBoxDiaSemana;
     private javax.swing.JComboBox<String> jComboBoxDiaUtil;
@@ -751,8 +818,9 @@ public class VincularRotinaView extends javax.swing.JFrame {
         return jComboBoxUnidade;
     }
 
-    
-    
-    
+    public JComboBox<Integer> getjComboBoxAno() {
+        return jComboBoxAno;
+    }
+ 
     
 }

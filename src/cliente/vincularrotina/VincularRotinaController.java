@@ -5,9 +5,7 @@
  */
 package cliente.vincularrotina;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import util.cliente.Data;
 
 
 /**
@@ -27,19 +25,12 @@ public class VincularRotinaController {
     void cancelar() {
         view.dispose();
     }
-
-    void preencherDias() {
-        String mes;
-        if(view.getjComboBoxMes().isEnabled()){
-            mes = (String) view.getjComboBoxMes().getSelectedItem(); 
-        } else mes = "Janeiro";
-            
-        int ano = Calendar.getInstance().get(Calendar.YEAR);
-        ArrayList<Integer> nDias = Data.nDiasMes(mes, ano);
-        helper.addJComboBoxDia(nDias);
-    }
     
-    void preencerDiasUteis(){
-        
+    void preencerAno() {
+        Calendar dataHoje = Calendar.getInstance();
+        int ano = dataHoje.get(Calendar.YEAR);
+        for(int i = 0; i < 10; i++){
+            view.getjComboBoxAno().addItem(ano+i);
+        }
     }
 }

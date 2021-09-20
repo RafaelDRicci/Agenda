@@ -5,6 +5,11 @@
  */
 package cliente.agendarrotina;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import javax.swing.DefaultListModel;
+import util.cliente.Data;
+
 /**
  *
  * @author rafaeld
@@ -16,6 +21,7 @@ public class AgendarRotinaView extends javax.swing.JFrame {
     public AgendarRotinaView() {
         controller = new AgendarRotinaController(this);
         initComponents();
+        completaAnos();
         
     }
 
@@ -32,16 +38,23 @@ public class AgendarRotinaView extends javax.swing.JFrame {
         jLabelTitulo = new javax.swing.JLabel();
         jPanelCentro = new javax.swing.JPanel();
         jLabelRotina = new javax.swing.JLabel();
-        jTextFieldRotina = new javax.swing.JTextField();
         jLabelHora = new javax.swing.JLabel();
-        jTextFieldHora = new javax.swing.JTextField();
         jComboBoxHora = new javax.swing.JComboBox<>();
-        jButtonRetirarHora = new javax.swing.JButton();
-        jLabelData = new javax.swing.JLabel();
-        jTextFieldData = new javax.swing.JTextField();
+        jLabelDia = new javax.swing.JLabel();
         jButtonAgendar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabelMes = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldDia = new javax.swing.JTextField();
+        jTextFieldMes = new javax.swing.JTextField();
+        jTextFieldAno = new javax.swing.JTextField();
+        jComboBoxDia = new javax.swing.JComboBox<>();
+        jComboBoxMes = new javax.swing.JComboBox<>();
+        jComboBoxAno = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListHora = new javax.swing.JList<>();
+        jButtonApagaHora = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -58,47 +71,37 @@ public class AgendarRotinaView extends javax.swing.JFrame {
 
         jPanelCentro.setBackground(new java.awt.Color(0, 51, 65));
         jPanelCentro.setBorder(javax.swing.BorderFactory.createMatteBorder(10, 10, 10, 10, new java.awt.Color(151, 158, 0)));
-        jPanelCentro.setPreferredSize(new java.awt.Dimension(400, 300));
+        jPanelCentro.setPreferredSize(new java.awt.Dimension(450, 410));
         jPanelCentro.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabelRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelRotina.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelRotina.setText("Rotina:");
-        jPanelCentro.add(jLabelRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-
-        jTextFieldRotina.setEditable(false);
-        jTextFieldRotina.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanelCentro.add(jTextFieldRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 320, -1));
+        jLabelRotina.setText("NomeDaRotina");
+        jPanelCentro.add(jLabelRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
         jLabelHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabelHora.setForeground(new java.awt.Color(240, 240, 240));
         jLabelHora.setText("Hora:");
-        jPanelCentro.add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        jPanelCentro.add(jLabelHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, -1, -1));
 
-        jTextFieldHora.setEditable(false);
-        jTextFieldHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanelCentro.add(jTextFieldHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 320, -1));
-
-        jComboBoxHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBoxHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jComboBoxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h" }));
-        jPanelCentro.add(jComboBoxHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 60, -1));
+        jComboBoxHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxHoraActionPerformed(evt);
+            }
+        });
+        jPanelCentro.add(jComboBoxHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 80, -1));
 
-        jButtonRetirarHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonRetirarHora.setText("<--");
-        jPanelCentro.add(jButtonRetirarHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
-
-        jLabelData.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelData.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelData.setText("Data:");
-        jPanelCentro.add(jLabelData, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
-
-        jTextFieldData.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jPanelCentro.add(jTextFieldData, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 320, -1));
+        jLabelDia.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelDia.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelDia.setText("Dia:");
+        jPanelCentro.add(jLabelDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, -1, -1));
 
         jButtonAgendar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonAgendar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButtonAgendar.setText("Agendar");
-        jPanelCentro.add(jButtonAgendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+        jPanelCentro.add(jButtonAgendar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
 
         jButtonCancelar.setBackground(new java.awt.Color(151, 158, 0));
         jButtonCancelar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -108,8 +111,76 @@ public class AgendarRotinaView extends javax.swing.JFrame {
                 jButtonCancelarActionPerformed(evt);
             }
         });
-        jPanelCentro.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, -1, -1));
-        jPanelCentro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 360, 20));
+        jPanelCentro.add(jButtonCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, -1, -1));
+        jPanelCentro.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 410, 20));
+
+        jLabelMes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabelMes.setForeground(new java.awt.Color(240, 240, 240));
+        jLabelMes.setText("Mês:");
+        jPanelCentro.add(jLabelMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel2.setText("Ano:");
+        jPanelCentro.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, -1, -1));
+
+        jTextFieldDia.setEditable(false);
+        jTextFieldDia.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jPanelCentro.add(jTextFieldDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 180, -1));
+
+        jTextFieldMes.setEditable(false);
+        jTextFieldMes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanelCentro.add(jTextFieldMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 180, -1));
+
+        jTextFieldAno.setEditable(false);
+        jTextFieldAno.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jPanelCentro.add(jTextFieldAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 180, -1));
+
+        jComboBoxDia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBoxDia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBoxDiaMouseClicked(evt);
+            }
+        });
+        jComboBoxDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDiaActionPerformed(evt);
+            }
+        });
+        jPanelCentro.add(jComboBoxDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 70, 30));
+
+        jComboBoxMes.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jComboBoxMes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" }));
+        jComboBoxMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMesActionPerformed(evt);
+            }
+        });
+        jPanelCentro.add(jComboBoxMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 130, 30));
+
+        jComboBoxAno.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jComboBoxAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAnoActionPerformed(evt);
+            }
+        });
+        jPanelCentro.add(jComboBoxAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 120, 30));
+
+        jListHora.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jListHora.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(jListHora);
+
+        jPanelCentro.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 140, 170));
+
+        jButtonApagaHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonApagaHora.setText("<--");
+        jButtonApagaHora.setToolTipText("");
+        jButtonApagaHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonApagaHoraActionPerformed(evt);
+            }
+        });
+        jPanelCentro.add(jButtonApagaHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 100, -1, -1));
 
         getContentPane().add(jPanelCentro, java.awt.BorderLayout.CENTER);
 
@@ -119,6 +190,40 @@ public class AgendarRotinaView extends javax.swing.JFrame {
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         controller.cancelar();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
+        jTextFieldMes.setText(jComboBoxMes.getSelectedItem().toString());
+        ArrayList<Integer> nDiasMes = Data.nDiasMes(jTextFieldMes.getText(), Integer.parseInt(jTextFieldAno.getText()));
+        jComboBoxDia.setActionCommand("preenchendoDias");
+        jComboBoxDia.removeAllItems();
+        nDiasMes.forEach(dia -> {
+            jComboBoxDia.addItem(dia);
+        }); 
+        
+        
+    }//GEN-LAST:event_jComboBoxMesActionPerformed
+
+    private void jComboBoxDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDiaActionPerformed
+        if(evt.getActionCommand().equals("selecionarDia")){
+            jTextFieldDia.setText((jComboBoxDia.getSelectedItem().toString()));
+        } 
+    }//GEN-LAST:event_jComboBoxDiaActionPerformed
+
+    private void jComboBoxDiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBoxDiaMouseClicked
+        jComboBoxDia.setActionCommand("selecionarDia");
+    }//GEN-LAST:event_jComboBoxDiaMouseClicked
+
+    private void jComboBoxAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAnoActionPerformed
+        jTextFieldAno.setText(Integer.toString((Integer) jComboBoxAno.getSelectedItem()));
+    }//GEN-LAST:event_jComboBoxAnoActionPerformed
+
+    private void jButtonApagaHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonApagaHoraActionPerformed
+        ((DefaultListModel)jListHora.getModel()).removeElementAt(jListHora.getSelectedIndex());
+    }//GEN-LAST:event_jButtonApagaHoraActionPerformed
+
+    private void jComboBoxHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxHoraActionPerformed
+        ((DefaultListModel)jListHora.getModel()).addElement((String)jComboBoxHora.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxHoraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,18 +262,33 @@ public class AgendarRotinaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAgendar;
+    private javax.swing.JButton jButtonApagaHora;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonRetirarHora;
+    private javax.swing.JComboBox<Integer> jComboBoxAno;
+    private javax.swing.JComboBox<Integer> jComboBoxDia;
     private javax.swing.JComboBox<String> jComboBoxHora;
-    private javax.swing.JLabel jLabelData;
+    private javax.swing.JComboBox<String> jComboBoxMes;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelDia;
     private javax.swing.JLabel jLabelHora;
+    private javax.swing.JLabel jLabelMes;
     private javax.swing.JLabel jLabelRotina;
     private javax.swing.JLabel jLabelTitulo;
+    private javax.swing.JList<String> jListHora;
     private javax.swing.JPanel jPanelCentro;
     private javax.swing.JPanel jPanelTopo;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextFieldData;
-    private javax.swing.JTextField jTextFieldHora;
-    private javax.swing.JTextField jTextFieldRotina;
+    private javax.swing.JTextField jTextFieldAno;
+    private javax.swing.JTextField jTextFieldDia;
+    private javax.swing.JTextField jTextFieldMes;
     // End of variables declaration//GEN-END:variables
+
+    private void completaAnos() {
+        int ano = Calendar.getInstance().get(Calendar.YEAR);
+        for(int i = 0; i < 10; i++){
+           jComboBoxAno.addItem(ano+i); 
+        }
+        jTextFieldAno.setText(Integer.toString(ano));
+    }
 }
