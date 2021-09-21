@@ -5,10 +5,12 @@
         <group>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaView.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalView.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/agendarrotina/AgendarRotinaView.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaHelper.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaController.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/cliente/Data.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/login/LoginView.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalController.java</file>
         </group>
     </open-files>
 </project-private>

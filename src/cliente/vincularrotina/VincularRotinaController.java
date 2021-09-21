@@ -17,20 +17,12 @@ public class VincularRotinaController {
     private VincularRotinaView view;
     private VincularRotinaHelper helper;
     
-    VincularRotinaController(VincularRotinaView view) {
+    public VincularRotinaController(VincularRotinaView view) {
         this.view = view;
         helper = new VincularRotinaHelper(view);
     }
 
-    void cancelar() {
+    public void cancelar() {
         view.dispose();
-    }
-    
-    void preencerAno() {
-        Calendar dataHoje = Calendar.getInstance();
-        int ano = dataHoje.get(Calendar.YEAR);
-        for(int i = 0; i < 10; i++){
-            view.getjComboBoxAno().addItem(ano+i);
-        }
     }
 }

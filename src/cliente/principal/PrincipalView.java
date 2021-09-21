@@ -156,6 +156,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelDescricao.setText("Descrição:");
         jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, 20));
 
+        jTextAreaDescricao.setEditable(false);
         jTextAreaDescricao.setColumns(20);
         jTextAreaDescricao.setFont(new java.awt.Font("Monospaced", 0, 14)); // NOI18N
         jTextAreaDescricao.setLineWrap(true);

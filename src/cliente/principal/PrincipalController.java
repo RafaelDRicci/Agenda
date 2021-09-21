@@ -140,31 +140,31 @@ public class PrincipalController {
         return login;
     }
 
-    void novaRotina() {
+    public void novaRotina() {
         SalvarRotinaView salvarRotinca = new SalvarRotinaView();
         salvarRotinca.setLocationRelativeTo(view);
         salvarRotinca.setVisible(true);
     }
 
-    void editarRotina() {
+    public void editarRotina() {
         SalvarRotinaView salvarRotinca = new SalvarRotinaView();
         salvarRotinca.setLocationRelativeTo(view);
         salvarRotinca.setVisible(true);
     }
 
-    void vincularRotina() {
+    public void vincularRotina() {
         VincularRotinaView vincularRotina = new VincularRotinaView();
         vincularRotina.setLocationRelativeTo(view);
         vincularRotina.setVisible(true);
     }
 
-    void listarRotina() {
+    public void listarRotina() {
         ListarRotinaView listarRotina = new ListarRotinaView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
     }
 
-    void desvincularRotina() {
+    public void desvincularRotina() {
         JustificarRotinaView justificarRotina = new JustificarRotinaView();
         justificarRotina.setLocationRelativeTo(view);
         justificarRotina.setVisible(true);
