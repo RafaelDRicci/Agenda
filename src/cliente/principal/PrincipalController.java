@@ -6,6 +6,7 @@
 package cliente.principal;
 
 import cliente.RequisicaoCliente;
+import cliente.agendarrotina.AgendarRotinaView;
 import cliente.justificarrotina.JustificarRotinaView;
 import cliente.listarrotina.ListarRotinaView;
 import cliente.login.LoginController;
@@ -168,5 +169,11 @@ public class PrincipalController {
         JustificarRotinaView justificarRotina = new JustificarRotinaView();
         justificarRotina.setLocationRelativeTo(view);
         justificarRotina.setVisible(true);
+    }
+
+    void reagendar() {
+        AgendarRotinaView agendar = new AgendarRotinaView();
+        agendar.setLocationRelativeTo(view);
+        agendar.setVisible(true);
     }
 }

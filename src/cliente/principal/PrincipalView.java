@@ -52,6 +52,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelCentralSuperiorInferior = new javax.swing.JPanel();
         jButtonFeito = new javax.swing.JButton();
         jButtonJustificar = new javax.swing.JButton();
+        jButtonReagendar = new javax.swing.JButton();
         jPanelCentroCentroCentro = new javax.swing.JPanel();
         jLabelNomeRotina = new javax.swing.JLabel();
         jLabelDataRotina = new javax.swing.JLabel();
@@ -59,11 +60,9 @@ public class PrincipalView extends javax.swing.JFrame {
         jScrollPaneDescricao = new javax.swing.JScrollPane();
         jTextAreaDescricao = new javax.swing.JTextArea();
         jTextFieldPeriodoRotina = new javax.swing.JTextField();
-        jTextFieldDataRorina = new javax.swing.JTextField();
-        jTextFieldHoraRotina = new javax.swing.JTextField();
+        jTextFieldDataRotina = new javax.swing.JTextField();
         jLabelPeriodoRotina = new javax.swing.JLabel();
         jTextFieldEstadoRotina = new javax.swing.JTextField();
-        jLabelHoraRotina = new javax.swing.JLabel();
         jTextFieldNomeRotina = new javax.swing.JTextField();
         jLabelEstadoRotina = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
@@ -136,6 +135,16 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jPanelCentralSuperiorInferior.add(jButtonJustificar);
 
+        jButtonReagendar.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonReagendar.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonReagendar.setText("Reagendar");
+        jButtonReagendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReagendarActionPerformed(evt);
+            }
+        });
+        jPanelCentralSuperiorInferior.add(jButtonReagendar);
+
         jPanelCentroCima.add(jPanelCentralSuperiorInferior, java.awt.BorderLayout.PAGE_END);
 
         jPanelCentroCentroCentro.setBackground(new java.awt.Color(0, 54, 65));
@@ -144,17 +153,17 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelNomeRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelNomeRotina.setForeground(new java.awt.Color(240, 240, 240));
         jLabelNomeRotina.setText("Nome:");
-        jPanelCentroCentroCentro.add(jLabelNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 80, -1));
+        jPanelCentroCentroCentro.add(jLabelNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 80, -1));
 
         jLabelDataRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelDataRotina.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDataRotina.setText("Data:");
-        jPanelCentroCentroCentro.add(jLabelDataRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, -1, -1));
+        jPanelCentroCentroCentro.add(jLabelDataRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
 
         jLabelDescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelDescricao.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDescricao.setText("Descrição:");
-        jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, -1, 20));
+        jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, -1, 20));
 
         jTextAreaDescricao.setEditable(false);
         jTextAreaDescricao.setColumns(20);
@@ -163,67 +172,41 @@ public class PrincipalView extends javax.swing.JFrame {
         jTextAreaDescricao.setRows(5);
         jScrollPaneDescricao.setViewportView(jTextAreaDescricao);
 
-        jPanelCentroCentroCentro.add(jScrollPaneDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, 760, 200));
+        jPanelCentroCentroCentro.add(jScrollPaneDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 760, 200));
 
         jTextFieldPeriodoRotina.setEditable(false);
         jTextFieldPeriodoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldPeriodoRotina.setText("Diário");
-        jTextFieldPeriodoRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldPeriodoRotinaActionPerformed(evt);
-            }
-        });
-        jPanelCentroCentroCentro.add(jTextFieldPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 270, 25));
+        jTextFieldPeriodoRotina.setPreferredSize(new java.awt.Dimension(60, 25));
+        jPanelCentroCentroCentro.add(jTextFieldPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 300, 25));
 
-        jTextFieldDataRorina.setEditable(false);
-        jTextFieldDataRorina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldDataRorina.setText("7/10/2021");
-        jTextFieldDataRorina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldDataRorinaActionPerformed(evt);
-            }
-        });
-        jPanelCentroCentroCentro.add(jTextFieldDataRorina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 267, 25));
-
-        jTextFieldHoraRotina.setEditable(false);
-        jTextFieldHoraRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldHoraRotina.setText("7h");
-        jTextFieldHoraRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldHoraRotinaActionPerformed(evt);
-            }
-        });
-        jPanelCentroCentroCentro.add(jTextFieldHoraRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 270, -1));
+        jTextFieldDataRotina.setEditable(false);
+        jTextFieldDataRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTextFieldDataRotina.setText("7/10/2021");
+        jTextFieldDataRotina.setPreferredSize(new java.awt.Dimension(60, 25));
+        jPanelCentroCentroCentro.add(jTextFieldDataRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 300, 25));
 
         jLabelPeriodoRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelPeriodoRotina.setForeground(new java.awt.Color(240, 240, 240));
         jLabelPeriodoRotina.setText("Período:");
-        jPanelCentroCentroCentro.add(jLabelPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 80, -1));
+        jPanelCentroCentroCentro.add(jLabelPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 80, -1));
 
         jTextFieldEstadoRotina.setEditable(false);
         jTextFieldEstadoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldEstadoRotina.setText("Em Vigor");
-        jTextFieldEstadoRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldEstadoRotinaActionPerformed(evt);
-            }
-        });
-        jPanelCentroCentroCentro.add(jTextFieldEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 40, 270, -1));
-
-        jLabelHoraRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabelHoraRotina.setForeground(new java.awt.Color(240, 240, 240));
-        jLabelHoraRotina.setText("Horários:");
-        jPanelCentroCentroCentro.add(jLabelHoraRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, -1, -1));
+        jPanelCentroCentroCentro.add(jTextFieldEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 300, 25));
 
         jTextFieldNomeRotina.setEditable(false);
         jTextFieldNomeRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextFieldNomeRotina.setText("Rotina A");
-        jPanelCentroCentroCentro.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 270, -1));
+        jTextFieldNomeRotina.setMinimumSize(new java.awt.Dimension(6, 25));
+        jTextFieldNomeRotina.setPreferredSize(new java.awt.Dimension(60, 25));
+        jPanelCentroCentroCentro.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 300, 25));
 
         jLabelEstadoRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelEstadoRotina.setForeground(new java.awt.Color(240, 240, 240));
         jLabelEstadoRotina.setText("Estado: ");
-        jPanelCentroCentroCentro.add(jLabelEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
+        jPanelCentroCentroCentro.add(jLabelEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
 
         jPanelCentroCima.add(jPanelCentroCentroCentro, java.awt.BorderLayout.CENTER);
 
@@ -368,22 +351,6 @@ public class PrincipalView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFieldDataRorinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldDataRorinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldDataRorinaActionPerformed
-
-    private void jTextFieldPeriodoRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPeriodoRotinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldPeriodoRotinaActionPerformed
-
-    private void jTextFieldHoraRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldHoraRotinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldHoraRotinaActionPerformed
-
-    private void jTextFieldEstadoRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldEstadoRotinaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldEstadoRotinaActionPerformed
-
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
         controller.sair();
     }//GEN-LAST:event_jButtonSairActionPerformed
@@ -407,6 +374,10 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jButtonJustificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJustificarActionPerformed
         controller.desvincularRotina();
     }//GEN-LAST:event_jButtonJustificarActionPerformed
+
+    private void jButtonReagendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReagendarActionPerformed
+        controller.reagendar();
+    }//GEN-LAST:event_jButtonReagendarActionPerformed
 
     
     /**
@@ -452,6 +423,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonJustificar;
     private javax.swing.JButton jButtonListarRotinas;
     private javax.swing.JButton jButtonNovaRotina;
+    private javax.swing.JButton jButtonReagendar;
     private javax.swing.JButton jButtonSair;
     private javax.swing.JButton jButtonVincularRotina;
     private javax.swing.JLabel jLabelAgenda;
@@ -459,7 +431,6 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelDataRotina;
     private javax.swing.JLabel jLabelDescricao;
     private javax.swing.JLabel jLabelEstadoRotina;
-    private javax.swing.JLabel jLabelHoraRotina;
     private javax.swing.JLabel jLabelNomeRotina;
     private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JLabel jLabelPeriodoRotina;
@@ -479,9 +450,8 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPaneRotinas;
     private javax.swing.JTable jTableRotinas;
     private javax.swing.JTextArea jTextAreaDescricao;
-    private javax.swing.JTextField jTextFieldDataRorina;
+    private javax.swing.JTextField jTextFieldDataRotina;
     private javax.swing.JTextField jTextFieldEstadoRotina;
-    private javax.swing.JTextField jTextFieldHoraRotina;
     private javax.swing.JTextField jTextFieldNomeRotina;
     private javax.swing.JTextField jTextFieldPeriodoRotina;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

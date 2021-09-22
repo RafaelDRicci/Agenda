@@ -52,7 +52,7 @@ public class ListarRotinaView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(240, 240, 240));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Todas as Rotinas");
+        jLabel1.setText("Rotinas Vinculadas");
         jLabel1.setToolTipText("");
         jPanelTopo.add(jLabel1);
 

@@ -75,7 +75,7 @@
                   <Color blue="f0" green="f0" red="f0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Todas as Rotinas"/>
+                <Property name="text" type="java.lang.String" value="Rotinas Vinculadas"/>
                 <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
             </Component>

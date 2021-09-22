@@ -8,7 +8,8 @@ package cliente.agendarrotina;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
-import util.cliente.Data;
+import util.date.Calendario;
+import util.date.Data;
 
 /**
  *
@@ -193,7 +194,7 @@ public class AgendarRotinaView extends javax.swing.JFrame {
 
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
         jTextFieldMes.setText(jComboBoxMes.getSelectedItem().toString());
-        ArrayList<Integer> nDiasMes = Data.nDiasMes(jTextFieldMes.getText(), Integer.parseInt(jTextFieldAno.getText()));
+        ArrayList<Integer> nDiasMes = Calendario.nDiasMes(jTextFieldMes.getText(), Integer.parseInt(jTextFieldAno.getText()));
         jComboBoxDia.setActionCommand("preenchendoDias");
         jComboBoxDia.removeAllItems();
         nDiasMes.forEach(dia -> {

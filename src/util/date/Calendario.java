@@ -3,23 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util.cliente;
+package util.date;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  *
  * @author rafaeld
  */
-public class Data {
+public class Calendario {
     
     private GregorianCalendar data;
     private boolean diaUtil;
     
-    
-    public Data(int dia, int mes, int ano){
+    public Calendario(int dia, int mes, int ano){
         data = new GregorianCalendar(ano, mes--, dia);
         diaUtil = isDiaUtil(data);
     }
@@ -78,13 +80,71 @@ public class Data {
         
         return diasUteis;
     }
+    /**
+     * 
+     * @param ano
+     * @return Calendar
+     * Calcula a data da páscoa em um ano. Para o calculo foi utilizado o algoritmo de Meeus/Jones/Butcher
+     */
+    public static Calendar calculaPascoa(int ano){
+       
+        int a = ano%19;
+        int b = ano/100;
+        int c = ano%100;
+        int d = b/4;
+        int e = b%4;
+        int f = (b + 8)/25;
+        int g = (b - f + 1)/3;
+        int h = (19 * a + b - d - g + 15)%30;
+        int i = c / 4;
+        int k = c % 4;
+        int l = (32 + 2 * e + 2 * i - h - k) % 7;
+        int  m = (a + 11 * h + 22 * l) / 451;
+        int mes = (h + l - 7 * m + 114)/ 31;
+        int dia = 1+ (h + l - 7 * m + 114)%31;
+        mes--;
+        return new GregorianCalendar(ano, mes, dia);
+    }
+    
+    public static List<Data> feriados(int ano){
+        
+        List<Data> feriados = new ArrayList<>();
+        
+        feriados.add(new Data("Ano novo", false, (new GregorianCalendar( ano, 0, 1))));
+        
+        Calendar pascoa = calculaPascoa(ano);
+        feriados.add(new Data("Páscoa", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
+        pascoa.add(Calendar.DAY_OF_MONTH, -48);
+        feriados.add( new Data("Carnaval", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
+        pascoa.add(Calendar.DAY_OF_MONTH, 1);
+        feriados.add(new Data("Carnaval", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
+        
+        
+        
+        feriados.add( new Data("Tiradentes", false, ( new GregorianCalendar( ano, 3,21) ) )); 
+        feriados.add( new Data("Dia do Trabalho", false, ( new GregorianCalendar( ano, 4, 1) ) ));
+        
+        
+        
+        feriados.add( new Data("Independência", false, ( new GregorianCalendar( ano, 8,  7) ) )); 
+        feriados.add( new Data("Natal", false, ( new GregorianCalendar( ano, 11, 25) ) )); 
+        
+        
+   
+        return feriados;
+    }
     
     public static void main(String[] args) {
         
-        ArrayList<String> diasUteis = diasUteis(1, 2021);
-       diasUteis.forEach(diaUtil -> {
-           System.out.println(diaUtil+" Dia Útil");
+        List<Data> feriados = feriados(2021);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy EEEE");
+        
+       feriados.forEach(feriado -> {
+           System.out.println(feriado.getNome() +": "+sdf.format(feriado.getData().getTime()));
        });
+        
+       
+        
     }
 
     public GregorianCalendar getData() {
