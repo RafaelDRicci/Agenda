@@ -912,19 +912,21 @@ public class VincularRotinaView extends javax.swing.JFrame {
     
     public void preencherDia(){
         
-        String mes;
+        int mes;
         if(getjComboBoxMes().isEnabled()){
-            mes = (String) getjComboBoxMes().getSelectedItem(); 
-        } else mes = "Janeiro";
+            mes = getjComboBoxMes().getSelectedIndex(); 
+        } else mes = 0;
         
         int ano = Calendar.getInstance().get(Calendar.YEAR);
-        ArrayList<Integer> nDias = Calendario.nDiasMes(mes, ano);
-        
+        int nDias = Calendario.nDias(mes, ano);
+       
         jComboBoxDia.setActionCommand("selecionaMes");
         jComboBoxDia.removeAllItems();
-        nDias.forEach(dia -> {
-            getjComboBoxDia().addItem(dia);
-        });
+        jComboBoxDia.setActionCommand("selecionaMes");
+        jComboBoxDia.removeAllItems();
+        for(int i = 1; i<= nDias; i++){
+            jComboBoxDia.addItem(i);
+        }
     }
     
     public JComboBox<Integer> getjComboBoxDia() {

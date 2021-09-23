@@ -5,10 +5,9 @@
  */
 package util.date;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -18,19 +17,32 @@ import java.util.List;
  */
 public class Calendario {
     
-    private GregorianCalendar data;
-    private boolean diaUtil;
     
-    public Calendario(int dia, int mes, int ano){
-        data = new GregorianCalendar(ano, mes--, dia);
-        diaUtil = isDiaUtil(data);
-    }
-    
-    
-    public static ArrayList<Integer> nDiasMes(String mes, int ano){
+    /**
+     * Calcula o número de dias a partir do mês e ano
+     * @param mes
+     * int que representa o mês (1 - Janeiro, 2 - Fevereiro...)
+     * @param ano
+     * @return int nDias 
+     * O numero de dias para aquele mês
+     */
+    public static int nDias(int mes, int ano){
         
-        ArrayList<Integer> dias = new ArrayList<>();
-   
+        GregorianCalendar data = new GregorianCalendar();
+        data.set(Calendar.DAY_OF_MONTH, 28);
+        data.set(Calendar.MONTH, mes-1);
+        data.set(Calendar.YEAR, ano);
+        
+        int nDias = 28;
+        while(data.get(Calendar.MONTH) == mes-1){
+            nDias = data.get(Calendar.DAY_OF_MONTH);
+            data.add(Calendar.DAY_OF_MONTH, 1);
+        }
+        
+        
+        return nDias;
+
+        /*
         dias.add(1); dias.add(2); dias.add(3); dias.add(4); 
         dias.add(5); dias.add(6); dias.add(7); dias.add(8);
         dias.add(9); dias.add(10);dias.add(11); dias.add(12);
@@ -50,8 +62,8 @@ public class Calendario {
         
         if(mes.equals("Fevereiro") && anoBissexto(ano)){
             dias.add(29);
-        }
-        return dias;
+        }*/
+        
     }
     
     public static boolean anoBissexto(int ano){
@@ -86,7 +98,7 @@ public class Calendario {
      * @return Calendar
      * Calcula a data da páscoa em um ano. Para o calculo foi utilizado o algoritmo de Meeus/Jones/Butcher
      */
-    public static Calendar calculaPascoa(int ano){
+    public static GregorianCalendar calculaPascoa(int ano){
        
         int a = ano%19;
         int b = ano/100;
@@ -103,57 +115,64 @@ public class Calendario {
         int mes = (h + l - 7 * m + 114)/ 31;
         int dia = 1+ (h + l - 7 * m + 114)%31;
         mes--;
-        return new GregorianCalendar(ano, mes, dia);
+        
+        GregorianCalendar pascoa = new GregorianCalendar();
+        pascoa.set(Calendar.YEAR, ano);
+        pascoa.set(Calendar.MONTH, mes);
+        pascoa.set(Calendar.DAY_OF_MONTH, dia);
+        
+        return pascoa;
     }
-    
+    /**
+     * Cria uma lista com todos os feriados de um ano
+     * @param int ano
+     * O ano 
+     * @return List<Data>
+     * List de objetos da classe Data
+     */
     public static List<Data> feriados(int ano){
+        
+        GregorianCalendar pascoa = calculaPascoa(ano);
+        GregorianCalendar carnaval = new GregorianCalendar();
+        GregorianCalendar sextaFeiraSanta = new GregorianCalendar();
+        GregorianCalendar corpusChristi = new GregorianCalendar();
         
         List<Data> feriados = new ArrayList<>();
         
         feriados.add(new Data("Ano novo", false, (new GregorianCalendar( ano, 0, 1))));
+        feriados.add(new Data("Pascoa", false, pascoa.getTimeInMillis()));
         
-        Calendar pascoa = calculaPascoa(ano);
-        feriados.add(new Data("Páscoa", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
-        pascoa.add(Calendar.DAY_OF_MONTH, -48);
-        feriados.add( new Data("Carnaval", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
-        pascoa.add(Calendar.DAY_OF_MONTH, 1);
-        feriados.add(new Data("Carnaval", false, ( new GregorianCalendar( ano, pascoa.get(Calendar.MONTH), pascoa.get(Calendar.DAY_OF_MONTH)) )) );
+        carnaval.setTimeInMillis(pascoa.getTimeInMillis());
+        carnaval.add(Calendar.DAY_OF_MONTH, -47);
+        feriados.add(new Data("Carnaval", false, carnaval.getTimeInMillis() ));
+        carnaval.add(Calendar.DAY_OF_MONTH, -1);
+        feriados.add(new Data("Carnaval", false, carnaval.getTimeInMillis() ));
         
+        sextaFeiraSanta.setTimeInMillis(pascoa.getTimeInMillis());
+        sextaFeiraSanta.add(Calendar.DAY_OF_MONTH, -2);
+        feriados.add(new Data("Sexta Feira Santa", false, ( sextaFeiraSanta )) );
         
+        corpusChristi.setTimeInMillis(pascoa.getTimeInMillis());
+        corpusChristi.add(Calendar.DAY_OF_MONTH, 60);
+        feriados.add(new Data("Corpus Christi", false, corpusChristi ) );
         
         feriados.add( new Data("Tiradentes", false, ( new GregorianCalendar( ano, 3,21) ) )); 
         feriados.add( new Data("Dia do Trabalho", false, ( new GregorianCalendar( ano, 4, 1) ) ));
-        
-        
-        
-        feriados.add( new Data("Independência", false, ( new GregorianCalendar( ano, 8,  7) ) )); 
+        feriados.add( new Data("Independência", false, ( new GregorianCalendar( ano, 8,  7) ) ));
+        feriados.add( new Data("Nossa Sra Aparecida", false, ( new GregorianCalendar( ano, 9, 12) ) ));
+        feriados.add( new Data("Finados", false, ( new GregorianCalendar(ano, 10, 2)) ));
+        feriados.add( new Data("Proclamação da República", false, ( new GregorianCalendar(ano, 10, 15) ) ));
         feriados.add( new Data("Natal", false, ( new GregorianCalendar( ano, 11, 25) ) )); 
+
+        Collections.sort(feriados);
         
-        
-   
         return feriados;
     }
     
     public static void main(String[] args) {
         
-        List<Data> feriados = feriados(2021);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy EEEE");
-        
-       feriados.forEach(feriado -> {
-           System.out.println(feriado.getNome() +": "+sdf.format(feriado.getData().getTime()));
-       });
-        
+        System.out.println(nDias(2,2020));
        
-        
+      
     }
-
-    public GregorianCalendar getData() {
-        return data;
-    }
-
-    public boolean isDiaUtil() {
-        return diaUtil;
-    }
-    
-    
 }   
