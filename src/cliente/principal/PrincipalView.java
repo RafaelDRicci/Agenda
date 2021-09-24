@@ -163,7 +163,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelDescricao.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabelDescricao.setForeground(new java.awt.Color(240, 240, 240));
         jLabelDescricao.setText("Descrição:");
-        jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 30, -1, 20));
+        jPanelCentroCentroCentro.add(jLabelDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 20, -1, 20));
 
         jTextAreaDescricao.setEditable(false);
         jTextAreaDescricao.setColumns(20);
@@ -172,17 +172,15 @@ public class PrincipalView extends javax.swing.JFrame {
         jTextAreaDescricao.setRows(5);
         jScrollPaneDescricao.setViewportView(jTextAreaDescricao);
 
-        jPanelCentroCentroCentro.add(jScrollPaneDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, 760, 200));
+        jPanelCentroCentroCentro.add(jScrollPaneDescricao, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 760, 200));
 
         jTextFieldPeriodoRotina.setEditable(false);
         jTextFieldPeriodoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldPeriodoRotina.setText("Diário");
         jTextFieldPeriodoRotina.setPreferredSize(new java.awt.Dimension(60, 25));
         jPanelCentroCentroCentro.add(jTextFieldPeriodoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 300, 25));
 
         jTextFieldDataRotina.setEditable(false);
         jTextFieldDataRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldDataRotina.setText("7/10/2021");
         jTextFieldDataRotina.setPreferredSize(new java.awt.Dimension(60, 25));
         jPanelCentroCentroCentro.add(jTextFieldDataRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 300, 25));
 
@@ -193,12 +191,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
         jTextFieldEstadoRotina.setEditable(false);
         jTextFieldEstadoRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldEstadoRotina.setText("Em Vigor");
         jPanelCentroCentroCentro.add(jTextFieldEstadoRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 300, 25));
 
         jTextFieldNomeRotina.setEditable(false);
         jTextFieldNomeRotina.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jTextFieldNomeRotina.setText("Rotina A");
         jTextFieldNomeRotina.setMinimumSize(new java.awt.Dimension(6, 25));
         jTextFieldNomeRotina.setPreferredSize(new java.awt.Dimension(60, 25));
         jPanelCentroCentroCentro.add(jTextFieldNomeRotina, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 300, 25));
@@ -277,9 +273,9 @@ public class PrincipalView extends javax.swing.JFrame {
         jTableRotinas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jTableRotinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"7:00", null, "Rotina A", "Rotina A", null, null, null, null},
-                {"8:00", null, null, "Rotina B", null, null, null, null},
-                {"9:00", null, null, "Rotina C", null, null, null, null},
+                {"7:00", null, "", "", null, null, null, null},
+                {"8:00", null, null, "", null, null, null, null},
+                {"9:00", null, null, "", null, null, null, null},
                 {"10:00", null, null, null, null, null, null, null},
                 {"11:00", null, null, null, null, null, null, null},
                 {"12:00", null, null, null, null, null, null, null},

@@ -1,0 +1,7 @@
+create table AGENDA_ROTINA (
+    codRotina INTEGER not null,
+    nome VARCHAR(30),
+    dataLimite DATE,
+    descricao VARCHAR(255),
+    CONSTRAINT PK_ROTINA PRIMARY KEY (codRotina)
+);

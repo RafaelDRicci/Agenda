@@ -5,7 +5,7 @@
  */
 package server;
 
-import util.comunicacao.Comunicacao;
+import util.communication.Comunicacao;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
@@ -15,8 +15,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
-import util.comunicacao.CodificaMensagem;
-import util.comunicacao.DecodificaMensagem;
+import util.communication.CodificaMensagem;
+import util.communication.DecodificaMensagem;
 
 /**
  *

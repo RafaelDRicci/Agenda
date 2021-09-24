@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
-import banco.conexao.ConnectionFactory;
+import util.connection.database.ConnectionFactory;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -206,5 +206,4 @@ public class UsuarioDAO{
         }
         
     }
-    
 }

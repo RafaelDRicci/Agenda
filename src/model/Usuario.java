@@ -11,8 +11,8 @@ import java.net.SocketAddress;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import util.comunicacao.Comunicacao;
-import util.comunicacao.DecodificaMensagem;
+import util.communication.Comunicacao;
+import util.communication.DecodificaMensagem;
 
 /**
  *

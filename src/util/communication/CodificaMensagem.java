@@ -3,14 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package util.comunicacao;
+package util.communication;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
@@ -19,41 +16,18 @@ import java.util.logging.Logger;
 /**
  *
  * @author rafaeld
+ * Transforma uma mensagem em um vetor de bytes. A mensagem pode ser um objeto e 
+ * os métodos podem ser utilizados para codificar cada campo. O primeiro byte do 
+ * vetor deve ser um código de indentificação
  */
-public class MensagemSair {
+public class CodificaMensagem {
     
     ByteArrayOutputStream baos;
     DataOutputStream dos;
-    ByteArrayInputStream bais;
-    DataInputStream dis;
     
-    public MensagemSair(){
+    public CodificaMensagem(){
         baos = new ByteArrayOutputStream ();
         dos = new DataOutputStream(baos);
-        try {
-            
-            codificar();
-            
-        } catch (IOException ex) {
-            
-            Logger.getLogger(MensagemSair.class.getName()).log(Level.SEVERE, null, ex);
-            
-        }
-    }
-    
-    public MensagemSair(byte[] bytes){
-        bais = new ByteArrayInputStream(bytes);
-        dis = new DataInputStream(bais);
-    }
-    
-    public byte[] codificar() throws IOException{
-        byte i = 0;
-        setByte(i);
-        return getMensagem();
-    }
-    
-    public byte decodifica() throws IOException{
-        return getByte();
     }
     
     /**
@@ -137,33 +111,4 @@ public class MensagemSair {
         }
         
     }
-    
-    public byte getByte() throws IOException{
-        return dis.readByte();  
-    }
-        
-    public int getInt() throws IOException{
-        return dis.readInt();
-    }
-    
-    public boolean getBoolean() throws IOException{
-        return dis.readBoolean();
-    }
-    
-    public String getString() throws IOException{       
-        int size = dis.readInt();
-        String string = "";
-        for(int i = 0; i < size; i++){
-            string += dis.readChar();
-        }
-            
-        return string;
-    }
-    
-    public Date getData() throws IOException, ParseException{
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.parse(getString());
-    }
-    
-
 }

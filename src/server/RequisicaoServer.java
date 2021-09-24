@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Usuario;
 import model.dao.UsuarioDAO;
-import util.comunicacao.CodificaMensagem;
-import util.comunicacao.DecodificaMensagem;
-import util.comunicacao.MensagemSair;
+import util.communication.CodificaMensagem;
+import util.communication.DecodificaMensagem;
+import util.communication.MensagemSair;
 
 /**
  *

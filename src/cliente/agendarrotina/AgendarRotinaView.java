@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import util.date.Calendario;
-import util.date.Data;
 
 /**
  *
@@ -194,12 +193,12 @@ public class AgendarRotinaView extends javax.swing.JFrame {
 
     private void jComboBoxMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMesActionPerformed
         jTextFieldMes.setText(jComboBoxMes.getSelectedItem().toString());
-        ArrayList<Integer> nDiasMes = Calendario.nDiasMes(jTextFieldMes.getText(), Integer.parseInt(jTextFieldAno.getText()));
+        int nDias = Calendario.nDias(jComboBoxMes.getSelectedIndex()+1, Integer.parseInt(jTextFieldAno.getText()));
         jComboBoxDia.setActionCommand("preenchendoDias");
         jComboBoxDia.removeAllItems();
-        nDiasMes.forEach(dia -> {
-            jComboBoxDia.addItem(dia);
-        }); 
+        for (int i = 1; i <= nDias; i++){
+            jComboBoxDia.addItem(i);
+        } 
         
         
     }//GEN-LAST:event_jComboBoxMesActionPerformed

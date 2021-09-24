@@ -918,10 +918,8 @@ public class VincularRotinaView extends javax.swing.JFrame {
         } else mes = 0;
         
         int ano = Calendar.getInstance().get(Calendar.YEAR);
-        int nDias = Calendario.nDias(mes, ano);
+        int nDias = Calendario.nDias(mes+1, ano);
        
-        jComboBoxDia.setActionCommand("selecionaMes");
-        jComboBoxDia.removeAllItems();
         jComboBoxDia.setActionCommand("selecionaMes");
         jComboBoxDia.removeAllItems();
         for(int i = 1; i<= nDias; i++){

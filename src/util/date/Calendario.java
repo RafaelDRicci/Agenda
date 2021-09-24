@@ -168,11 +168,4 @@ public class Calendario {
         
         return feriados;
     }
-    
-    public static void main(String[] args) {
-        
-        System.out.println(nDias(2,2020));
-       
-      
-    }
 }   
