@@ -19,33 +19,64 @@ public class teste {
         
         Connection con = ConnectionFactory.getConnection();
         
-        /*
+        
         int[] array = {1,2,3,4,5};
-        
-        SQLIntArray intArray = new SQLIntArray(array);
-        
-
+        int[] array2 = {1};
+        int[] array3 = {};
+        int[] array4 = null;
         String sql = "Insert into AGENDA_TESTE(CHAVE, ARRAY) values (?, ?)";
         
+        SQLIntArray intArray = new SQLIntArray(array);
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setInt(1, 1);
         stm.setString(2, intArray.getStringValue());
         stm.execute();
-        */
         
-        String sql = "Select * from AGENDA_TESTE";
+        String sql2 = "Insert into AGENDA_TESTE(CHAVE, ARRAY) values (?, ?)";
+        SQLIntArray intArray2 = new SQLIntArray(array2);
+        stm = con.prepareStatement(sql2);
+        stm.setInt(1, 2);
+        stm.setString(2, intArray2.getStringValue());
+        stm.execute();
         
-        PreparedStatement stm = con.prepareStatement(sql);
+        String sql3 = "Insert into AGENDA_TESTE(CHAVE, ARRAY) values (?, ?)";
+        SQLIntArray intArray3 = new SQLIntArray(array3);
+        stm = con.prepareStatement(sql3);
+        stm.setInt(1, 3);
+        stm.setString(2, intArray3.getStringValue());
+        stm.execute();
+        
+        String sql4 = "Insert into AGENDA_TESTE(CHAVE, ARRAY) values (?, ?)";
+        SQLIntArray intArray4 = new SQLIntArray(array4);
+        intArray = new SQLIntArray(array4);
+        stm = con.prepareStatement(sql4);
+        stm.setInt(1, 4);
+        stm.setString(2, intArray4.getStringValue());
+        stm.execute();
+        
+        
+        
+        sql = "Select * from AGENDA_TESTE";
+        
+        stm = con.prepareStatement(sql);
         ResultSet rs = stm.executeQuery();
         
-        rs.next();
-        String stringArray = rs.getString("ARRAY");
+        while(rs.next()){
+            String stringArray = rs.getString("ARRAY");
         
-        SQLIntArray integerArray = new SQLIntArray(stringArray);
-        System.out.println(integerArray);
-        for(int i = 0; i < integerArray.getIntArray().length; i++){
-            System.out.println(integerArray.getIntArray()[i]);
+            SQLIntArray integerArray = new SQLIntArray(stringArray);
+            System.out.print("String: "+ integerArray+" ");
+            if(!integerArray.toString().equals("NULL")){
+                    for(int i = 0; i < integerArray.getIntArray().length; i++){
+                    System.out.print(integerArray.getIntArray()[i]);
+                    System.out.print(" ");
+                }
+            }
+           
+            
+            System.out.println("");
         }
-       
+        
+        ConnectionFactory.closeConnection(con, stm);
     }
 }

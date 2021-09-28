@@ -12,22 +12,21 @@ import java.util.ArrayList;
  *
  * @author rafaeld
  */
-public class VincularRotinaDiaUtil extends VincularRotina{
+public class Semanal extends VincularRotina{
     
-    private ArrayList<Integer> diasUteis;
+    private int[] diasSemana;
     
-    public VincularRotinaDiaUtil(int codRotina, int codUsuario) {
+    public Semanal(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
+        diasSemana = new int[7];
     }
 
-    public ArrayList<Integer> getDiasUteis() {
-        return diasUteis;
+    public int[] getDiasSemana() {
+        return diasSemana;
     }
 
-    public void setDiasUteis(ArrayList<Integer> diasUteis) {
-        this.diasUteis = diasUteis;
+    public void setDiasSemana(int[] diasSemana) {
+        this.diasSemana = diasSemana;
     }
-    
-    
     
 }

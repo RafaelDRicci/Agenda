@@ -6,18 +6,17 @@
 package model.vincularrotina;
 
 import model.VincularRotina;
-import java.util.ArrayList;
 
 /**
  *
  * @author rafaeld
  */
-public class VincularRotinaDatasAno extends VincularRotina{
+public class DatasAno extends VincularRotina{
     
-    private Integer dia;
-    private ArrayList<Integer> meses;
+    private int dia;
+    private int[] meses;
     
-    public VincularRotinaDatasAno(int codRotina, int codUsuario) {
+    public DatasAno(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
 
@@ -29,11 +28,11 @@ public class VincularRotinaDatasAno extends VincularRotina{
         this.dia = dia;
     }
 
-    public ArrayList<Integer> getMeses() {
+    public int[] getMeses() {
         return meses;
     }
 
-    public void setMeses(ArrayList<Integer> meses) {
+    public void setMeses(int[] meses) {
         this.meses = meses;
     }
     

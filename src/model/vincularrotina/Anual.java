@@ -11,12 +11,12 @@ import model.VincularRotina;
  *
  * @author rafaeld
  */
-public class VincularRotinaAnual extends VincularRotina{
+public class Anual extends VincularRotina{
     
     private int dia;
-    private int ano;
+    private int mes;
     
-    public VincularRotinaAnual(int codRotina, int codUsuario) {
+    public Anual(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
 
@@ -28,12 +28,12 @@ public class VincularRotinaAnual extends VincularRotina{
         this.dia = dia;
     }
 
-    public int getAno() {
-        return ano;
+    public int getMes() {
+        return mes;
     }
 
-    public void setAno(int ano) {
-        this.ano = ano;
+    public void setMes(int mes) {
+        this.mes = mes;
     }
     
 }

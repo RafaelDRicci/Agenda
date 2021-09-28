@@ -11,21 +11,21 @@ import model.VincularRotina;
  *
  * @author rafaeld
  */
-public class VincularRotinaDataUnica extends VincularRotina{
+public class DataUnica extends VincularRotina{
     
     private Integer dia;
     private Integer mes;
     private Integer ano;
     
-    public VincularRotinaDataUnica(int codRotina, int codUsuario) {
+    public DataUnica(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
 
-    public Integer getDias() {
+    public Integer getDia() {
         return dia;
     }
 
-    public void setDias(Integer dia) {
+    public void setDia(Integer dia) {
         this.dia = dia;
     }
 
@@ -33,7 +33,7 @@ public class VincularRotinaDataUnica extends VincularRotina{
         return mes;
     }
 
-    public void setMeses(Integer mes) {
+    public void setMes(Integer mes) {
         this.mes = mes;
     }
 
@@ -41,8 +41,8 @@ public class VincularRotinaDataUnica extends VincularRotina{
         return ano;
     }
 
-    public void setAnos(Integer anos) {
-        this.ano = anos;
+    public void setAno(Integer ano) {
+        this.ano = ano;
     }
     
 }

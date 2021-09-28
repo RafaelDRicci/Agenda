@@ -11,9 +11,9 @@ import model.VincularRotina;
  *
  * @author rafaeld
  */
-public class VincularRotinaDiario extends VincularRotina{
+public class Diario extends VincularRotina{
     
-    public VincularRotinaDiario(int codRotina, int codUsuario) {
+    public Diario(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
     

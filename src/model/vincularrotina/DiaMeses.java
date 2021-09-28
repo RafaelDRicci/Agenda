@@ -6,25 +6,24 @@
 package model.vincularrotina;
 
 import model.VincularRotina;
-import java.util.ArrayList;
 
 /**
  *
  * @author rafaeld
  */
-public class VincularRotinaDiaMes extends VincularRotina{
+public class DiaMeses extends VincularRotina{
     
-    private ArrayList<Integer> dias;
+    private int[] dias;
     
-    public VincularRotinaDiaMes(int codRotina, int codUsuario) {
+    public DiaMeses(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
 
-    public ArrayList<Integer> getDias() {
+    public int[] getDias() {
         return dias;
     }
 
-    public void setDias(ArrayList<Integer> dias) {
+    public void setDias(int[] dias) {
         this.dias = dias;
     }
     

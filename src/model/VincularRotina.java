@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author rafaeld
@@ -18,7 +16,7 @@ public abstract class VincularRotina {
     protected boolean prioritario;
     protected boolean reagendavel;
     protected boolean horarioFixo;
-    protected ArrayList<Integer> horarios;
+    protected int[] horarios;
 
     public VincularRotina(int codRotina, int codUsuario) {
         this.codRotina = codRotina;
@@ -65,11 +63,11 @@ public abstract class VincularRotina {
         this.horarioFixo = horarioFixo;
     }
 
-    public ArrayList<Integer> getHorarios() {
+    public int[] getHorarios() {
         return horarios;
     }
 
-    public void setHorarios(ArrayList<Integer> horarios) {
+    public void setHorarios(int[] horarios) {
         this.horarios = horarios;
     }
     

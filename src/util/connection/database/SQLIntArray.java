@@ -19,8 +19,8 @@ import java.util.Map;
  */
 public class SQLIntArray implements Array{
 
-    private final int[] intArray;
-    private final String stringValue;
+    private int[] intArray;
+    private String stringValue;
     
     public SQLIntArray (int[] intArray){
         this.intArray = intArray;
@@ -32,7 +32,7 @@ public class SQLIntArray implements Array{
         intArray = SQLIntArrayStringToIntArray(stringValue);
     }
     
-    public String intArrayToSQLIntArrayString(int[] intArray) {
+    public static String intArrayToSQLIntArrayString(int[] intArray) {
         
         if(intArray == null){
             return "NULL";
@@ -54,8 +54,8 @@ public class SQLIntArray implements Array{
         return array;
     }
     
-    public int[] SQLIntArrayStringToIntArray(String stringValue){
-        if(stringValue == null){
+    public static int[] SQLIntArrayStringToIntArray(String stringValue){
+        if(stringValue.equals("NULL")){
             return null;
         }
        
@@ -87,6 +87,16 @@ public class SQLIntArray implements Array{
         }
         
         return resultado;
+    }
+    
+    public void setIntArray(int[] intArray){
+        this.intArray = intArray;
+        this.stringValue = intArrayToSQLIntArrayString(intArray);
+    }
+    
+    public void setStringValue(String value){
+        this.stringValue = value;
+        this.intArray = SQLIntArrayStringToIntArray(value);
     }
     
     @Override

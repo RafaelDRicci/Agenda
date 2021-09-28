@@ -7,10 +7,11 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import model.Usuario;
 import model.VincularRotina;
 import util.connection.database.ConnectionFactory;
 
@@ -18,44 +19,39 @@ import util.connection.database.ConnectionFactory;
  *
  * @author rafaeld
  */
-public abstract class VincularRotinaDAO {
-    
-    /*
-    protected int codRotina;
-    protected int codUsuario;
-    protected boolean prioritario;
-    protected boolean reagendavel;
-    protected boolean horarioFixo;
-    protected ArrayList<Integer> horarios;
-    */
+public abstract class VincularRotinaDAO<T> {
     
     protected Connection con;
-    
+
     public VincularRotinaDAO(){
         con = ConnectionFactory.getConnection();
     }
     
-    public void create(VincularRotina vincular){
-        String sql = "Insert into AGENDA_VINCULARROTINA(CODROTINA, CODUSUARIO, "
-                + "PRIORITARIO, REAGENDAVEL, HORARIOFIXO, DIAS, MESES, ANOS, "
-                + "DIASSEMANA, DIASUTEIS, HORARIOS)";
+    public abstract void create(T vincular) throws SQLException;
+    
+    public abstract T read(int codRotina, int codUsuario) throws SQLException;
+    
+    public abstract void upadate() throws SQLException;
+    
+    public abstract void delete(T vincular) throws SQLException;
+    
+    public abstract List<T> list() throws SQLException;
+    
+    protected List<Usuario> usuariosVinculados(VincularRotina vincular) throws SQLException{
+        List<Usuario> usuarios = new ArrayList<>();
         
-        try {
+        String sql = "Select * From Usuario where CODUSUAIOR = ?";
         
-            PreparedStatement stm = con.prepareStatement(sql);
-            
-        
-        } catch (SQLException ex) {
-            Logger.getLogger(VincularRotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, vincular.getCodUsuario());
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            Usuario usuario = new Usuario();
+            usuario.setnControle(rs.getInt(sql));
         }
         
+        return usuarios;
     }
     
-    public abstract VincularRotina read(int codRotina, int codUsuario);
-    
-    public abstract void upadate();
-    
-    public abstract void delete(VincularRotina vincular);
-    
-    public abstract List<VincularRotina> list();
+ 
 }
