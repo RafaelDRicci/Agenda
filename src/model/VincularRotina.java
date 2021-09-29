@@ -9,7 +9,7 @@ package model;
  *
  * @author rafaeld
  */
-public abstract class VincularRotina {
+public class VincularRotina {
     
     protected int codRotina;
     protected int codUsuario;
@@ -17,6 +17,7 @@ public abstract class VincularRotina {
     protected boolean reagendavel;
     protected boolean horarioFixo;
     protected int[] horarios;
+    protected String periodo;
 
     public VincularRotina(int codRotina, int codUsuario) {
         this.codRotina = codRotina;
@@ -69,6 +70,14 @@ public abstract class VincularRotina {
 
     public void setHorarios(int[] horarios) {
         this.horarios = horarios;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
     }
     
     

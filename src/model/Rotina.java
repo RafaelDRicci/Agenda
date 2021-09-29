@@ -6,6 +6,7 @@
 package model;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -56,6 +57,11 @@ public class Rotina {
         this.dataLimite = dataLimite;
     }
 
+    public void setDataLimite(Date data){
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTimeInMillis(data.getTime());
+    }
+    
     public String getDescricao() {
         return descricao;
     }

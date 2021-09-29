@@ -207,6 +207,7 @@ public class Usuario {
         this.autenticado = autenticado;
     }
     
+    
     @Override
     public String toString(){
         return this.nomeAprovacao;

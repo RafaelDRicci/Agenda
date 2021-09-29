@@ -6,6 +6,8 @@
 package model.dao.vincularrotinadao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.vincularrotina.Anual;
 
 /**
@@ -15,24 +17,14 @@ import model.vincularrotina.Anual;
 public class Teste {
     public static void main(String[] args) throws SQLException {
         
-        AnualDAO dao = new AnualDAO();
-        
-        /*
-        Anual anual1 = new Anual(2, 150);
-        anual1.setDia(5);
-        anual1.setMes(10);
-        anual1.setHorarioFixo(true);
-        int[] horarios1 = {7, 8, 9};
-        anual1.setHorarios(horarios1);
-
-        dao.create(anual1);
-        */
-        Anual anual = dao.read(2,150);
-        int[] horarios = anual.getHorarios();
-        
-        for(int i = 0; i < horarios.length; i++){
-            System.out.println(horarios[i]);
-        }
+       List<Anual> vinculacoes = new ArrayList<>();
+       
+       AnualDAO dao = new AnualDAO();
+       vinculacoes = dao.listAllAnual();
+       
+       vinculacoes.forEach(vinculacao -> {
+           System.out.println(vinculacao.getCodUsuario() +" " + vinculacao.getCodRotina());
+       });
         
     }
 }

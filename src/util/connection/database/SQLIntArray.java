@@ -78,7 +78,7 @@ public class SQLIntArray implements Array{
                 
                 array[i] = pos; 
             }
-           lista.add(Integer.valueOf(array[i]));
+            lista.add(Integer.valueOf(array[i]));
         }
         
         int[] resultado = new int[lista.size()]; 

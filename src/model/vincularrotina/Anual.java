@@ -18,6 +18,7 @@ public class Anual extends VincularRotina{
     
     public Anual(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
+        periodo = this.getClass().getSimpleName();
     }
 
     public int getDia() {

@@ -11,9 +11,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Rotina;
+import model.Usuario;
+import model.VincularRotina;
 import util.connection.database.ConnectionFactory;
 
 /**
@@ -144,6 +147,8 @@ public class RotinaDAO {
                 rotinas.add(rotina);
             }
             
+            rs.close();
+            stm.close();
             
         } catch (SQLException ex) {
             Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -152,18 +157,35 @@ public class RotinaDAO {
         return rotinas;
     }
     
-    public static void main(String args[]){
+    public List<Usuario> usuarioVinculados(Rotina rotina) throws SQLException{
+        List<Usuario> usuarios = new ArrayList<>();
         
-        RotinaDAO dao = new RotinaDAO();
-        Rotina nova = new Rotina("Nova Rotina");
-        dao.create(nova);
+        String sql = "Select u.CODUSUARIO, u.NOMEUSUARIO, u.DATACADASTRO, u.CARGO, u.UNIDADE, u.NOMEAPROVACAO "
+                + "from USUARIOS u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr"
+                + " where vr.CODUSUARIO = u.CODUSUARIO and vr.CODROTINA = r.CODROTINA "
+                + "and r.CODROTINA = ?";
         
-        ArrayList<Rotina> rotinas = dao.listaAll();
-       
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, rotina.getCodRotina());
+        ResultSet rs = stm.executeQuery();
         
-        rotinas.forEach(rotina ->{
-            System.out.println(rotina + " " + rotina.getDataLimite().getTime());
-        });
+        while(rs.next()){
+            
+            Usuario usuario = new Usuario();
+            usuario.setCodUsuario(rs.getInt("CODUSUARIO"));
+            usuario.setNome(rs.getString("NOMEUSUARIO"));
+            usuario.setDataCadastro(rs.getDate("DATACADASTRO"));
+            usuario.setCargo(rs.getString("CARGO"));
+            usuario.setUnidade(rs.getString("UNIDADE"));
+            usuario.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
+            
+            usuarios.add(usuario);
+            
+        }
         
+        rs.close();
+        stm.close();
+        return usuarios;
     }
+
 }

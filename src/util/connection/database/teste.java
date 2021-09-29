@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class teste {
     public static void main(String[] args) throws SQLException {
-        
+        /*
         Connection con = ConnectionFactory.getConnection();
         
         
@@ -78,5 +78,12 @@ public class teste {
         }
         
         ConnectionFactory.closeConnection(con, stm);
+    */
+        
+        String stringArray = "{1,2,3}";
+        int[] array = SQLIntArray.SQLIntArrayStringToIntArray(stringArray);
+        for(int i = 0; i < array.length; i++){
+            System.out.println(array[i]);
+        }
     }
 }

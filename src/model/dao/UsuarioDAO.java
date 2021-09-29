@@ -15,6 +15,9 @@ import util.connection.database.ConnectionFactory;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+import model.Rotina;
 
 /**
  *
@@ -205,5 +208,34 @@ public class UsuarioDAO{
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    
+    public List<Rotina> listarRotinasVinculadas(Usuario usuario) throws SQLException{
+        List<Rotina> rotinas = new ArrayList<>();
+        
+        String sql = "Select r.* From USUARIO u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr"
+                + "where u.CODUSUARIO = r.CODUSUARIO and r.CODROTINA = vr.CODROTINA"
+                + "and r.CODUSUARIO = ?";
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, usuario.getCodUsuario());
+        ResultSet rs = stm.executeQuery();
+        
+        while(rs.next()){
+            
+            int codRotina = rs.getInt("CODROTINA");
+            String nome = rs.getString("NOME");
+            Rotina rotina = new Rotina(codRotina, nome);
+            rotina.setDataLimite(rs.getDate("DATALIMITE"));
+            rotina.setDescricao(rs.getString("DESCRICAO"));
+            
+            rotinas.add(rotina);
+            
+        }
+        
+        rs.close();
+        stm.close();
+        
+        return rotinas;
     }
 }

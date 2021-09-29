@@ -8,6 +8,7 @@ package model.dao.vincularrotinadao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import model.dao.VincularRotinaDAO;
 import model.vincularrotina.Anual;
@@ -43,10 +44,11 @@ public class AnualDAO extends VincularRotinaDAO<Anual>{
     @Override
     public Anual read(int codRotina, int codUsuario) throws SQLException {
        
-        String sql = "Select * from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
+        String sql = "Select * from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ? and PERIODO = ?";
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setInt(1, codRotina);
         stm.setInt(2, codUsuario);
+        stm.setString(3, "Anual");
         ResultSet rs = stm.executeQuery();
         if(rs.next()){
             boolean prioritario = (rs.getString("PRIORITARIO").equals("T"));
@@ -71,18 +73,58 @@ public class AnualDAO extends VincularRotinaDAO<Anual>{
     }
 
     @Override
-    public void upadate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void upadate(Anual anual) throws SQLException {
+             
+        String sql= "Update AGENDA_VINCULARROTINA "
+                +   "SET PRIORITARIO = ?, REAGENDAVEL = ?, HORARIOFIXO = ?, DIAS = ?, MESES = ?, HORARIOS = ?"
+                +   "where CODROTINA = ? and CODUSUARIO = ? and Periodo = ?";
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, anual.isPrioritario() ? "V" : "F");
+        stm.setString(2, anual.isReagendavel() ? "V" : "F");
+        stm.setString(3, anual.isHorarioFixo() ? "V" : "F");
+        stm.setString(4, "{"+anual.getDia()+"}");
+        stm.setString(5, "{"+anual.getMes()+"}");
+        stm.setString(6, SQLIntArray.intArrayToSQLIntArrayString(anual.getHorarios()) ) ;
+        stm.setInt(7, anual.getCodRotina());
+        stm.setInt(8, anual.getCodUsuario());
+        stm.setString(9, anual.getClass().getSimpleName());
+        stm.execute();
     }
 
-    @Override
-    public void delete(Anual vincular) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Anual> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public List<Anual> listAllAnual() throws SQLException {
+        List<Anual> lista = new ArrayList<>();
+        
+        String sql = "Select * from AGENDA_VINCULARROTINA where PERIODO = ?";
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, "Anual");
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            
+            int codRotina  = rs.getInt("CODROTINA");
+            int codUsuario = rs.getInt("CODUSUARIO");
+            String prioritario = rs.getString("PRIORITARIO");
+            String reagendavel = rs.getString("REAGENDAVEL");
+            String horarioFixo = rs.getString("HORARIOFIXO");
+            String dias = rs.getString(("DIAS"));
+            String meses = rs.getString("MESES");
+            String horarios = rs.getString("HORARIOS");
+                        
+            Anual vincular = new Anual(codRotina, codUsuario);
+            vincular.setPrioritario(prioritario.equals("V"));
+            vincular.setReagendavel(reagendavel.equals("V"));
+            vincular.setHorarioFixo(horarioFixo.equals("V"));
+            vincular.setDia((SQLIntArray.SQLIntArrayStringToIntArray(dias))[0]);
+            vincular.setMes(SQLIntArray.SQLIntArrayStringToIntArray(meses)[0]);
+            vincular.setHorarios(SQLIntArray.SQLIntArrayStringToIntArray(horarios));
+            
+            lista.add(vincular);
+            
+        }
+        
+        return lista;
     }
     
     
