@@ -5,48 +5,25 @@
  */
 package model.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
-import util.connection.database.ConnectionFactory;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import model.Rotina;
 
 /**
  *
  * @author rafaeld
  */
-public class UsuarioDAO{
-    
-    /*
-    public UsuarioDAO() {
-        super(Usuario.class);
-    }
-    
-    public boolean autenticaUsuario(Usuario usuario){
-        return em.contains(usuario);
-    }
+public class UsuarioDAO extends GenericDAO<Usuario>{
 
-    */
     
-    private Connection con = null;
-    
-    
-    
-    public UsuarioDAO(){
-        con = ConnectionFactory.getConnection();
-    }
-    
-    public void close() throws SQLException{
-        con.close();
-    }
     
     /**
      * 
@@ -67,7 +44,7 @@ public class UsuarioDAO{
      * @return código de autenticação; 0 - Usuário não Existe; 1 - Usuário inativado;
      * 2 - Senha expirada; 3 - Senha incorreta; 4 - Usuário autenticado;
      */
-    public byte autentica(Usuario usuario){
+    public byte autentica(Usuario usuario) throws SQLException{
         
         Usuario maisRecente = maisRecente(buscaPorLogin(usuario.getLogin()));
         Calendar calendar = Calendar.getInstance();
@@ -100,30 +77,28 @@ public class UsuarioDAO{
         return codigo;
     }
     
-    public ArrayList<Usuario> buscaPorLogin(String login){
+    public ArrayList<Usuario> buscaPorLogin(String login) throws SQLException{
+       
         String sql = "Select * from USUARIOSCONTROLES where LOGIN = ?";
-        PreparedStatement stm = null;
-        ResultSet rs = null;
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, login);
+        ResultSet rs = stm.executeQuery();
         ArrayList<Usuario> list = new ArrayList<>();
-        try {
-            stm = con.prepareStatement(sql);
-            stm.setString(1, login);
-            rs = stm.executeQuery();
-            
-            while(rs.next()){
+        
+        while(rs.next()){
                
-                Usuario novo = new Usuario();
-                novo.setLogin(login);
-                novo.setSenha(rs.getString("SENHA"));
-                novo.setnControle(rs.getInt("NCONTROLE"));
-                novo.setCodUsuario(rs.getInt("CODUSUARIO"));
-                novo.setDataCadastro(rs.getDate("DATACADASTRO"));
-                novo.setDataValidacao(rs.getDate("DATAVALIDADE"));
-                list.add(novo);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Usuario novo = new Usuario();
+            novo.setLogin(login);
+            novo.setSenha(rs.getString("SENHA"));
+            novo.setnControle(rs.getInt("NCONTROLE"));
+            novo.setCodUsuario(rs.getInt("CODUSUARIO"));
+            novo.setDataCadastro(rs.getDate("DATACADASTRO"));
+            novo.setDataValidacao(rs.getDate("DATAVALIDADE"));
+            list.add(novo);
         }
+        rs.close();
+        stm.close();
+ 
         return  list;
     }
     
@@ -183,15 +158,44 @@ public class UsuarioDAO{
             if(rs.next()){
                 if(rs.getString("ATIVADO").equals("S")) return true;
             }
-            
+            rs.close();
+            stm.close();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         return false;
         
     }
+     
+    public Usuario read(int codUsuario) throws SQLException, NoSuchElementException{
+        
+        String sql = "Select u.NOMEUSUARIO, u.NOMEAPROVACAO, u.CARGO, u.UNIDADE "
+                + "from USUARIOS u where CODUSUARIO = ? ";
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, codUsuario);
+        ResultSet rs = stm.executeQuery();
+        Usuario usuario = null;
+        if(rs.next()){
+            usuario = new Usuario();
+            usuario.setCodUsuario(codUsuario);
+            usuario.setNome(rs.getString("NOMEUSUARIO"));
+            usuario.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
+            usuario.setCargo(rs.getString("CARGO"));
+            usuario.setUnidade("UNIDADE");
+            
+        } else {
+            throw new NoSuchElementException("BANCO DE DADOS NÃO POSSUI USUÁRIO COM CÓDIGO "+codUsuario);
+        }
+        
+        rs.close();
+        stm.close();
+        return usuario;
+    }
+    
 
-    public void bloquear(String login){
+    public void bloquear(String login) throws SQLException{
         Usuario maisRecente = maisRecente(buscaPorLogin(login));
         
         String sql = "Update USUARIOS set ATIVADO = ? where CODUSUARIO = ?";
@@ -203,19 +207,20 @@ public class UsuarioDAO{
             stm.setString(1, "N");
             stm.setInt(2, maisRecente.getCodUsuario());
             stm.executeUpdate();
-            
+            stm.close();
         } catch (SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
     }
     
     public List<Rotina> listarRotinasVinculadas(Usuario usuario) throws SQLException{
         List<Rotina> rotinas = new ArrayList<>();
         
-        String sql = "Select r.* From USUARIO u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr"
-                + "where u.CODUSUARIO = r.CODUSUARIO and r.CODROTINA = vr.CODROTINA"
-                + "and r.CODUSUARIO = ?";
+        String sql = "Select r.* From USUARIOS u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr\n" +
+            "where u.CODUSUARIO = vr.CODUSUARIO and r.CODROTINA = vr.CODROTINA\n" +
+            "and u.CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setInt(1, usuario.getCodUsuario());
@@ -237,5 +242,25 @@ public class UsuarioDAO{
         stm.close();
         
         return rotinas;
+    }
+
+    @Override
+    public void create(Usuario object) throws SQLException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(Usuario object) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void delete(Usuario object) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Usuario> listAll() throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

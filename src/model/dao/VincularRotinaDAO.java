@@ -5,68 +5,62 @@
  */
 package model.dao;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
-import util.connection.database.ConnectionFactory;
 
 /**
  *
  * @author rafaeld
  */
-public abstract class VincularRotinaDAO<T> {
+public abstract class VincularRotinaDAO<T> extends GenericDAO{
     
-    protected Connection con;
 
-    public VincularRotinaDAO(){
-        con = ConnectionFactory.getConnection();
-    }
-    
-    public abstract void create(T vincular) throws SQLException;
-    
-    public abstract T read(int codRotina, int codUsuario) throws SQLException;
-    
-    public abstract void upadate(T vincular) throws SQLException;
-    
     public void delete(VincularRotina vincular) throws SQLException {
         
         String sql = "Delete from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, vincular.getCodRotina());
-        stm.setInt(2, vincular.getCodUsuario());
+        stm.setInt(1, vincular.getRotina().getCodRotina());
+        stm.setInt(2, vincular.getUsuario().getCodUsuario());
         stm.execute();
+        stm.close();
     }
     
+    @Override
     public List<VincularRotina> listAll() throws SQLException {
         List<VincularRotina> lista = new ArrayList<>();
         
         String sql = "Select * from AGENDA_VINCULARROTINA";
         
         PreparedStatement stm = con.prepareStatement(sql);
-        ResultSet rs = stm.getResultSet();
+        ResultSet rs = stm.executeQuery();
         
         while(rs.next()){
             
-            int codRotina  = rs.getInt("CODROTINA");
-            int codUsuario = rs.getInt("CODUSUARIO");
-            String prioritario = rs.getString("PRIORITARIO");
-            String reagendavel = rs.getString("REAGENDAVEL");
-            String horarioFixo = rs.getString("HORARIOFIXO");
-            String periodo = rs.getString("PERIODO");
+            RotinaDAO rotinaDAO = new RotinaDAO();
+            Rotina rotina = rotinaDAO.read(rs.getInt("CODROTINA")); 
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            Usuario usuario = usuarioDAO.read(rs.getInt("CODUSUARIO"));
             
-            VincularRotina vincular = new VincularRotina(codRotina, codUsuario);
-            vincular.setPrioritario(prioritario.equals("V"));
-            vincular.setReagendavel(reagendavel.equals("V"));
-            vincular.setHorarioFixo(horarioFixo.equals("V"));
-            vincular.setPeriodo(periodo);
+            rotinaDAO.closeConnection();
+            usuarioDAO.closeConnection();
+            
+            VincularRotina vincular = new VincularRotina(rotina, usuario);
+            vincular.setPrioritario( rs.getString("PRIORITARIO").equals("V"));
+            vincular.setReagendavel(rs.getString("REAGENDAVEL").equals("V"));
+            vincular.setHorarioFixo(rs.getString("HORARIOFIXO").equals("V"));
+            vincular.setPeriodo(rs.getString("PERIODO"));
             
             lista.add(vincular);
         }
+        
+        rs.close();
+        stm.close();
         
         return lista;
     }

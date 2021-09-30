@@ -28,8 +28,8 @@ public class AnualDAO extends VincularRotinaDAO<Anual>{
             + " PRIORITARIO, REAGENDAVEL, HORARIOFIXO, PERIODO, DIAS, MESES,"
             + " HORARIOS) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, anual.getCodRotina());
-        stm.setInt(2, anual.getCodUsuario());
+        stm.setInt(1, anual.getRotina().getCodRotina());
+        stm.setInt(2, anual.getUsuario().getCodUsuario());
         stm.setString(3, anual.isPrioritario() ? "V" : "F");
         stm.setString(4, anual.isReagendavel() ? "V" : "F");
         stm.setString(5, anual.isHorarioFixo() ? "V" : "F");
@@ -86,8 +86,8 @@ public class AnualDAO extends VincularRotinaDAO<Anual>{
         stm.setString(4, "{"+anual.getDia()+"}");
         stm.setString(5, "{"+anual.getMes()+"}");
         stm.setString(6, SQLIntArray.intArrayToSQLIntArrayString(anual.getHorarios()) ) ;
-        stm.setInt(7, anual.getCodRotina());
-        stm.setInt(8, anual.getCodUsuario());
+        stm.setInt(7, anual.getRotina().getCodRotina());
+        stm.setInt(8, anual.getUsuario().getCodUsuario());
         stm.setString(9, anual.getClass().getSimpleName());
         stm.execute();
     }

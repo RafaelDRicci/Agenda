@@ -16,10 +16,11 @@ public class DataUnica extends VincularRotina{
     private Integer dia;
     private Integer mes;
     private Integer ano;
-    
+
     public DataUnica(int codRotina, int codUsuario) {
         super(codRotina, codUsuario);
     }
+    
 
     public Integer getDia() {
         return dia;

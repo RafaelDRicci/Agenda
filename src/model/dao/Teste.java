@@ -13,6 +13,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
+import model.dao.vincularrotinadao.AnualDAO;
 import util.date.Data;
 
 /**
@@ -22,38 +24,17 @@ import util.date.Data;
 public class Teste {
     public static void main(String[] args) throws SQLException {
         
+        RotinaDAO dao = new RotinaDAO();
+        UsuarioDAO uDao = new UsuarioDAO();
+        uDao.read(150);
         
-        RotinaDAO rotinaDao = new RotinaDAO();
-        Rotina rotina = rotinaDao.read(2);
-        List<Usuario> usuarios = rotinaDao.usuarioVinculados(rotina);
+        
+        List<Usuario> usuarios = dao.usuarioVinculados(dao.read(150));
         
         usuarios.forEach(usuario -> {
-            System.out.println("***********************************");
-            System.out.println(rotina);
+            System.out.println("*****************************");
             System.out.println(usuario);
-            System.out.println(usuario.getCargo());
-            System.out.println(usuario.getUnidade());
-            
         });
-        
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        Usuario usuario = new Usuario();
-        usuario.setCodUsuario(2);
-        List<Rotina> rotinas = usuarioDao.listarRotinasVinculadas(usuario);
-        rotinas.forEach(rotina1 -> {
-            System.out.println("*********************************");
-            System.out.println(rotina1);
-        });
-        
-        
-        System.out.println("");
-        GregorianCalendar calendar1 = new GregorianCalendar(2021, 8, 28);
-        Date date = calendar1.getTime();
-        
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(date.getTime());
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM/yyyy EEEE");
-        System.out.println(sdf.format(calendar.getTime()));
     }
    
 }

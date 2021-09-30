@@ -7,8 +7,10 @@ package model.dao.vincularrotinadao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import model.vincularrotina.Anual;
+import model.vincularrotina.DataUnica;
 
 /**
  *
@@ -19,12 +21,22 @@ public class Teste {
         
        List<Anual> vinculacoes = new ArrayList<>();
        
-       AnualDAO dao = new AnualDAO();
-       vinculacoes = dao.listAllAnual();
+       AnualDAO anualDao = new AnualDAO();
+       vinculacoes = anualDao.listAllAnual();
        
-       vinculacoes.forEach(vinculacao -> {
-           System.out.println(vinculacao.getCodUsuario() +" " + vinculacao.getCodRotina());
-       });
+        System.out.println("ANUAL");
+        System.out.println("*******************************************");
+        vinculacoes.forEach(vinculacao -> {
+           
+            System.out.println(vinculacao.getCodUsuario() +" " + vinculacao.getCodRotina());
+        });
+        System.out.println("*******************************************");
         
+       
+       DataUnicaDAO dataDAO = new DataUnicaDAO();
+       DataUnica dataUnica = dataDAO.read(5, 120);
+       dataUnica.setDia(5);
+       dataDAO.upadate(dataUnica);
+        System.out.println(dataUnica.getCodUsuario() + " " + dataUnica.getCodRotina());
     }
 }

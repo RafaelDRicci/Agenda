@@ -33,6 +33,12 @@ public class Rotina {
         dataLimite.set(Calendar.getInstance().get(Calendar.YEAR)+10, 0, 1);
     }
     
+    public Rotina(int codRotina){
+        this.codRotina = codRotina;
+        dataLimite = new GregorianCalendar();
+        dataLimite.set(Calendar.getInstance().get(Calendar.YEAR)+10, 0, 1);
+    }
+    
     public void setCodRotin(int cod){
         this.codRotina = cod;
     }

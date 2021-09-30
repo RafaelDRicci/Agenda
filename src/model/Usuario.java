@@ -43,6 +43,13 @@ public class Usuario {
         conectado = false;
         autenticado = false;
     }
+    
+    public Usuario(int codUsuario){
+        this.codUsuario = codUsuario;
+        tentativaLogin = 0;
+        conectado = false;
+        autenticado = false;
+    }
  
     public void tentativaLogin(){
         tentativaLogin++;

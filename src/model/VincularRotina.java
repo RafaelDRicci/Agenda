@@ -11,35 +11,37 @@ package model;
  */
 public class VincularRotina {
     
-    protected int codRotina;
-    protected int codUsuario;
+    protected Usuario usuario;
+    protected Rotina rotina;
     protected boolean prioritario;
     protected boolean reagendavel;
     protected boolean horarioFixo;
     protected int[] horarios;
     protected String periodo;
 
-    public VincularRotina(int codRotina, int codUsuario) {
-        this.codRotina = codRotina;
-        this.codUsuario = codUsuario;
+    public VincularRotina(Rotina rotina, Usuario usuario) {
+        this.rotina = rotina;
+        this.usuario = usuario;
+        periodo = this.getClass().getSimpleName();
     }
 
-    public int getCodRotina() {
-        return codRotina;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setCodRotina(int codRotina) {
-        this.codRotina = codRotina;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    public int getCodUsuario() {
-        return codUsuario;
+    public Rotina getRotina() {
+        return rotina;
     }
 
-    public void setCodUsuario(int codUsuario) {
-        this.codUsuario = codUsuario;
+    public void setRotina(Rotina rotina) {
+        this.rotina = rotina;
     }
 
+    
     public boolean isPrioritario() {
         return prioritario;
     }

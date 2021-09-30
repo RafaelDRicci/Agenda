@@ -12,59 +12,46 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Rotina;
 import model.Usuario;
-import model.VincularRotina;
-import util.connection.database.ConnectionFactory;
 
 /**
  *
  * @author rafaeld
  */
-public class RotinaDAO {
+public class RotinaDAO extends GenericDAO<Rotina>{
     
-    private Connection con;
     
-    public RotinaDAO(){
-        con = ConnectionFactory.getConnection();
-    }
-    
-    public void create(Rotina rotina){
+    @Override
+    public void create(Rotina rotina) throws SQLException{
         
         String sql = "INSERT INTO AGENDA_ROTINA (NOME, DATALIMITE, DESCRICAO) VALUES(?, ?, ?)";
-        try {
             
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, rotina.getNome());
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, rotina.getNome());
             
-            if( !(rotina.getDataLimite() == null) ) {
-                stm.setDate(2, new java.sql.Date(rotina.getDataLimite().getTimeInMillis()));
-            } else stm.setDate(2, null);
-                
-             
-            stm.setString(3, rotina.getDescricao());
-            stm.execute();
-            
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        if( !(rotina.getDataLimite() == null) ) {
+            stm.setDate(2, new java.sql.Date(rotina.getDataLimite().getTimeInMillis()));
+        } else stm.setDate(2, null);
+    
+        stm.setString(3, rotina.getDescricao());
+        stm.execute();
+              
     }
     
-    public Rotina read(int cod){
+    @Override
+    public Rotina read(int cod) throws SQLException, NoSuchElementException{
         
         Rotina consulta = null;
-        
-        try {
-            
-            String sql = "Select * from AGENDA_ROTINA WHERE CODROTINA = ?";
-            PreparedStatement stm  = con.prepareStatement(sql);
-            stm.setInt(1, cod);
-            ResultSet rs = stm.executeQuery();
-            rs.next();
+   
+        String sql = "Select * from AGENDA_ROTINA WHERE CODROTINA = ?";
+        PreparedStatement stm  = con.prepareStatement(sql);
+        stm.setInt(1, cod);
+        ResultSet rs = stm.executeQuery();
+        if(rs.next()){
             int codRotina = rs.getInt("CODROTINA");
             String nome = rs.getString("NOME");
             GregorianCalendar data = new GregorianCalendar();
@@ -75,89 +62,71 @@ public class RotinaDAO {
             consulta.setCodRotin(codRotina);
             consulta.setDataLimite(data);
             consulta.setDescricao(desc);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } else {
+            throw new NoSuchElementException("BANCO DE DADOS NÂO POSSUI REGISTRO DE ROTINA COM CÓDIGO "+cod);
         }
-        
-        
+            
         return consulta;
     }
     
-    public void update(Rotina rotina){
-
-        try {
+    @Override
+    public void update(Rotina rotina)throws SQLException, NoSuchElementException{
+          
+        String sql = "Update AGENDA_ROTINA set NOME = ?, DATALIMITE = ?, DESCRICAO = ? Where CODROTINA = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setString(1, rotina.getNome());
+        stm.setDate(2, ( new java.sql.Date(rotina.getDataLimite().getTimeInMillis()) ));
+        stm.setString(3, rotina.getDescricao());
+        stm.setInt(4, rotina.getCodRotina());
+        stm.execute();
+               
+    }
+    
+    @Override
+    public void delete(Rotina rotina)throws SQLException, NoSuchElementException{
             
-            String sql = "Update AGENDA_ROTINA set NOME = ?, DATALIMITE = ?, DESCRICAO = ? Where CODROTINA = ?";
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setString(1, rotina.getNome());
-            stm.setDate(2, ( new java.sql.Date(rotina.getDataLimite().getTimeInMillis()) ));
-            stm.setString(3, rotina.getDescricao());
-            stm.setInt(4, rotina.getCodRotina());
-            stm.execute();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String sql = "Delete from AGENDA_ROTINA WHERE CODROTINA = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, rotina.getCodRotina());
+        stm.execute();
         
     }
     
-    public void delete(Rotina rotina){
-        
-        try {
-            
-            String sql = "Delete from AGENDA_ROTINA WHERE CODROTINA = ?";
-            PreparedStatement stm = con.prepareStatement(sql);
-            stm.setInt(1, rotina.getCodRotina());
-            stm.execute();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public ArrayList<Rotina> listaAll(){
+    @Override
+    public ArrayList<Rotina> listAll() throws SQLException, NoSuchElementException{
         ArrayList<Rotina> rotinas = new ArrayList<>();
         
-        
-        try {
+        String sql = "Select * from AGENDA_ROTINA";
+        PreparedStatement stm = con.prepareStatement(sql);
+        ResultSet rs = stm.executeQuery();
             
-            String sql = "Select * from AGENDA_ROTINA";
-            PreparedStatement stm = con.prepareStatement(sql);
-            ResultSet rs = stm.executeQuery();
-            
-            while(rs.next()){
-                
-                int cod = rs.getInt("CODROTINA");
-                String nome = rs.getString("NOME");
-                Rotina rotina = new Rotina (cod, nome);
-                java.sql.Date data = rs.getDate("DATALIMITE");
-                
-                
-                if( !(data == null) ){
-                    GregorianCalendar gc = new GregorianCalendar();
-                    gc.setTimeInMillis(rs.getDate("DATALIMITE").getTime());
-                    rotina.setDataLimite(gc);
-                } 
-                
-                String descricao = rs.getString("DESCRICAO");
-                rotina.setDescricao(descricao);
-                
-                rotinas.add(rotina);
-            }
-            
-            rs.close();
-            stm.close();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(RotinaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        while(rs.next()){
+
+            int cod = rs.getInt("CODROTINA");
+            String nome = rs.getString("NOME");
+            Rotina rotina = new Rotina (cod, nome);
+            java.sql.Date data = rs.getDate("DATALIMITE");
+
+
+            if( !(data == null) ){
+                GregorianCalendar gc = new GregorianCalendar();
+                gc.setTimeInMillis(rs.getDate("DATALIMITE").getTime());
+                rotina.setDataLimite(gc);
+            } 
+
+            String descricao = rs.getString("DESCRICAO");
+            rotina.setDescricao(descricao);
+
+            rotinas.add(rotina);
         }
+
+        rs.close();
+        stm.close();
         
         return rotinas;
     }
     
-    public List<Usuario> usuarioVinculados(Rotina rotina) throws SQLException{
+    public List<Usuario> usuarioVinculados(Rotina rotina) throws SQLException, NoSuchElementException{
         List<Usuario> usuarios = new ArrayList<>();
         
         String sql = "Select u.CODUSUARIO, u.NOMEUSUARIO, u.DATACADASTRO, u.CARGO, u.UNIDADE, u.NOMEAPROVACAO "
