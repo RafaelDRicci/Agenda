@@ -26,10 +26,11 @@ public class Teste {
         
         RotinaDAO dao = new RotinaDAO();
         UsuarioDAO uDao = new UsuarioDAO();
-        uDao.read(150);
+        Usuario u = uDao.read(120);
         
+        System.out.println(u);
         
-        List<Usuario> usuarios = dao.usuarioVinculados(dao.read(150));
+        List<Usuario> usuarios = uDao.buscarPorUnidade("ADMINISTRAÇÃO");
         
         usuarios.forEach(usuario -> {
             System.out.println("*****************************");

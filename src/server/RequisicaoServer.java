@@ -6,7 +6,7 @@
 package server;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 import model.Usuario;
 import model.dao.UsuarioDAO;
@@ -26,7 +26,7 @@ public class RequisicaoServer {
         this.usuarios = usuarios;
     }
     
-    public void TrataMensagem(MensagemCliente mensagem) throws IOException, InterruptedException{
+    public void TrataMensagem(MensagemCliente mensagem) throws IOException, InterruptedException, SQLException{
              
             byte[] dados = mensagem.getMensagem();
             DecodificaMensagem dm = new DecodificaMensagem(dados);
@@ -54,7 +54,7 @@ public class RequisicaoServer {
             
     }
     
-        public void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException{
+        public void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException, SQLException{
 
                 UsuarioDAO dao = new UsuarioDAO();
                 usuario.setLogin(login);

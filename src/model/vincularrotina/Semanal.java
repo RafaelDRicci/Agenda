@@ -7,6 +7,8 @@ package model.vincularrotina;
 
 import model.VincularRotina;
 import java.util.ArrayList;
+import model.Rotina;
+import model.Usuario;
 
 /**
  *
@@ -15,12 +17,11 @@ import java.util.ArrayList;
 public class Semanal extends VincularRotina{
     
     private int[] diasSemana;
-    
-    public Semanal(int codRotina, int codUsuario) {
-        super(codRotina, codUsuario);
-        diasSemana = new int[7];
-    }
 
+    public Semanal(Rotina rotina, Usuario usuario) {
+        super(rotina, usuario);
+    }
+    
     public int[] getDiasSemana() {
         return diasSemana;
     }

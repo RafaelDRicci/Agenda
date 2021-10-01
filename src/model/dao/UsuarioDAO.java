@@ -7,8 +7,6 @@ package model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Usuario;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -22,8 +20,6 @@ import model.Rotina;
  * @author rafaeld
  */
 public class UsuarioDAO extends GenericDAO<Usuario>{
-
-    
     
     /**
      * 
@@ -102,7 +98,7 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
         return  list;
     }
     
-    public Usuario maisRecente(ArrayList<Usuario> usuarios){
+    public Usuario maisRecente(ArrayList<Usuario> usuarios) throws SQLException{
         
         if(!usuarios.isEmpty()){
             Usuario maisRecente = usuarios.get(0);
@@ -114,112 +110,61 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
             }
             
             String sql = "Select * from USUARIOS where CODUSUARIO = ?";
-            PreparedStatement stm = null;
-            ResultSet rs = null;
+            PreparedStatement stm = con.prepareStatement(sql);
+            stm.setInt(1, maisRecente.getCodUsuario());
+            ResultSet rs = stm.executeQuery();
             
-            try {
-                
-                stm = con.prepareStatement(sql);
-                stm.setInt(1, maisRecente.getCodUsuario());
-               
-                rs = stm.executeQuery();
-                if(rs.next()){
-                    
-                    maisRecente.setNome("NOME");
-                    maisRecente.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
-                    maisRecente.setUnidade(rs.getString("UNIDADE"));
-                    maisRecente.setCargo(rs.getString("CARGO"));
-                    
+            if(rs.next()){
 
-                }
+                maisRecente.setNome("NOME");
+                maisRecente.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
+                maisRecente.setUnidade(rs.getString("UNIDADE"));
+                maisRecente.setCargo(rs.getString("CARGO"));    
 
-                rs.close();
-                stm.close();
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
+
+            rs.close();
+            stm.close();             
 
             return maisRecente;
         }
         return null;
     }
     
-    public boolean ativado(Usuario usuario){
+    public boolean ativado(Usuario usuario) throws SQLException, NoSuchElementException{
         
         String sql = "Select * from USUARIOS where CODUSUARIO = ?";
-        PreparedStatement stm = null;
-        ResultSet rs = null;
-        try {
-            
-            stm = con.prepareStatement(sql);
-            stm.setInt(1, usuario.getCodUsuario());
-            rs = stm.executeQuery();
-            if(rs.next()){
-                if(rs.getString("ATIVADO").equals("S")) return true;
-            }
-            rs.close();
-            stm.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return false;
-        
-    }
-     
-    public Usuario read(int codUsuario) throws SQLException, NoSuchElementException{
-        
-        String sql = "Select u.NOMEUSUARIO, u.NOMEAPROVACAO, u.CARGO, u.UNIDADE "
-                + "from USUARIOS u where CODUSUARIO = ? ";
-        
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, codUsuario);
+
+        stm.setInt(1, usuario.getCodUsuario());
         ResultSet rs = stm.executeQuery();
-        Usuario usuario = null;
-        if(rs.next()){
-            usuario = new Usuario();
-            usuario.setCodUsuario(codUsuario);
-            usuario.setNome(rs.getString("NOMEUSUARIO"));
-            usuario.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
-            usuario.setCargo(rs.getString("CARGO"));
-            usuario.setUnidade("UNIDADE");
-            
-        } else {
-            throw new NoSuchElementException("BANCO DE DADOS NÃO POSSUI USUÁRIO COM CÓDIGO "+codUsuario);
-        }
-        
         rs.close();
         stm.close();
-        return usuario;
+        
+        if(rs.next()){
+            return rs.getString("ATIVADO").equals("S");
+        } else throw new NoSuchElementException("USUARIO DE CÓDIGO "+ usuario.getCodUsuario() +" NÃO ENCONTRADO NO BANCO DE DADOS");
     }
-    
 
     public void bloquear(String login) throws SQLException{
         Usuario maisRecente = maisRecente(buscaPorLogin(login));
         
         String sql = "Update USUARIOS set ATIVADO = ? where CODUSUARIO = ?";
-        PreparedStatement stm = null;
+        PreparedStatement stm = con.prepareStatement(sql);
         
-        try {
-            
-            stm = con.prepareStatement(sql);
-            stm.setString(1, "N");
-            stm.setInt(2, maisRecente.getCodUsuario());
-            stm.executeUpdate();
-            stm.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        stm.setString(1, "N");
+        stm.setInt(2, maisRecente.getCodUsuario());
+        stm.executeUpdate();
         
+        stm.close();
         
     }
-    
+
     public List<Rotina> listarRotinasVinculadas(Usuario usuario) throws SQLException{
         List<Rotina> rotinas = new ArrayList<>();
         
-        String sql = "Select r.* From USUARIOS u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr\n" +
-            "where u.CODUSUARIO = vr.CODUSUARIO and r.CODROTINA = vr.CODROTINA\n" +
+        String sql = "Select r.* From USUARIOS u, AGENDA_ROTINA r, AGENDA_VINCULARROTINA vr" +
+            "where u.CODUSUARIO = vr.CODUSUARIO and r.CODROTINA = vr.CODROTINA" +
             "and u.CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
@@ -243,7 +188,64 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
         
         return rotinas;
     }
-
+    
+    public List<Usuario> buscarPorCargo(String cargo) throws SQLException{       
+        return buscarPorCondicao("CARGO",cargo, "String");
+    }
+    
+    public List<Usuario> buscarPorUnidade(String unidade) throws SQLException{  
+        return buscarPorCondicao("UNIDADE",unidade, "String");
+    }
+    
+    public List<Usuario> buscarPorCondicao(String coluna, String valor, String tipo) throws SQLException{
+        String novaCondicao = ""; 
+        
+        if(tipo.equals("String")){
+            novaCondicao = " and u."+coluna+ " LIKE ?";
+        } else if(tipo.equals("int")){
+            novaCondicao = " and u."+coluna+ " = ?";
+        }
+        
+        String sql  = "Select u.CODUSUARIO, u.NOMEUSUARIO, u.NOMEAPROVACAO, u.CARGO, u.UNIDADE"
+                    + " from USUARIOS u"
+                    + " Where u.ATIVADO = 'S'" + novaCondicao;
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        
+        if(tipo.equals("String")){
+            stm.setString(1, "%"+valor+"%");
+        } else if(tipo.equals("int")){
+            stm.setInt(1, Integer.valueOf(valor));
+        } 
+        
+        ResultSet rs = stm.executeQuery();
+        
+        List<Usuario> usuarios = new ArrayList<>();
+        while(rs.next()){
+            Usuario usuario = new Usuario(rs.getInt("CODUSUARIO"));
+            usuario.setNome(rs.getString("NOMEUSUARIO"));
+            usuario.setNomeAprovacao(rs.getString("NOMEAPROVACAO"));
+            usuario.setCargo(rs.getString("CARGO"));
+            usuario.setUnidade(rs.getString("UNIDADE"));
+            usuarios.add(usuario);
+        }
+        
+        rs.close();
+        stm.close();
+        return usuarios;
+    }
+    
+    
+    @Override
+    public Usuario read(int codUsuario) throws SQLException, NoSuchElementException{
+        List<Usuario> usuarios = buscarPorCondicao("CODUSUARIO",Integer.toString(codUsuario), "int");
+        if(usuarios.isEmpty()) {
+            throw new NoSuchElementException("NENHUM USUARIO COM CÓDIGO "+codUsuario);
+        }
+        return usuarios.get(0);
+    }
+    
+    
     @Override
     public void create(Usuario object) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -260,7 +262,9 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
     }
 
     @Override
-    public List<Usuario> listAll() throws SQLException, NoSuchElementException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Usuario> listAll() throws SQLException {
+       return buscarPorCondicao("", "", "");
     }
 }
+
+

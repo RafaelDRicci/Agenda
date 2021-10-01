@@ -7,8 +7,10 @@ package model.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import model.Usuario;
 import util.connection.database.ConnectionFactory;
 
 /**
@@ -24,7 +26,7 @@ public abstract class GenericDAO<T> {
     }
     
     public void closeConnection() throws SQLException{
-        con.close();
+        ConnectionFactory.closeConnection(con);
     }
     
     public abstract T read(int cod) throws SQLException, NoSuchElementException;

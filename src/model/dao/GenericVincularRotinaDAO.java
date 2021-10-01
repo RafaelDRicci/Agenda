@@ -5,23 +5,41 @@
  */
 package model.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
+import util.connection.database.ConnectionFactory;
 
 /**
  *
  * @author rafaeld
  */
-public abstract class VincularRotinaDAO<T> extends GenericDAO{
+public abstract class GenericVincularRotinaDAO <T>{
     
-
-    public void delete(VincularRotina vincular) throws SQLException {
+    protected Connection con;
+    
+    public GenericVincularRotinaDAO(){
+        con = ConnectionFactory.getConnection();      
+    }
+    
+    public void closeConnection(){
+        ConnectionFactory.closeConnection(con);
+    }
+    
+    public abstract void create(T vincular) throws SQLException;
+    
+    public abstract T read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException;
+    
+    public abstract void update(T vincular)throws SQLException, NoSuchElementException;
+    
+    public void delete(VincularRotina vincular)  throws SQLException, NoSuchElementException {
         
         String sql = "Delete from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
         PreparedStatement stm = con.prepareStatement(sql);
@@ -30,9 +48,8 @@ public abstract class VincularRotinaDAO<T> extends GenericDAO{
         stm.execute();
         stm.close();
     }
-    
-    @Override
-    public List<VincularRotina> listAll() throws SQLException {
+ 
+    public List<VincularRotina> listAll() throws SQLException, NoSuchElementException {
         List<VincularRotina> lista = new ArrayList<>();
         
         String sql = "Select * from AGENDA_VINCULARROTINA";
@@ -64,7 +81,5 @@ public abstract class VincularRotinaDAO<T> extends GenericDAO{
         
         return lista;
     }
-    
-   
- 
+
 }

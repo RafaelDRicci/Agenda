@@ -8,7 +8,9 @@ package model.dao.vincularrotinadao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import model.dao.VincularRotinaDAO;
+import model.Rotina;
+import model.Usuario;
+import model.dao.GenericVincularRotinaDAO;
 import model.vincularrotina.DataUnica;
 import util.connection.database.SQLIntArray;
 
@@ -16,7 +18,7 @@ import util.connection.database.SQLIntArray;
  *
  * @author rafaeld
  */
-public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
+public class DataUnicaDAO extends GenericVincularRotinaDAO<DataUnica>{
 
     @Override
     public void create(DataUnica dataUnica) throws SQLException {
@@ -26,8 +28,8 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
                 + "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
         
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, dataUnica.getCodRotina());
-        stm.setInt(2, dataUnica.getCodUsuario());
+        stm.setInt(1, dataUnica.getRotina().getCodRotina());
+        stm.setInt(2, dataUnica.getUsuario().getCodUsuario());
         stm.setString(3, dataUnica.isPrioritario() ? "V" : "F");
         stm.setString(4, dataUnica.isReagendavel() ? "V" : "F");
         stm.setString(5, dataUnica.isHorarioFixo() ? "V" : "F");
@@ -43,19 +45,20 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
     }
 
     @Override
-    public DataUnica read(int codRotina, int codUsuario) throws SQLException {
+    public DataUnica read(Rotina rotina, Usuario usuario) throws SQLException {
         
         String sql = "Select * from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setInt(1, codRotina);
-        stm.setInt(2, codUsuario);
+        stm.setInt(1, rotina.getCodRotina());
+        stm.setInt(2, usuario.getCodUsuario());
         ResultSet rs = stm.executeQuery();
         DataUnica dataUnica = null;
         
         if(rs.next()){
             
-            dataUnica = new DataUnica(codRotina, codUsuario);
+            
+            dataUnica = new DataUnica(rotina, usuario);
             dataUnica.setPrioritario(rs.getString("PRIORITARIO").equals("V"));
             dataUnica.setReagendavel(rs.getString("REAGENDAVEL").equals("V"));
             dataUnica.setHorarioFixo(rs.getString("HorarioFixo").equals("V"));
@@ -72,7 +75,7 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
     }
 
     @Override
-    public void upadate(DataUnica vincular) throws SQLException {
+    public void update(DataUnica vincular) throws SQLException {
         String sql = "Update AGENDA_VINCULARROTINA "
                 + "set PRIORITARIO = ?, REAGENDAVEl = ?, HORARIOFIXO = ?, DIAS = ?, MESES = ?, ANOS = ?, HORARIOS = ?"
                 + "where CODROTINA = ? and CODUSUARIO = ?";
@@ -85,8 +88,8 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
         stm.setString(5, "{"+vincular.getMes()+"}");
         stm.setString(6, "{"+vincular.getAno()+"}");
         stm.setString(7, SQLIntArray.intArrayToSQLIntArrayString(vincular.getHorarios()));
-        stm.setInt(8, vincular.getCodRotina());
-        stm.setInt(9, vincular.getCodUsuario());
+        stm.setInt(8, vincular.getRotina().getCodRotina());
+        stm.setInt(9, vincular.getUsuario().getCodUsuario());
         stm.execute();
     }
     

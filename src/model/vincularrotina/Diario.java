@@ -5,6 +5,8 @@
  */
 package model.vincularrotina;
 
+import model.Rotina;
+import model.Usuario;
 import model.VincularRotina;
 
 /**
@@ -12,10 +14,8 @@ import model.VincularRotina;
  * @author rafaeld
  */
 public class Diario extends VincularRotina{
-    
-    public Diario(int codRotina, int codUsuario) {
-        super(codRotina, codUsuario);
-    }
-    
-    
+
+    public Diario(Rotina rotina, Usuario usuario) {
+        super(rotina, usuario);
+    } 
 }

@@ -28,15 +28,9 @@ public class Teste {
         System.out.println("*******************************************");
         vinculacoes.forEach(vinculacao -> {
            
-            System.out.println(vinculacao.getCodUsuario() +" " + vinculacao.getCodRotina());
+            System.out.println(vinculacao.getUsuario() +" " + vinculacao.getRotina());
         });
         System.out.println("*******************************************");
-        
-       
-       DataUnicaDAO dataDAO = new DataUnicaDAO();
-       DataUnica dataUnica = dataDAO.read(5, 120);
-       dataUnica.setDia(5);
-       dataDAO.upadate(dataUnica);
-        System.out.println(dataUnica.getCodUsuario() + " " + dataUnica.getCodRotina());
+    
     }
 }

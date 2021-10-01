@@ -41,7 +41,6 @@ public class VincularRotina {
         this.rotina = rotina;
     }
 
-    
     public boolean isPrioritario() {
         return prioritario;
     }

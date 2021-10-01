@@ -5,6 +5,8 @@
  */
 package model.vincularrotina;
 
+import model.Rotina;
+import model.Usuario;
 import model.VincularRotina;
 
 /**
@@ -14,9 +16,9 @@ import model.VincularRotina;
 public class DiaMeses extends VincularRotina{
     
     private int[] dias;
-    
-    public DiaMeses(int codRotina, int codUsuario) {
-        super(codRotina, codUsuario);
+
+    public DiaMeses(Rotina rotina, Usuario usuario) {
+        super(rotina, usuario);
     }
 
     public int[] getDias() {
