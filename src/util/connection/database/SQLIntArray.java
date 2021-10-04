@@ -35,7 +35,7 @@ public class SQLIntArray implements Array{
     public static String intArrayToSQLIntArrayString(int[] intArray) {
         
         if(intArray == null){
-            return "NULL";
+            return "{}";
         }
         
         int arraySize = intArray.length;
@@ -53,7 +53,7 @@ public class SQLIntArray implements Array{
         array += "}";
         return array;
     }
-    
+  
     public static int[] SQLIntArrayStringToIntArray(String stringValue){
         if(stringValue.equals("NULL")){
             return null;

@@ -21,12 +21,12 @@ import util.connection.database.ConnectionFactory;
  *
  * @author rafaeld
  */
-public abstract class GenericVincularRotinaDAO <T>{
+public abstract class VincularRotinaGenericDAO<T>{
     
     protected Connection con;
     
-    public GenericVincularRotinaDAO(){
-        con = ConnectionFactory.getConnection();      
+    public VincularRotinaGenericDAO(){
+        con = ConnectionFactory.getConnection();
     }
     
     public void closeConnection(){
@@ -37,9 +37,9 @@ public abstract class GenericVincularRotinaDAO <T>{
     
     public abstract T read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException;
     
-    public abstract void update(T vincular)throws SQLException, NoSuchElementException;
+    public abstract void update(T vincular)throws SQLException;
     
-    public void delete(VincularRotina vincular)  throws SQLException, NoSuchElementException {
+    public void delete(VincularRotina vincular)  throws SQLException {
         
         String sql = "Delete from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
         PreparedStatement stm = con.prepareStatement(sql);
@@ -81,5 +81,7 @@ public abstract class GenericVincularRotinaDAO <T>{
         
         return lista;
     }
-
+    
+    public abstract List<T> listAllPeriodo() throws SQLException;
+ 
 }

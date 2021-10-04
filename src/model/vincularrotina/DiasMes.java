@@ -13,11 +13,11 @@ import model.VincularRotina;
  *
  * @author rafaeld
  */
-public class DiaMeses extends VincularRotina{
+public class DiasMes extends VincularRotina{
     
     private int[] dias;
 
-    public DiaMeses(Rotina rotina, Usuario usuario) {
+    public DiasMes(Rotina rotina, Usuario usuario) {
         super(rotina, usuario);
     }
 

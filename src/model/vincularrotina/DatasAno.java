@@ -26,7 +26,7 @@ public class DatasAno extends VincularRotina{
         return dia;
     }
 
-    public void setDias(Integer dia) {
+    public void setDia(Integer dia) {
         this.dia = dia;
     }
 
