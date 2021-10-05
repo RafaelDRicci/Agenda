@@ -5,13 +5,12 @@
  */
 package cliente.vincularrotina;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import util.date.Calendario;
-import util.date.Data;
+
 
 /**
  *

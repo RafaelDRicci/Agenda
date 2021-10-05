@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
 import util.connection.database.ConnectionFactory;
 
 /**
@@ -30,6 +33,10 @@ public abstract class GenericDAO<T> {
     }
     
     public abstract T read(int cod) throws SQLException, NoSuchElementException;
+    
+    public abstract T read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException;
+    
+    public abstract T read(int cod, VincularRotina vincular) throws SQLException, NoSuchElementException;
     
     public abstract void create(T object) throws SQLException;
     

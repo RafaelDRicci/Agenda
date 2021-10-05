@@ -48,8 +48,6 @@ public class Data implements Comparable<Data>{
     public void setDiaUtil(boolean diaUtil) {
         this.diaUtil = diaUtil;
     }
-
-    
     
     public GregorianCalendar getData() {
         return data;
@@ -59,6 +57,7 @@ public class Data implements Comparable<Data>{
         this.data = data;
     }
 
+    
     @Override
     public int compareTo(Data data) {
         int dia = this.data.get(Calendar.DAY_OF_MONTH);

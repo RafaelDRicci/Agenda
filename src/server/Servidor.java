@@ -8,6 +8,7 @@ package server;
 import util.communication.Comunicacao;
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -91,6 +92,8 @@ public class Servidor{
             } catch (InterruptedException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
+                Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
                 Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
             }
          }

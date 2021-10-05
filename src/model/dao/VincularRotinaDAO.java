@@ -21,11 +21,11 @@ import util.connection.database.ConnectionFactory;
  *
  * @author rafaeld
  */
-public abstract class VincularRotinaGenericDAO<T>{
+public abstract class VincularRotinaDAO<T> {
     
     protected Connection con;
     
-    public VincularRotinaGenericDAO(){
+    public VincularRotinaDAO(){
         con = ConnectionFactory.getConnection();
     }
     

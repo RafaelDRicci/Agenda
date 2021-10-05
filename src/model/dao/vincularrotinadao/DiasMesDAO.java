@@ -15,7 +15,7 @@ import model.Rotina;
 import model.Usuario;
 import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
-import model.dao.VincularRotinaGenericDAO;
+import model.dao.VincularRotinaDAO;
 import model.vincularrotina.DatasAno;
 import model.vincularrotina.DiasMes;
 import util.connection.database.SQLIntArray;
@@ -24,7 +24,7 @@ import util.connection.database.SQLIntArray;
  *
  * @author rafaeld
  */
-public class DiasMesDAO extends VincularRotinaGenericDAO<DiasMes>{
+public class DiasMesDAO extends VincularRotinaDAO<DiasMes>{
 
     @Override
     public void create(DiasMes vincular) throws SQLException {

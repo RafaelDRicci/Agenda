@@ -55,6 +55,7 @@ public class SQLIntArray implements Array{
     }
   
     public static int[] SQLIntArrayStringToIntArray(String stringValue){
+
         if(stringValue.equals("NULL")){
             return null;
         }

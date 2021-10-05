@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
 
 /**
  *
@@ -152,6 +153,16 @@ public class RotinaDAO extends GenericDAO<Rotina>{
         rs.close();
         stm.close();
         return usuarios;
+    }
+
+    @Override
+    public Rotina read(int cod, VincularRotina vincular) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Rotina read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

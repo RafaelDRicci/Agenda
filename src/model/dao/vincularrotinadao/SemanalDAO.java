@@ -15,9 +15,7 @@ import model.Rotina;
 import model.Usuario;
 import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
-import model.dao.VincularRotinaGenericDAO;
-import model.vincularrotina.DatasAno;
-import model.vincularrotina.DiasUteis;
+import model.dao.VincularRotinaDAO;
 import model.vincularrotina.Semanal;
 import util.connection.database.SQLIntArray;
 
@@ -25,7 +23,7 @@ import util.connection.database.SQLIntArray;
  *
  * @author rafaeld
  */
-public class SemanalDAO extends VincularRotinaGenericDAO<Semanal>{
+public class SemanalDAO extends VincularRotinaDAO<Semanal>{
 
     @Override
     public void create(Semanal vincular) throws SQLException {
@@ -102,7 +100,7 @@ public class SemanalDAO extends VincularRotinaGenericDAO<Semanal>{
         String sql = "Select * from AGENDA_VINCULARROTINA where PERIODO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1, DatasAno.class.getSimpleName());
+        stm.setString(1, Semanal.class.getSimpleName());
         ResultSet rs = stm.executeQuery();
         while(rs.next()){
             

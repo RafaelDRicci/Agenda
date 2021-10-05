@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 import model.Rotina;
+import model.VincularRotina;
 
 /**
  *
@@ -138,12 +139,17 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
 
         stm.setInt(1, usuario.getCodUsuario());
         ResultSet rs = stm.executeQuery();
-        rs.close();
-        stm.close();
-        
+
         if(rs.next()){
-            return rs.getString("ATIVADO").equals("S");
-        } else throw new NoSuchElementException("USUARIO DE CÓDIGO "+ usuario.getCodUsuario() +" NÃO ENCONTRADO NO BANCO DE DADOS");
+            boolean retorno = rs.getString("ATIVADO").equals("S");
+            rs.close();
+            stm.close();
+            return retorno;
+        } else {
+            rs.close();
+            stm.close();
+            throw new NoSuchElementException("USUARIO DE CÓDIGO "+ usuario.getCodUsuario() +" NÃO ENCONTRADO NO BANCO DE DADOS");
+        }
     }
 
     public void bloquear(String login) throws SQLException{
@@ -264,6 +270,16 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
     @Override
     public List<Usuario> listAll() throws SQLException {
        return buscarPorCondicao("", "", "");
+    }
+
+    @Override
+    public Usuario read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Usuario read(int cod, VincularRotina vincular) throws SQLException, NoSuchElementException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 

@@ -22,7 +22,7 @@ public class DataUnica extends VincularRotina{
     public DataUnica(Rotina rotina, Usuario usuario) {
         super(rotina, usuario);
     }
-    
+
     public Integer getDia() {
         return dia;
     }

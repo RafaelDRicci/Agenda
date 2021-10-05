@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import model.Rotina;
 import model.Usuario;
-import model.dao.VincularRotinaGenericDAO;
+import model.dao.VincularRotinaDAO;
 import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
 import model.vincularrotina.Anual;
@@ -23,7 +23,7 @@ import util.connection.database.SQLIntArray;
  *
  * @author rafaeld
  */
-public class AnualDAO extends VincularRotinaGenericDAO<Anual>{
+public class AnualDAO extends VincularRotinaDAO<Anual>{
     
     
     @Override
