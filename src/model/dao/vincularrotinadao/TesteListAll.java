@@ -7,8 +7,10 @@ package model.dao.vincularrotinadao;
 
 import java.sql.SQLException;
 import java.util.List;
+import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
+import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
 import model.dao.VincularRotinaDAO;
 import model.vincularrotina.Anual;
@@ -80,7 +82,8 @@ public class TesteListAll {
        semanal.forEach(rotina -> {
            System.out.println(rotina.getRotina() +" "+rotina.getUsuario() + " "+rotina.getPeriodo());
        });
-       
+    
+      
     }
     
 }

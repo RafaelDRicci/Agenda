@@ -17,7 +17,7 @@ public class Data implements Comparable<Data>{
     
     private String nome;
     private boolean diaUtil;
-    private GregorianCalendar data;
+    private Calendar data;
 
     public Data(String nome, boolean diaUtil, long timeInMillis) {
         this.nome = nome;
@@ -26,7 +26,7 @@ public class Data implements Comparable<Data>{
         data.setTimeInMillis(timeInMillis);
     }
     
-    public Data(String nome, boolean diaUtil, GregorianCalendar data) {
+    public Data(String nome, boolean diaUtil, Calendar data) {
         this.nome = nome;
         this.diaUtil = diaUtil;
         this.data = data;
@@ -49,7 +49,7 @@ public class Data implements Comparable<Data>{
         this.diaUtil = diaUtil;
     }
     
-    public GregorianCalendar getData() {
+    public Calendar getData() {
         return data;
     }
 
@@ -80,9 +80,7 @@ public class Data implements Comparable<Data>{
     @Override
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy - EEEE");
-        return sdf.format(data.getTime()) + " - " +nome;
+        return sdf.format(data.getTime());
     }
-    
-
-    
+   
 }

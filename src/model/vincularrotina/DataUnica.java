@@ -5,6 +5,8 @@
  */
 package model.vincularrotina;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
@@ -15,36 +17,23 @@ import model.VincularRotina;
  */
 public class DataUnica extends VincularRotina{
     
-    private Integer dia;
-    private Integer mes;
-    private Integer ano;
+    private Calendar data;
 
     public DataUnica(Rotina rotina, Usuario usuario) {
         super(rotina, usuario);
     }
 
-    public Integer getDia() {
-        return dia;
+    public Calendar getData() {
+        return data;
     }
 
-    public void setDia(Integer dia) {
-        this.dia = dia;
+    public void setData(Calendar data) {
+        this.data = data;
     }
 
-    public Integer getMes() {
-        return mes;
+    public void setData(long millis){
+        data = new GregorianCalendar();
+        data.setTimeInMillis(millis);
     }
 
-    public void setMes(Integer mes) {
-        this.mes = mes;
-    }
-
-    public Integer getAno() {
-        return ano;
-    }
-
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
-    
 }

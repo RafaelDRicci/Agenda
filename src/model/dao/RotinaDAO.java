@@ -73,7 +73,7 @@ public class RotinaDAO extends GenericDAO<Rotina>{
         String sql = "Update AGENDA_ROTINA set NOME = ?, DATALIMITE = ?, DESCRICAO = ? Where CODROTINA = ?";
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setString(1, rotina.getNome());
-        stm.setDate(2, ( new java.sql.Date(rotina.getDataLimite().getTimeInMillis()) ));
+        stm.setDate(2, ( new java.sql.Date( rotina.getDataLimite().getTimeInMillis() ) ));
         stm.setString(3, rotina.getDescricao());
         stm.setInt(4, rotina.getCodRotina());
         stm.execute();
@@ -91,7 +91,7 @@ public class RotinaDAO extends GenericDAO<Rotina>{
     }
     
     @Override
-    public ArrayList<Rotina> listAll() throws SQLException, NoSuchElementException{
+    public ArrayList<Rotina> listAll() throws SQLException{
         ArrayList<Rotina> rotinas = new ArrayList<>();
         
         String sql = "Select * from AGENDA_ROTINA";
@@ -124,7 +124,7 @@ public class RotinaDAO extends GenericDAO<Rotina>{
         return rotinas;
     }
     
-    public List<Usuario> usuarioVinculados(Rotina rotina) throws SQLException, NoSuchElementException{
+    public List<Usuario> usuarioVinculados(Rotina rotina) throws SQLException{
         List<Usuario> usuarios = new ArrayList<>();
         
         String sql = "Select u.CODUSUARIO, u.NOMEUSUARIO, u.DATACADASTRO, u.CARGO, u.UNIDADE, u.NOMEAPROVACAO "

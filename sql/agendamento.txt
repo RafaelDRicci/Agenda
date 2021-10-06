@@ -1,0 +1,12 @@
+CREATE TABLE AGENDA_AGENDAMENTO (
+    CODROTINA integer, 
+    CODUSUARIO integer,
+    CODAGENDAMENTO integer,
+    DATA date,
+    HORAINICIAL integer,
+    HORAFINAL integer,
+    ESTADO varchar(10),
+    JUSTIFICATIVA varchar(255),
+    constraint FK_VINCULARROTINA foreign key (CODROTINA, CODUSUARIO) references agenda_vincularrotina(CODROTINA, CODUSUARIO),
+    constraint PK_AGENDAMENTO primary key (CODROTINA, CODUSUARIO, CODAGENDAMENTO)
+)

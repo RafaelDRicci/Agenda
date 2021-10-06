@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import model.Rotina;
 import model.Usuario;
@@ -31,6 +33,8 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
                 + "(CODROTINA, CODUSUARIO, PRIORITARIO, REAGENDAVEL, HORARIOFIXO, PERIODO, DIAS, MESES, ANOS, HORARIOS)"
                 + "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
         
+        dataUnica.getData().get(Calendar.MONTH);
+        
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setInt(1, dataUnica.getRotina().getCodRotina());
         stm.setInt(2, dataUnica.getUsuario().getCodUsuario());
@@ -38,9 +42,9 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
         stm.setString(4, dataUnica.isReagendavel() ? "V" : "F");
         stm.setString(5, dataUnica.isHorarioFixo() ? "V" : "F");
         stm.setString(6, dataUnica.getClass().getSimpleName());
-        stm.setString(7, "{"+dataUnica.getDia()+"}");
-        stm.setString(8, "{"+dataUnica.getMes()+"}");
-        stm.setString(9, "{"+dataUnica.getAno()+"}");
+        stm.setString(7, "{"+dataUnica.getData().get(Calendar.DAY_OF_MONTH)+"}");
+        stm.setString(8, "{"+(dataUnica.getData().get(Calendar.MONTH)+1)+"}");
+        stm.setString(9, "{"+dataUnica.getData().get(Calendar.YEAR)+"}");
         stm.setString(10, SQLIntArray.intArrayToSQLIntArrayString(dataUnica.getHorarios()));
         stm.execute();
         
@@ -65,9 +69,15 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
             dataUnica.setPrioritario(rs.getString("PRIORITARIO").equals("V"));
             dataUnica.setReagendavel(rs.getString("REAGENDAVEL").equals("V"));
             dataUnica.setHorarioFixo(rs.getString("HorarioFixo").equals("V"));
-            dataUnica.setDia(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("DIAS"))[0]);
-            dataUnica.setMes(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("MESES"))[0]);
-            dataUnica.setAno(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("ANOS"))[0]);
+            
+            int dia = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("DIAS"))[0];
+            int mes = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("MESES"))[0] - 1;
+            int ano = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("ANOS"))[0];
+            
+            GregorianCalendar data = new GregorianCalendar(ano, mes, dia);
+           
+            dataUnica.setData(data);
+            
             dataUnica.setHorarios(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("HORARIOS")));
             
         }
@@ -78,21 +88,21 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
     }
 
     @Override
-    public void update(DataUnica vincular) throws SQLException {
+    public void update(DataUnica dataUnica) throws SQLException {
         String sql = "Update AGENDA_VINCULARROTINA "
                 + "set PRIORITARIO = ?, REAGENDAVEl = ?, HORARIOFIXO = ?, DIAS = ?, MESES = ?, ANOS = ?, HORARIOS = ?"
                 + "where CODROTINA = ? and CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
-        stm.setString(1, vincular.isPrioritario() ? "V" : "F");
-        stm.setString(2, vincular.isReagendavel() ? "V" : "F");
-        stm.setString(3, vincular.isHorarioFixo() ? "V" : "F");
-        stm.setString(4, "{"+vincular.getDia()+"}");
-        stm.setString(5, "{"+vincular.getMes()+"}");
-        stm.setString(6, "{"+vincular.getAno()+"}");
-        stm.setString(7, SQLIntArray.intArrayToSQLIntArrayString(vincular.getHorarios()));
-        stm.setInt(8, vincular.getRotina().getCodRotina());
-        stm.setInt(9, vincular.getUsuario().getCodUsuario());
+        stm.setString(1, dataUnica.isPrioritario() ? "V" : "F");
+        stm.setString(2, dataUnica.isReagendavel() ? "V" : "F");
+        stm.setString(3, dataUnica.isHorarioFixo() ? "V" : "F");
+        stm.setString(7, "{"+dataUnica.getData().get(Calendar.DAY_OF_MONTH)+"}");
+        stm.setString(8, "{"+(dataUnica.getData().get(Calendar.MONTH)+1)+"}");
+        stm.setString(9, "{"+dataUnica.getData().get(Calendar.DAY_OF_MONTH)+"}");
+        stm.setString(7, SQLIntArray.intArrayToSQLIntArrayString(dataUnica.getHorarios()));
+        stm.setInt(8, dataUnica.getRotina().getCodRotina());
+        stm.setInt(9, dataUnica.getUsuario().getCodUsuario());
         stm.execute();
         
         stm.close();
@@ -124,9 +134,15 @@ public class DataUnicaDAO extends VincularRotinaDAO<DataUnica>{
             dataUnica.setPrioritario(rs.getString("PRIORITARIO").equals("V"));
             dataUnica.setReagendavel(rs.getString("REAGENDAVEL").equals("V"));
             dataUnica.setHorarioFixo(rs.getString("HorarioFixo").equals("V"));
-            dataUnica.setDia(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("DIAS"))[0]);
-            dataUnica.setMes(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("MESES"))[0]);
-            dataUnica.setAno(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("ANOS"))[0]);
+            
+            
+            int dia = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("DIAS"))[0];
+            int mes = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("MESES"))[0] - 1;
+            int ano = SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("ANOS"))[0];
+            
+            GregorianCalendar data = new GregorianCalendar(ano, mes, dia);
+            dataUnica.setData(data);
+
             dataUnica.setHorarios(SQLIntArray.SQLIntArrayStringToIntArray(rs.getString("HORARIOS")));
             
             lista.add(dataUnica);          

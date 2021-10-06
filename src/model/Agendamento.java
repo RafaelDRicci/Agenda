@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.Calendar;
 import util.date.Data;
 
 /**
@@ -27,8 +28,14 @@ public class Agendamento extends Data{
         this.vincularRotina = vincularRotina;
         horaInicio = vincularRotina.getHorarios()[0];
         horaFinal = vincularRotina.getHorarios()[vincularRotina.getHorarios().length-1];
-        estado = "A FAZER";
-        justificativa = estado+": ";
+    }
+    
+    public Agendamento(int codAgendamento, VincularRotina vincularRotina, Calendar data) {
+        super(vincularRotina.getRotina().getNome(), true, data);
+        this.codAgendamento = codAgendamento;
+        this.vincularRotina = vincularRotina;
+        horaInicio = vincularRotina.getHorarios()[0];
+        horaFinal = vincularRotina.getHorarios()[vincularRotina.getHorarios().length-1];
     }
 
     public int getCodAgendamento() {
@@ -79,9 +86,9 @@ public class Agendamento extends Data{
         this.descricao = descricao;
     }
     
-    public void setDescricao(){
+    public void setDescricaoPadrao(){
         descricao = vincularRotina.getRotina()+" ("+vincularRotina.getRotina().getCodRotina()+ ")"
-                +" VINCULADA PARA "+ vincularRotina.getUsuario()+ " ("+vincularRotina.getUsuario().getCodUsuario()+")"
-                +" PERÍODO "+vincularRotina.getPeriodo()+ " AGENDADA PARA "+toString() +"DAS "+horaInicio+"h ATÉ "+horaFinal+"h";
+                +" | VINCULADA PARA "+ vincularRotina.getUsuario()+ " ("+vincularRotina.getUsuario().getCodUsuario()+")"
+                +" | PERÍODO: "+vincularRotina.getPeriodo()+ " | DATA: "+toString() +" | HORÁRIO: "+horaInicio+"h - "+horaFinal+"h";
     }
 }

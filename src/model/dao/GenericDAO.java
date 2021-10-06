@@ -44,5 +44,5 @@ public abstract class GenericDAO<T> {
     
     public abstract void delete(T object) throws SQLException, NoSuchElementException;
     
-    public abstract List<T> listAll() throws SQLException, NoSuchElementException;
+    public abstract List<T> listAll() throws SQLException;
 }
