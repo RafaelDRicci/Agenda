@@ -14,8 +14,8 @@ import util.date.Data;
  */
 public class Agendamento extends Data{
      
-    private final int codAgendamento;
-    private final VincularRotina vincularRotina;
+    private int codAgendamento;
+    private VincularRotina vincularRotina;
     private int horaInicio;
     private int horaFinal;
     private String estado;
@@ -26,18 +26,25 @@ public class Agendamento extends Data{
         super(vincularRotina.getRotina().getNome(), true, millis);
         this.codAgendamento = codAgendamento;
         this.vincularRotina = vincularRotina;
-        horaInicio = vincularRotina.getHorarios()[0];
-        horaFinal = vincularRotina.getHorarios()[vincularRotina.getHorarios().length-1];
     }
     
     public Agendamento(int codAgendamento, VincularRotina vincularRotina, Calendar data) {
         super(vincularRotina.getRotina().getNome(), true, data);
         this.codAgendamento = codAgendamento;
         this.vincularRotina = vincularRotina;
-        horaInicio = vincularRotina.getHorarios()[0];
-        horaFinal = vincularRotina.getHorarios()[vincularRotina.getHorarios().length-1];
     }
-
+    
+    
+    public Agendamento(VincularRotina vincularRotina, long millis) {
+        super(vincularRotina.getRotina().getNome(), true, millis);
+        this.vincularRotina = vincularRotina;
+    }
+    
+    public Agendamento(VincularRotina vincularRotina, Calendar data) {
+        super(vincularRotina.getRotina().getNome(), true, data);
+        this.vincularRotina = vincularRotina;
+    }
+    
     public int getCodAgendamento() {
         return codAgendamento;
     }
@@ -88,7 +95,8 @@ public class Agendamento extends Data{
     
     public void setDescricaoPadrao(){
         descricao = vincularRotina.getRotina()+" ("+vincularRotina.getRotina().getCodRotina()+ ")"
-                +" | VINCULADA PARA "+ vincularRotina.getUsuario()+ " ("+vincularRotina.getUsuario().getCodUsuario()+")"
-                +" | PERÍODO: "+vincularRotina.getPeriodo()+ " | DATA: "+toString() +" | HORÁRIO: "+horaInicio+"h - "+horaFinal+"h";
+                +" | VINCULADA PARA: "+ vincularRotina.getUsuario()+ " ("+vincularRotina.getUsuario().getCodUsuario()+")"
+                +" | PERÍODO: "+vincularRotina.getPeriodo()+ " | DATA: "+toString() +" | HORÁRIO: "+horaInicio+"h - "+horaFinal+"h"
+                +" | ESTADO: "+estado+ " | JUSTIFICATIVA: "+justificativa;
     }
 }

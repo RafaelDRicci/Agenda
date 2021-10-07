@@ -36,7 +36,6 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
 
     @Override
     public Agendamento read(int cod, VincularRotina vincular) throws SQLException, NoSuchElementException {
-        
         String sql = "Select * from AGENDA_AGENDAMENTO where CODAGENDAMENTO = ? and CODROTINA = ? and CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
@@ -67,26 +66,24 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                     " ENTRE ROTINA "+vincular.getRotina().getCodRotina()+ " E USUARIO "
                     +vincular.getUsuario().getCodUsuario()+ " NÃO ENCONTRADO NO BANCO DE DADOS");
         }
-        
     }
 
     @Override
     public void create(Agendamento agendamento) throws SQLException {
         
         String sql = "Insert into AGENDA_AGENDAMENTO (CODROTINA, CODUSUARIO, "
-                + "CODAGENDAMENTO, DATA, HORAINICIAL, HORAFINAL, ESTADO, JUSTIFICATIVA, DESCRICAO)"
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                + "DATA, HORAINICIAL, HORAFINAL, ESTADO, JUSTIFICATIVA, DESCRICAO)"
+                + "values (?, ?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement stm = con.prepareStatement(sql);
         stm.setInt(1, agendamento.getVincularRotina().getRotina().getCodRotina());
         stm.setInt(2, agendamento.getVincularRotina().getUsuario().getCodUsuario());
-        stm.setInt(3, agendamento.getCodAgendamento());
-        stm.setDate(4, new java.sql.Date(agendamento.getData().getTimeInMillis()));
-        stm.setInt(5, agendamento.getHoraInicio());
-        stm.setInt(6, agendamento.getHoraFinal());
-        stm.setString(7, agendamento.getEstado());
-        stm.setString(8, agendamento.getJustificativa());
-        stm.setString(9, agendamento.getDescricao());
+        stm.setDate(3, new java.sql.Date(agendamento.getData().getTimeInMillis()));
+        stm.setInt(4, agendamento.getHoraInicio());
+        stm.setInt(5, agendamento.getHoraFinal());
+        stm.setString(6, agendamento.getEstado());
+        stm.setString(7, agendamento.getJustificativa());
+        stm.setString(8, agendamento.getDescricao());
         
         stm.execute();
         
@@ -94,14 +91,14 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
     }
 
     @Override
-    public void update(Agendamento agendamento) throws SQLException, NoSuchElementException {
+    public void update(Agendamento agendamento) throws SQLException{
         
         String sql = "Update AGENDA_AGENDAMENTO set DATA = ?, HORAINICIAL = ?, HORAFINAL = ?, ESTADO = ?, JUSTIFICATIVA = ?, DESCRICAO = ?"
-                + " where CODRITINA = ? and CODUSUARIO = ? and CODAGENDAMENTO = ?";
+                + " where CODROTINA = ? and CODUSUARIO = ? and CODAGENDAMENTO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
         
-        stm.setDate(1, ( agendamento.getData().getTime() ));
+        stm.setDate(1, new java.sql.Date( agendamento.getData().getTimeInMillis() ));
         stm.setInt(2, agendamento.getHoraInicio());
         stm.setInt(3, agendamento.getHoraFinal());
         stm.setString(4, agendamento.getEstado());
@@ -111,14 +108,8 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
         stm.setInt(8, agendamento.getVincularRotina().getUsuario().getCodUsuario());
         stm.setInt(9, agendamento.getCodAgendamento());
         
-        if(stm.execute()){
-            stm.close();
-        } else{
-            stm.close();
-            throw new NoSuchElementException("AGENDAMENTO DE CODIGO "+agendamento.getCodAgendamento()+
-                    " ENTRE ROTINA "+agendamento.getVincularRotina().getRotina().getCodRotina()+ " E USUARIO "
-                    +agendamento.getVincularRotina().getUsuario().getCodUsuario()+ " NÃO ENCONTRADO NO BANCO DE DADOS");
-        }
+        stm.execute();
+        stm.close();
     }
 
     @Override
@@ -131,18 +122,16 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
         stm.setInt(2, agendamento.getVincularRotina().getRotina().getCodRotina());
         stm.setInt(3, agendamento.getVincularRotina().getUsuario().getCodUsuario());
         
-        if(stm.execute()){
-            stm.close();
-        } else throw new NoSuchElementException("AGENDAMENTO DE CODIGO "+agendamento.getCodAgendamento()+
-                    " ENTRE ROTINA "+agendamento.getVincularRotina().getRotina().getCodRotina()+ " E USUARIO "
-                    +agendamento.getVincularRotina().getUsuario().getCodUsuario()+ " NÃO ENCONTRADO NO BANCO DE DADOS");
+        stm.execute();
+        stm.close();
         
     }
 
     @Override
     public List<Agendamento> listAll() throws SQLException {
         
-        String sql = "Select * from AGENDA_AGENDAMENTO";
+        String sql = "Select a.*, v.PERIODO from AGENDA_AGENDAMENTO a, AGENDA_VINCULARROTINA v "
+                + " where a.CODROTINA = v.CODROTINA and a.CODUSUARIO = v.CODUSUARIO";
         PreparedStatement stm = con.prepareStatement(sql);
         ResultSet rs = stm.executeQuery();
         
@@ -153,33 +142,30 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
             RotinaDAO rotinaDAO = new RotinaDAO();
             Rotina rotina = rotinaDAO.read(rs.getInt("CODROTINA"));
             UsuarioDAO usuarioDAO = new UsuarioDAO();
-            Usuario usuario = usuarioDAO.read(rs.getInt("CODUSUARIO"));
+            Usuario usuario = usuarioDAO.read(rs.getInt("CODUSUARIO"));    
             
-            stm.setInt(1, rotina.getCodRotina());
-            stm.setInt(2, usuario.getCodUsuario());
-            
-            sql = "Select PERIODO from AGENDA_VINCULARROTINA where CODROTINA = ? and CODUSUARIO = ?";
-            stm = con.prepareStatement(sql);
-            
-            ResultSet rsPeriodo = stm.executeQuery();
-            
-            String periodo = "";
+            String periodo = rs.getString("PERIODO");
             VincularRotina vincular;
-            if(rsPeriodo.next()) periodo = rsPeriodo.getString("PERIODO");
+           
             switch(periodo) {
                 
                 case "DataUnica":
                     
                     DataUnicaDAO duDAO = new DataUnicaDAO();
                     vincular = duDAO.read(rotina, usuario);
-
+                    duDAO.closeConnection();
                     break;
+                    
+                    
+                case "Diario":
+                    
+                    
                     
                 default :
                     
                     VincularRotinaGenericDAO vrgDAO = new VincularRotinaGenericDAO();
                     vincular = vrgDAO.read(rotina, usuario);
-                    
+                    vrgDAO.closeConnection();
                     break;
                 
             }
@@ -199,6 +185,4 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
         
         return agendamentos;
     }
-    
-    
 }

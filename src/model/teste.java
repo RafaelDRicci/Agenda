@@ -43,7 +43,9 @@ public class teste {
        */
         
        DataUnica dataUnica = vcDAO.read(rotina, usuario);
-        System.out.println(dataUnica.getData().getTime());
+       System.out.println(dataUnica.getData().getTime());
+       
+       
 
     }
 }

@@ -13,7 +13,9 @@ import model.Agendamento;
 import model.Rotina;
 import model.Usuario;
 import model.dao.vincularrotinadao.DataUnicaDAO;
+import model.dao.vincularrotinadao.SemanalDAO;
 import model.vincularrotina.DataUnica;
+import model.vincularrotina.Semanal;
 
 /**
  *
@@ -28,23 +30,41 @@ public class teste {
         UsuarioDAO uDAO = new UsuarioDAO();
         Usuario usuario = uDAO.read(135);
         
-        DataUnicaDAO dtDAO = new DataUnicaDAO();
-        DataUnica dataUnica = dtDAO.read(rotina, usuario);
+        DataUnicaDAO duDAO = new DataUnicaDAO();
+        DataUnica dataUnica = duDAO.read(rotina, usuario);
         
-        AgendamentoDAO agendamentoDAO = new AgendamentoDAO();
-        
-        
-        
-        Agendamento agendamento = new Agendamento(1, dataUnica, dataUnica.getData());
-        agendamento.setEstado("A FAZER");
-        agendamento.setJustificativa("A FAZER");
+        AgendamentoDAO aDAO = new AgendamentoDAO();
+        Agendamento agendamento = aDAO.read(1, dataUnica);
+        agendamento.setEstado("EXPIRADO");
+        agendamento.setJustificativa("BANCO DE HORAS");
         agendamento.setDescricaoPadrao();
+        aDAO.update(agendamento);
         
-        System.out.println(agendamento.getDescricao());
         
-        List<Agendamento> lista = agendamentoDAO.listAll();
+        Rotina rotina2 = rDAO.read(3);
+        Usuario usuario2 = uDAO.read(125);
+        SemanalDAO sDAO = new SemanalDAO();
+        Semanal semanal = sDAO.read(rotina2, usuario2);
+        int[] diasSemana = {5};
+        semanal.setDiasSemana(diasSemana);
+        int[] horarios = {14, 15};
+        semanal.setHorarios(horarios);
+        sDAO.update(semanal);
+        
+        Agendamento agendamento2 = aDAO.read(4, semanal);
+        agendamento2.setEstado("A FAZER");
+        agendamento2.setJustificativa("A FAZER");
+        agendamento2.setHoraInicio(agendamento2.getVincularRotina().getHorarios()[0]);
+        agendamento2.setHoraFinal(agendamento2.getVincularRotina().getHorarios()[agendamento2.getVincularRotina().getHorarios().length-1]);
+        agendamento2.setDescricaoPadrao();
+        aDAO.update(agendamento2);
+
+        
+        
+        
+        List<Agendamento> lista = aDAO.listAll();
         lista.forEach(l -> {
-            System.out.println(l);
+            System.out.println(l.getDescricao());
         });
     }
 }

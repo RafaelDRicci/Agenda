@@ -4,6 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/RotinaDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/Semanal.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Usuario.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/principal/PrincipalView.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/teste.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/DataUnica.java</file>
@@ -16,7 +18,10 @@
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/date/Data.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/RequisicaoServer.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/vincularrotinadao/AnualDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/TestCreate.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/vincularrotinadao/SemanalDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/TesteDelete.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/Anual.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/AgendamentoDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/vincularrotinadao/VincularRotinaGenericDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/GenericDAO.java</file>
@@ -29,8 +34,10 @@
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/UsuarioDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/VincularRotinaDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/DiasUteis.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/TesteRead.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/vincularrotinadao/DataUnicaDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/VincularRotina.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/vincularrotinadao/DiarioDAO.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Agendamento.java</file>
         </group>
     </open-files>
