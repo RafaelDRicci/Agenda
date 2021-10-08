@@ -5,6 +5,9 @@
  */
 package model.vincularrotina;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
@@ -38,6 +41,18 @@ public class DatasAno extends VincularRotina{
         this.meses = meses;
     }
     
-    
+    @Override
+    public String toString(){
+        
+        String string = super.toString()+":";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM");
+        GregorianCalendar calendar = new GregorianCalendar();
+        for(int i = 0; i < meses.length; i++){
+            calendar.set(calendar.get(Calendar.YEAR), meses[i]-1, dia);
+            string += " "+sdf.format(calendar.getTime());
+        }
+        
+        return string;
+    }
     
 }

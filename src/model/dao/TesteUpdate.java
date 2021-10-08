@@ -21,7 +21,7 @@ import model.vincularrotina.Semanal;
  *
  * @author rafaeld
  */
-public class TesteRead {
+public class TesteUpdate {
     public static void main(String[] args) throws SQLException {
         
         UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -52,14 +52,60 @@ public class TesteRead {
         DiasUteis diasUteis = (DiasUteis) vincularDAO.read(rotina6, usuario6);
         Semanal semanal = (Semanal) vincularDAO.read(rotina7, usuario7);
         
-        System.out.println(anual);
-        System.out.println(dataUnica);
-        System.out.println(datasAno);
-        System.out.println(diario);
-        System.out.println(diasMes);
-        System.out.println(diasUteis);
-        System.out.println(semanal);
+        anual.setDia(6);
+        anual.setMes(6);
+        int[] horarios = {7,8,9};
+        anual.setHorarios(horarios);
+        anual.setPrioritario(true);
+        anual.setReagendavel(true);
+        anual.setHorarioFixo(true);
+        vincularDAO.update(anual);
         
+        GregorianCalendar data = new GregorianCalendar(2022, 10, 25);
+        dataUnica.setData(data);
+        dataUnica.setPrioritario(true);
+        dataUnica.setReagendavel(true);
+        dataUnica.setHorarioFixo(true);
+        dataUnica.setHorarios(horarios);
+        vincularDAO.update(dataUnica);
         
+        datasAno.setDia(8);
+        int[] meses = {3, 9, 12};
+        datasAno.setMeses(meses);
+        datasAno.setPrioritario(true);
+        datasAno.setReagendavel(true);
+        datasAno.setHorarioFixo(true);
+        datasAno.setHorarios(horarios);
+        vincularDAO.update(datasAno);
+        
+        diario.setPrioritario(true);
+        diario.setReagendavel(true);
+        diario.setHorarioFixo(true);
+        diario.setHorarios(horarios);
+        vincularDAO.update(diario);
+        
+        int[] dias = {10, 20};
+        diasMes.setDias(dias);
+        diasMes.setPrioritario(true);
+        diasMes.setReagendavel(true);
+        diasMes.setHorarioFixo(true);
+        diasMes.setHorarios(horarios);
+        vincularDAO.update(diasMes);
+        
+        int[] uteis = {5, 10};
+        diasUteis.setDiasUteis(uteis);
+        diasUteis.setPrioritario(true);
+        diasUteis.setReagendavel(true);
+        diasUteis.setHorarioFixo(true);
+        diasUteis.setHorarios(horarios);
+        vincularDAO.update(diasUteis);
+        
+        int[] diasSemana = {2, 3, 5};
+        semanal.setDiasSemana(diasSemana);
+        semanal.setPrioritario(true);
+        semanal.setReagendavel(true);
+        semanal.setHorarioFixo(true);
+        semanal.setHorarios(horarios);
+        vincularDAO.update(semanal);
     }
 }

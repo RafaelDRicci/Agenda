@@ -5,6 +5,9 @@
  */
 package model.vincularrotina;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
@@ -36,6 +39,18 @@ public class Anual extends VincularRotina{
 
     public void setMes(int mes) {
         this.mes = mes;
+    }
+    
+    @Override
+    public String toString(){
+        
+        String string = super.toString()+":";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMMM");
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.set(calendar.get(Calendar.YEAR), mes-1, dia);
+        string += " "+sdf.format(calendar.getTime());
+       
+        return string;
     }
     
 }

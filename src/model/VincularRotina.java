@@ -81,7 +81,9 @@ public class VincularRotina {
         this.periodo = periodo;
     }
     
-    
-
+    @Override
+    public String toString(){
+        return this.rotina + " vinculada para " + this.usuario + " com período " + periodo;
+    }
     
 }

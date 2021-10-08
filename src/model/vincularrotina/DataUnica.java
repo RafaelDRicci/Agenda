@@ -5,6 +5,7 @@
  */
 package model.vincularrotina;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import model.Rotina;
@@ -36,4 +37,10 @@ public class DataUnica extends VincularRotina{
         data.setTimeInMillis(millis);
     }
 
+    @Override
+    public String toString(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy - EEEE");
+        return super.toString() + ": "+sdf.format(data.getTime());
+    }
+    
 }

@@ -59,9 +59,6 @@ public class teste {
         agendamento2.setDescricaoPadrao();
         aDAO.update(agendamento2);
 
-        
-        
-        
         List<Agendamento> lista = aDAO.listAll();
         lista.forEach(l -> {
             System.out.println(l.getDescricao());

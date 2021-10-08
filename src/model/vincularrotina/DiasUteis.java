@@ -29,6 +29,16 @@ public class DiasUteis extends VincularRotina{
         this.diasUteis = diasUteis;
     }
     
+    @Override
+    public String toString(){
+        String string = super.toString()+":";
+        
+        for(int i = 0; i < diasUteis.length; i++){
+            string += " "+diasUteis[i]+"°";
+        }
+        
+        return string;
+    }
     
     
 }

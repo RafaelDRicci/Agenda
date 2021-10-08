@@ -30,5 +30,15 @@ public class DiasMes extends VincularRotina{
     }
     
     
+    @Override
+    public String toString(){
+        String string = super.toString()+": Dia(s)";
+        
+        for(int i = 0; i < dias.length; i++){
+            string += String.format(" %02d", dias[i]);
+        }
+        
+        return string;
+    }
     
 }
