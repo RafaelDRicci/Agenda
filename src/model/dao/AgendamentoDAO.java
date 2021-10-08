@@ -153,7 +153,7 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                     
                     DataUnicaDAO duDAO = new DataUnicaDAO();
                     vincular = duDAO.read(rotina, usuario);
-                    duDAO.closeConnection();
+
                     break;
                     
                     
@@ -165,7 +165,7 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                     
                     VincularRotinaGenericDAO vrgDAO = new VincularRotinaGenericDAO();
                     vincular = vrgDAO.read(rotina, usuario);
-                    vrgDAO.closeConnection();
+   
                     break;
                 
             }
