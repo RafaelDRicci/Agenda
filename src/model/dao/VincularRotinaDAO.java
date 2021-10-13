@@ -49,7 +49,7 @@ public class VincularRotinaDAO{
         
         String sql;
         PreparedStatement stm;
-        
+
         switch (periodo){
             
             case "Anual":

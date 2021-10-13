@@ -15,8 +15,6 @@ import model.Agendamento;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
-import model.dao.vincularrotinadao.DataUnicaDAO;
-import model.dao.vincularrotinadao.VincularRotinaGenericDAO;
 
 /**
  *
@@ -151,8 +149,8 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                 
                 case "DataUnica":
                     
-                    DataUnicaDAO duDAO = new DataUnicaDAO();
-                    vincular = duDAO.read(rotina, usuario);
+                    //DataUnicaDAO duDAO = new DataUnicaDAO();
+                    //vincular = duDAO.read(rotina, usuario);
 
                     break;
                     
@@ -163,13 +161,13 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                     
                 default :
                     
-                    VincularRotinaGenericDAO vrgDAO = new VincularRotinaGenericDAO();
-                    vincular = vrgDAO.read(rotina, usuario);
+                   // VincularRotinaGenericDAO vrgDAO = new VincularRotinaGenericDAO();
+                    //vincular = vrgDAO.read(rotina, usuario);
    
                     break;
                 
             }
-            
+            /*
             Agendamento agendamento = new Agendamento(rs.getInt("CODAGENDAMENTO"), vincular, rs.getDate("DATA").getTime());
             agendamento.setHoraInicio(rs.getInt("HORAINICIAL"));
             agendamento.setHoraFinal(rs.getInt("HORAFINAL"));
@@ -177,7 +175,7 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
             agendamento.setJustificativa(rs.getString("JUSTIFICATIVA"));
             agendamento.setDescricao(rs.getString("DESCRICAO"));
             
-            agendamentos.add(agendamento);
+            agendamentos.add(agendamento);*/
         }
         
         rs.close();
