@@ -8,7 +8,9 @@ package server;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
+import model.Rotina;
 import model.Usuario;
+import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
 import util.communication.CodificaMensagem;
 import util.communication.DecodificaMensagem;
@@ -33,6 +35,7 @@ public class RequisicaoServer {
             byte codigo = dm.getByte();
              
             switch(codigo){
+                //Sair
                 case 0: 
                     System.out.println("SAIR");
                     MensagemSair sair = new MensagemSair();
@@ -42,6 +45,7 @@ public class RequisicaoServer {
                     usuarios.remove(mensagem.getUsuario());
                     mensagem.getUsuario().desconectar();
                     break;
+                //Autenticar usuário
                 case 1:
                     System.out.println("AUTENTICA USUARIO");
                     String login = dm.getString();
@@ -49,6 +53,12 @@ public class RequisicaoServer {
                     
                     autenticaUsuario(mensagem.getUsuario(), login, senha);
                     break;
+                //Listar rotinas
+                case 2:
+                    System.out.println("BUSCAR TODAS ROTINAS");
+                    
+                    break;
+                 
             }
             dm.close();
             
@@ -111,4 +121,14 @@ public class RequisicaoServer {
                             
         }
  
+        public void todasRotinas(Usuario usuario) throws SQLException, IOException{
+            
+            RotinaDAO rotinaDAO = new RotinaDAO();
+            List<Rotina> rotinas = rotinaDAO.listAll();
+            CodificaMensagem cm = new CodificaMensagem();
+            byte codigoResposta = 2;
+            cm.setByte(codigoResposta);
+            
+            
+        }
 }

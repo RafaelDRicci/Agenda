@@ -23,7 +23,11 @@ import model.vincularrotina.Semanal;
 import org.junit.Test;
 
 /**
- *
+ *Teste do DAO vincular rotina.
+ * Foram testados todas as operações (CRUDE) em único teste para cada tipo de vinculação.
+ * Os testes foram feitos dessa forma, pois as operações gravam dados em banco de dados, que ao final são excluídos.
+ * Os testes de criação inserem dados no banco que outros testes utilizam, e devido que os testes não são feitos de forma ordenada, 
+ * vários falhavam.
  * @author rafaeld
  */
 
@@ -41,9 +45,6 @@ public class VincularRotinaDAOTest {
         
     }
 
-    @Test
-    public void testCloseConnection() {
-    }
 
     @Test(expected = SQLException.class)
     public void testCreateVinculacaoExistente() throws SQLException{
@@ -57,24 +58,24 @@ public class VincularRotinaDAOTest {
         vincularDAO.create(anual);
         vincularDAO.create(anual);
     }
-    
+
     @Test
     public void testAnual() throws SQLException{
         
         System.out.println("*******************************************************************");
         System.out.println("                        Test Anual");
-        
+        //Leitura de um usuário e rotina
         final Usuario usuario1 = usuarioDAO.read(121);
         final Rotina rotina1 = rotinaDAO.read(2);
-        
+        //Criação de uma vinculação anual e gravando no banco
         final Anual vincular = new Anual(rotina1, usuario1);
         vincular.setDia(5);
         vincular.setMes(8);
         vincularDAO.create(vincular);
-         
+         //Leitura da vinculação gravada anteriormente
         final Anual anual = (Anual) vincularDAO.read(rotina1, usuario1);
         System.out.println(anual);
-        
+        //Atualização 
         anual.setDia(6);
         anual.setMes(6);
         int[] horarios = {7,8,9};
@@ -83,19 +84,20 @@ public class VincularRotinaDAOTest {
         anual.setReagendavel(true);
         anual.setHorarioFixo(true);
         vincularDAO.update(anual);
-        
+        //Leitura da vinculação após a atualização
         final Anual anualAtt = (Anual) vincularDAO.read(rotina1, usuario1);
         System.out.println(anualAtt);
-        
+        //Apagar a vinculação do banco 
         vincularDAO.delete(anualAtt);
 
     }
+    
     
     @Test
     public void testDataUnica() throws SQLException{
                 
         System.out.println("*******************************************************************");
-        System.out.println("                        Test Read DataUnica");
+        System.out.println("                        Test DataUnica");
 
         final Usuario usuario2 = usuarioDAO.read(122);
         final Rotina rotina2 = rotinaDAO.read(3);
@@ -103,10 +105,23 @@ public class VincularRotinaDAOTest {
         final DataUnica vincular = new DataUnica(rotina2, usuario2);
         vincular.setData(new GregorianCalendar(2022, 11, 25));
         vincularDAO.create(vincular);
-        
-        DataUnica dataUnica =  (DataUnica) vincularDAO.read(rotina2, usuario2);
+
+        final DataUnica dataUnica =  (DataUnica) vincularDAO.read(rotina2, usuario2);
         System.out.println(dataUnica);
-        vincularDAO.delete(vincular);
+        
+        GregorianCalendar data = new GregorianCalendar(2022, 10, 25);
+        dataUnica.setData(data);
+        dataUnica.setPrioritario(true);
+        dataUnica.setReagendavel(true);
+        dataUnica.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        dataUnica.setHorarios(horarios);
+        vincularDAO.update(dataUnica);
+        
+        final DataUnica dataUnicaAtt = (DataUnica) vincularDAO.read(rotina2, usuario2);
+        System.out.println(dataUnicaAtt);
+        
+        vincularDAO.delete(dataUnicaAtt);
 
     }
 
@@ -121,13 +136,27 @@ public class VincularRotinaDAOTest {
 
         final DatasAno vincular = new DatasAno(rotina3, usuario3);
         vincular.setDia(5);
-        int[] meses = {5, 6, 7};
+        final int[] meses = {5, 6, 7};
         vincular.setMeses(meses);
         vincularDAO.create(vincular);
         
-        DatasAno datasAno = (DatasAno) vincularDAO.read(rotina3, usuario3);
+        final DatasAno datasAno = (DatasAno) vincularDAO.read(rotina3, usuario3);
         System.out.println(datasAno);
-        vincularDAO.delete(vincular);
+        
+        datasAno.setDia(8);
+        final int[] mesesAtt = {3, 9, 12};
+        datasAno.setMeses(mesesAtt);
+        datasAno.setPrioritario(true);
+        datasAno.setReagendavel(true);
+        datasAno.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        datasAno.setHorarios(horarios);
+        vincularDAO.update(datasAno);
+        
+        final DatasAno dataAnoAtt = (DatasAno)vincularDAO.read(rotina3, usuario3);
+        System.out.println(dataAnoAtt);
+        
+        vincularDAO.delete(dataAnoAtt);      
     }
     
     @Test
@@ -143,15 +172,24 @@ public class VincularRotinaDAOTest {
         vincularDAO.create(vincular);
         
         Diario diario = (Diario) vincularDAO.read(rotina4, usuario4);
+        System.out.println(diario);
 
-        System.out.println(diario);  
-        vincularDAO.delete(vincular);
+        diario.setPrioritario(true);
+        diario.setReagendavel(true);
+        diario.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        diario.setHorarios(horarios);
+        vincularDAO.update(diario);
+        
+        final Diario diarioAtt = (Diario) vincularDAO.read(rotina4, usuario4);
+        System.out.println(diarioAtt);  
+        
+        vincularDAO.delete(diarioAtt);
     }
     
    @Test
     public void testDiasMes() throws SQLException{
-        
-                
+                  
         System.out.println("*******************************************************************");
         System.out.println("                        Test DiasMes");
         
@@ -159,14 +197,26 @@ public class VincularRotinaDAOTest {
         final Rotina rotina5 = rotinaDAO.read(6);
        
         final DiasMes vincular = new DiasMes(rotina5, usuario5);
-        int[] dias = {1, 10, 20};
+        final int[] dias = {1, 10, 20};
         vincular.setDias(dias);
         vincularDAO.create(vincular);
         
-        final DiasMes diaMes = (DiasMes) vincularDAO.read(rotina5, usuario5);
-        System.out.println(diaMes);
+        final DiasMes diasMes = (DiasMes) vincularDAO.read(rotina5, usuario5);
+        System.out.println(diasMes);
         
-        vincularDAO.delete(vincular);
+        final int[] diasAtt = {10, 20};
+        diasMes.setDias(diasAtt);
+        diasMes.setPrioritario(true);
+        diasMes.setReagendavel(true);
+        diasMes.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        diasMes.setHorarios(horarios);
+        vincularDAO.update(diasMes);
+        
+        final DiasMes diasMesAtt = (DiasMes)vincularDAO.read(rotina5, usuario5);
+        System.out.println(diasMesAtt);
+        
+        vincularDAO.delete(diasMesAtt);
     }
     
     @Test
@@ -184,12 +234,21 @@ public class VincularRotinaDAOTest {
         vincularDAO.create(vincular);
         
         DiasUteis diasUteis = (DiasUteis) vincularDAO.read(rotina6, usuario6);
-
         System.out.println(diasUteis);
-        vincularDAO.delete(vincular);
+        
+        final int[] uteis = {5, 10};
+        diasUteis.setDiasUteis(uteis);
+        diasUteis.setPrioritario(true);
+        diasUteis.setReagendavel(true);
+        diasUteis.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        diasUteis.setHorarios(horarios);
+        vincularDAO.update(diasUteis);
+        
+        final DiasUteis diasUteisAtt = (DiasUteis)vincularDAO.read(rotina6, usuario6);
+        System.out.println(diasUteisAtt);
+        vincularDAO.delete(diasUteisAtt);
     }
-    
-    
     
     @Test
     public void testSemanal() throws SQLException{
@@ -206,9 +265,19 @@ public class VincularRotinaDAOTest {
         vincularDAO.create(vincular);
         
         final Semanal semanal = (Semanal) vincularDAO.read(rotina7, usuario7);
-
         System.out.println(semanal);
-        vincularDAO.delete(vincular);
+
+        semanal.setDiasSemana(diasSemana);
+        semanal.setPrioritario(true);
+        semanal.setReagendavel(true);
+        semanal.setHorarioFixo(true);
+        final int[] horarios = {7,8,9};
+        semanal.setHorarios(horarios);
+        vincularDAO.update(semanal);
+        
+        final Semanal semanalAtt = (Semanal)vincularDAO.read(rotina7, usuario7);
+        System.out.println(semanalAtt);
+        vincularDAO.delete(semanalAtt);
     }
 
     @Test(expected = NoSuchElementException.class)

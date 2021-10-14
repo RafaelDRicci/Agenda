@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/RotinaDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/Anual.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Usuario.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/AgendamentoDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/communication/MensagemSair.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/Servidor.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Rotina.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/communication/Comunicacao.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/MensagemCliente.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/dao/VincularRotinaDAO.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/model/dao/VincularRotinaDAOTest.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/model/dao/AgendamentoDAOTest.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/RequisicaoServer.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/VincularRotina.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Agendamento.java</file>
+        </group>
     </open-files>
 </project-private>

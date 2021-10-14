@@ -457,7 +457,6 @@ public class VincularRotinaDAO{
         stm.close();
         
     }
-
     
     
     public void delete(VincularRotina vincular)  throws SQLException {

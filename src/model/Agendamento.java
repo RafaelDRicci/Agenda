@@ -99,4 +99,8 @@ public class Agendamento extends Data{
                 +" | PERÍODO: "+vincularRotina.getPeriodo()+ " | DATA: "+toString() +" | HORÁRIO: "+horaInicio+"h - "+horaFinal+"h"
                 +" | ESTADO: "+estado+ " | JUSTIFICATIVA: "+justificativa;
     }
+
+    public void setCodAgendamento(int codAgendamento) {
+        this.codAgendamento = codAgendamento;
+    }
 }

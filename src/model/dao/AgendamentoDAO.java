@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 import model.Agendamento;
@@ -22,11 +23,13 @@ import model.VincularRotina;
  */
 public class AgendamentoDAO extends GenericDAO<Agendamento>{
 
+    @Deprecated
     @Override
     public Agendamento read(int cod) throws SQLException, NoSuchElementException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Deprecated
     @Override
     public Agendamento read(Rotina rotina, Usuario usuario) throws SQLException, NoSuchElementException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,6 +37,8 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
 
     @Override
     public Agendamento read(int cod, VincularRotina vincular) throws SQLException, NoSuchElementException {
+       
+      
         String sql = "Select * from AGENDA_AGENDAMENTO where CODAGENDAMENTO = ? and CODROTINA = ? and CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
@@ -111,8 +116,7 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
     }
 
     @Override
-    public void delete(Agendamento agendamento) throws SQLException, NoSuchElementException {
-        
+    public void delete(Agendamento agendamento) throws SQLException{
         String sql = "Delete from AGENDA_AGENDAMENTO where CODAGENDAMENTO = ? and CODROTINA = ? and CODUSUARIO = ?";
         
         PreparedStatement stm = con.prepareStatement(sql);
@@ -125,9 +129,39 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
         
     }
 
+    public List<Agendamento> listAgendamentos(VincularRotina vincular) throws SQLException{
+        
+        String sql = "Select * from AGENDA_AGENDAMENTO where CODROTINA = ? and CODUSUARIO = ?";
+        
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, vincular.getRotina().getCodRotina());
+        stm.setInt(2, vincular.getUsuario().getCodUsuario());
+        
+        ResultSet rs = stm.executeQuery();
+        
+        List<Agendamento> agendamentos = new ArrayList<>();
+        
+        while(rs.next()){
+            
+            GregorianCalendar data = new GregorianCalendar();
+            data.setTime(rs.getDate("DATA"));
+            Agendamento agendamento = new Agendamento (vincular, data);
+            agendamento.setCodAgendamento(rs.getInt("CODAGENDAMENTO"));
+            agendamento.setHoraInicio(rs.getInt("HORAINICIAL"));
+            agendamento.setHoraFinal(rs.getInt("HORAFINAL"));
+            agendamento.setEstado(rs.getString("ESTADO"));
+            agendamento.setJustificativa(rs.getString("JUSTIFICATIVA"));
+            agendamento.setDescricao(rs.getString("DESCRICAO"));
+            
+            agendamentos.add(agendamento);
+        }
+        return agendamentos;
+    }
+    
     @Override
     public List<Agendamento> listAll() throws SQLException {
-        
+        throw new SQLException();
+        /*
         String sql = "Select a.*, v.PERIODO from AGENDA_AGENDAMENTO a, AGENDA_VINCULARROTINA v "
                 + " where a.CODROTINA = v.CODROTINA and a.CODUSUARIO = v.CODUSUARIO";
         PreparedStatement stm = con.prepareStatement(sql);
@@ -167,7 +201,7 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
                     break;
                 
             }
-            /*
+            
             Agendamento agendamento = new Agendamento(rs.getInt("CODAGENDAMENTO"), vincular, rs.getDate("DATA").getTime());
             agendamento.setHoraInicio(rs.getInt("HORAINICIAL"));
             agendamento.setHoraFinal(rs.getInt("HORAFINAL"));
@@ -175,12 +209,13 @@ public class AgendamentoDAO extends GenericDAO<Agendamento>{
             agendamento.setJustificativa(rs.getString("JUSTIFICATIVA"));
             agendamento.setDescricao(rs.getString("DESCRICAO"));
             
-            agendamentos.add(agendamento);*/
+            agendamentos.add(agendamento);
         }
         
         rs.close();
         stm.close();
         
-        return agendamentos;
+        return agendamentos;*/
+        
     }
 }
