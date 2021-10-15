@@ -13,7 +13,7 @@ import java.util.GregorianCalendar;
  *
  * @author rafaeld
  */
-public class Rotina {
+public class Rotina implements Comparable<Rotina>{
     private int codRotina;
     private String nome;
     private Calendar dataLimite;
@@ -79,5 +79,20 @@ public class Rotina {
     @Override
     public String toString(){
         return nome;
+    }
+   
+
+    @Override
+    public int compareTo(Rotina rotina) {
+        return this.getCodRotina() - rotina.getCodRotina();
+    }
+    
+    public boolean igual(Rotina rotina){
+        return  (this.getCodRotina() == rotina.getCodRotina()) && 
+                (this.getDataLimite().get(Calendar.DAY_OF_MONTH) == rotina.getDataLimite().get(Calendar.DAY_OF_MONTH)) &&
+                (this.getDataLimite().get(Calendar.MONTH) == rotina.getDataLimite().get(Calendar.MONTH)) &&
+                (this.getDataLimite().get(Calendar.YEAR) == rotina.getDataLimite().get(Calendar.YEAR)) &&
+                (this.getDescricao().equals(rotina.getDescricao())) &&
+                (this.getNome().equals(rotina.getNome()));
     }
 }

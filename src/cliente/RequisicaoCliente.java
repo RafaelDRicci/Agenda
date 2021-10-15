@@ -42,9 +42,8 @@ public abstract class RequisicaoCliente {
                 break;
                 
             case 2:
-                //numero aleatorio
-                int numero = dm.getInt();
-                JOptionPane.showMessageDialog(principal, "Número Aleatório Gerado Pelo Servidor "+numero, "Mensagem do Servidor", 1);
+                //listar rotinas
+                
             }
             
         dm.close();

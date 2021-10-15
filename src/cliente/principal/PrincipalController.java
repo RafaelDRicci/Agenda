@@ -18,7 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
-import util.communication.MensagemSair;
+import util.mensagens.MensagemSair;
 
 /**
  *
@@ -41,7 +41,7 @@ public class PrincipalController {
         filaMensagens = new LinkedBlockingQueue<>();
         recebeMensagem = new Thread (() -> recebeMensagens());
         consomeMensagem = new Thread (() -> consomeMensagens());
-        //logar();
+        logar();
        
     }
     
@@ -156,6 +156,7 @@ public class PrincipalController {
     public void vincularRotina() {
         VincularRotinaView vincularRotina = new VincularRotinaView();
         vincularRotina.setLocationRelativeTo(view);
+        vincularRotina.setUsuario(usuario);
         vincularRotina.setVisible(true);
     }
 

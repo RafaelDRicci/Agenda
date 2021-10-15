@@ -9,6 +9,8 @@ import java.util.Calendar;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import model.Rotina;
+import model.Usuario;
 import util.date.Calendario;
 
 
@@ -153,7 +155,11 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jPanelFundo.add(jComboBoxFuncionario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, 250, 30));
 
         jComboBoxUnidade.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jComboBoxUnidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Rotina A", "Rotina B", "Rotina C" }));
+        jComboBoxUnidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxUnidadeActionPerformed(evt);
+            }
+        });
         jPanelFundo.add(jComboBoxUnidade, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 250, 30));
 
         jLabelHora.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -806,6 +812,10 @@ public class VincularRotinaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBoxReagendavelActionPerformed
 
+    private void jComboBoxUnidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxUnidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxUnidadeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -866,7 +876,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxMes;
     private javax.swing.JComboBox<String> jComboBoxPeriodo;
     private javax.swing.JComboBox<String> jComboBoxRotina;
-    private javax.swing.JComboBox<String> jComboBoxUnidade;
+    private javax.swing.JComboBox<Rotina> jComboBoxUnidade;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -926,6 +936,12 @@ public class VincularRotinaView extends javax.swing.JFrame {
         }
     }
     
+    public void preencherRotinas(){
+        
+        controller.preencherRotinas();
+        
+    }
+    
     public JComboBox<Integer> getjComboBoxDia() {
         return jComboBoxDia;
     }
@@ -958,12 +974,14 @@ public class VincularRotinaView extends javax.swing.JFrame {
         return jComboBoxRotina;
     }
 
-    public JComboBox<String> getjComboBoxUnidade() {
-        return jComboBoxUnidade;
-    }
+ 
 
     public JComboBox<Integer> getjComboBoxAno() {
         return jComboBoxAno;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        controller.setUsuario(usuario);
     }
  
     

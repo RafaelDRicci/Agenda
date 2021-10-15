@@ -14,7 +14,8 @@ import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
 import util.communication.CodificaMensagem;
 import util.communication.DecodificaMensagem;
-import util.communication.MensagemSair;
+import util.mensagens.MensagemRotina;
+import util.mensagens.MensagemSair;
 
 /**
  *
@@ -23,7 +24,7 @@ import util.communication.MensagemSair;
 public class RequisicaoServer {
 
     private List<Usuario> usuarios;
-    
+       
     public RequisicaoServer(List<Usuario> usuarios){
         this.usuarios = usuarios;
     }
@@ -39,7 +40,6 @@ public class RequisicaoServer {
                 case 0: 
                     System.out.println("SAIR");
                     MensagemSair sair = new MensagemSair();
-                    sair.codificar();
                     mensagem.getUsuario().enviarMensagem(sair.getMensagem());
                     System.out.println("Finalizando Conexão com Cliente");
                     usuarios.remove(mensagem.getUsuario());
@@ -53,9 +53,23 @@ public class RequisicaoServer {
                     
                     autenticaUsuario(mensagem.getUsuario(), login, senha);
                     break;
-                //Listar rotinas
+                /**
+                 * Listar rotinas
+                 * Código de resposta = 2
+                 * Número de Rotinas
+                 * Para cada rotina:
+                 * Código da rotina
+                 * Nome 
+                 * Data Limite
+                 * Descricao;
+                 */
                 case 2:
-                    System.out.println("BUSCAR TODAS ROTINAS");
+                    System.out.println("Rotinas");
+                    RotinaDAO rotinaDAO = new RotinaDAO();
+                    List<Rotina> rotinas = rotinaDAO.listAll();
+                    MensagemRotina mensagemRotina = new MensagemRotina();
+                    mensagemRotina.codificar(rotinas);
+                    mensagem.getUsuario().enviarMensagem(mensagemRotina.getMensagem());
                     
                     break;
                  
@@ -121,14 +135,5 @@ public class RequisicaoServer {
                             
         }
  
-        public void todasRotinas(Usuario usuario) throws SQLException, IOException{
-            
-            RotinaDAO rotinaDAO = new RotinaDAO();
-            List<Rotina> rotinas = rotinaDAO.listAll();
-            CodificaMensagem cm = new CodificaMensagem();
-            byte codigoResposta = 2;
-            cm.setByte(codigoResposta);
-            
-            
-        }
+        
 }
