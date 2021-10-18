@@ -23,10 +23,10 @@ import util.communication.CodificaMensagem;
  */
 public class MensagemSair {
     
-    ByteArrayOutputStream baos;
-    DataOutputStream dos;
-    ByteArrayInputStream bais;
-    DataInputStream dis;
+    private ByteArrayOutputStream baos;
+    private DataOutputStream dos;
+    private ByteArrayInputStream bais;
+    private DataInputStream dis;
     
     public MensagemSair(){
         baos = new ByteArrayOutputStream ();

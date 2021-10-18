@@ -7,8 +7,11 @@ package util.mensagens;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Rotina;
 
 /**
@@ -19,6 +22,11 @@ public class MensagemRotina extends Mensagem<Rotina>{
 
     public MensagemRotina() {
         super();
+        try {
+            codificar();
+        } catch (IOException ex) {
+            Logger.getLogger(MensagemRotina.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public MensagemRotina(byte[] bytes) {
@@ -43,7 +51,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
     }
 
     @Override
-    public Rotina decodifica() throws IOException {
+    public Rotina decodificar() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -61,21 +69,23 @@ public class MensagemRotina extends Mensagem<Rotina>{
     
     @Override
     public byte[] codificar(List<Rotina> rotinas) throws IOException {
-        byte i = 2;
-        //código da mensagem
-        setByte(i);
         //número de rotinas
-        setInt(rotinas.size());
+        int numeroRotinas = rotinas.size();
+        setInt(numeroRotinas);
         //codificando cada rotina
         for(Rotina rotina: rotinas){
             //código da rotina
-            setInt(rotina.getCodRotina());
+            int codRotina = rotina.getCodRotina();
+            setInt(codRotina);
             //nome 
-            setString(rotina.getNome());
+            String nome = rotina.getNome();
+            setString(nome);
             //Data
-            setData(rotina.getDataLimite().getTime());
+            Date dataLimite = rotina.getDataLimite().getTime();
+            setData(dataLimite);
             //Descricao
-            setString(rotina.getDescricao());
+            String descricao = rotina.getDescricao();
+            setString(descricao);
         }
         return getMensagem();
     }
@@ -87,7 +97,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
      * @throws IOException 
      */
     @Override
-    public List<Rotina> decodificar() throws IOException {
+    public List<Rotina> decodificarList() throws IOException {
        
        //Código da Mensagem
        byte cod = getByte();

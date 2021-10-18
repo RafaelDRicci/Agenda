@@ -6,6 +6,9 @@
 package cliente.vincularrotina;
 
 import java.util.ArrayList;
+import java.util.List;
+import model.Rotina;
+import model.Usuario;
 
 /**
  *
@@ -18,4 +21,16 @@ public class VincularRotinaHelper {
     VincularRotinaHelper(VincularRotinaView view) {
         this.view = view;
     }   
+
+    void preencherRotinas(List<Rotina> rotinas) {
+       for(Rotina rotina: rotinas){
+           view.getjComboBoxRotina().addItem(rotina);
+       }
+    }
+
+    void preencherUsuarios(List<Usuario> usuarios) {
+        for(Usuario usuario : usuarios){
+            view.getjComboBoxFuncionario().addItem(usuario);
+        }
+    }
 }

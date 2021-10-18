@@ -219,4 +219,10 @@ public class Usuario {
     public String toString(){
         return this.nomeAprovacao;
     }   
+
+    public boolean igual(Usuario usuario) {
+        return (    ( usuario.getCodUsuario().equals(codUsuario) ) && (usuario.getNome().equals(nome)) &&
+                    ( usuario.getCargo().equals(cargo)) && (usuario.getNomeAprovacao().equals(nomeAprovacao)) &&
+                    ( usuario.getUnidade().equals(unidade)) );
+    }
 }

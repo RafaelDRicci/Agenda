@@ -8,11 +8,14 @@ package cliente.vincularrotina;
 import cliente.login.LoginController;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Rotina;
 import model.Usuario;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemSair;
+import util.mensagens.MensagemUsuario;
 
 
 /**
@@ -34,13 +37,20 @@ public class VincularRotinaController {
         view.dispose();
     }
 
-    public void preencherRotinas() {
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
+    }
+    
+     public Usuario getUsuario(){
+        return this.usuario;
+    }
+    
+    public void requisicaoPreencherRotinas() {
          
             MensagemRotina mensagemRotina = new MensagemRotina();
            
             try {
-                mensagemRotina.codificar();
-                usuario.enviarMensagem(mensagemRotina.getMensagem());
+                usuario.enviarMensagem(mensagemRotina.codificar());
                 
             } catch (IOException ex) {
                 
@@ -52,11 +62,28 @@ public class VincularRotinaController {
             }
         } 
     
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
+    public void preencherRotinas(List<Rotina> rotinas){
+        helper.preencherRotinas(rotinas);
     }
     
-    public Usuario getUsuario(){
-        return this.usuario;
+    
+    public void requisicaoPreencherUsuarios() {
+        MensagemUsuario mensagemUsuario = new MensagemUsuario();
+
+            try {
+                usuario.enviarMensagem(mensagemUsuario.codificar());
+
+            } catch (IOException ex) {
+
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                System.exit(0);
+
+            } finally {               
+                mensagemUsuario.close();
+            }
+    }
+
+    void preencherUsuarios(List<Usuario> usuarios) {
+        helper.preencherUsuarios(usuarios);
     }
 }

@@ -9,11 +9,15 @@ import cliente.login.LoginController;
 import cliente.principal.PrincipalView;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Rotina;
 import model.Usuario;
 import util.communication.DecodificaMensagem;
+import util.mensagens.MensagemRotina;
+import util.mensagens.MensagemUsuario;
 
 /**
  *
@@ -22,14 +26,10 @@ import util.communication.DecodificaMensagem;
 public abstract class RequisicaoCliente {
     
     public static void trataMensagem(byte[] mensagem, PrincipalView principal) throws IOException{
-        
-   
-            
+               
         DecodificaMensagem dm = new DecodificaMensagem(mensagem);
         byte codigo = dm.getByte();
-            
-            
-            
+               
         switch(codigo){
             case 0:
                 System.out.println("SAIR");
@@ -38,13 +38,23 @@ public abstract class RequisicaoCliente {
             case 1: 
                 //login
                 logar(principal, dm);
-                 
                 break;
                 
             case 2:
                 //listar rotinas
-                
+                System.out.println("PREENCER ROTINAS");
+                MensagemRotina mensagemRotinas = new MensagemRotina(mensagem);
+                List<Rotina> rotinas = mensagemRotinas.decodificarList();
+                principal.getVincularRotina().preencherRotinas(rotinas);
+                break;
+            case 3:
+                //listar usuários
+                System.out.println("LISTAR USUÁRIO");
+                MensagemUsuario mensagemUsuario = new MensagemUsuario();
+                List<Usuario> usuarios = mensagemUsuario.decodificarList();
+                principal.getVincularRotina().preencherUsuarios(usuarios);
             }
+            
             
         dm.close();
             
@@ -101,11 +111,9 @@ public abstract class RequisicaoCliente {
                 }
             
             } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-    }
-    
+    } 
 }

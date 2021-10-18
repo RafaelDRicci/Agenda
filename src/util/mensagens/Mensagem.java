@@ -106,7 +106,7 @@ public abstract class Mensagem<T> {
     public byte[] getMensagem(){
         return baos.toByteArray();
     }
-
+    
     
     /**
      * Finaliza os componentes abertos
@@ -161,8 +161,8 @@ public abstract class Mensagem<T> {
     
     public abstract byte[] codificar(List<T> objetos) throws IOException;
     
-    public abstract T decodifica() throws IOException;
+    public abstract T decodificar() throws IOException;
     
-    public abstract List<T> decodificar()throws IOException;
+    public abstract List<T> decodificarList()throws IOException;
 
 }

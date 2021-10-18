@@ -22,8 +22,8 @@ import java.util.logging.Logger;
  */
 public class CodificaMensagem {
     
-    ByteArrayOutputStream baos;
-    DataOutputStream dos;
+    private ByteArrayOutputStream baos;
+    private DataOutputStream dos;
     
     public CodificaMensagem(){
         baos = new ByteArrayOutputStream ();

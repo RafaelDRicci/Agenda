@@ -6,10 +6,12 @@
 package cliente.principal;
 
 import cliente.login.LoginView;
+import cliente.vincularrotina.VincularRotinaView;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import model.Usuario;
+import model.VincularRotina;
 import util.cliente.ColorirTabelaRotinas;
 
 /**
@@ -496,6 +498,10 @@ public class PrincipalView extends javax.swing.JFrame {
     
     public void setJLabelNome(JLabel jLabelNome){
         this.jLabelNomeUsuario = jLabelNome;
+    }
+
+    public VincularRotinaView getVincularRotina() {
+        return controller.getVincularRotina();
     }
     
 }

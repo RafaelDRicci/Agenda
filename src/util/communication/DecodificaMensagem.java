@@ -21,8 +21,8 @@ import java.util.Date;
 public class DecodificaMensagem {
     
     
-    ByteArrayInputStream bais;
-    DataInputStream dis;
+    private ByteArrayInputStream bais;
+    private DataInputStream dis;
     
     
     public DecodificaMensagem (byte[] bytes){

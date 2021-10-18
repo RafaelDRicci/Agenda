@@ -28,6 +28,9 @@ public class PrincipalController {
     
     private final PrincipalView view;
     private final PrincipalHelper helper;
+    
+    private VincularRotinaView vincularRotina;
+
     private Thread recebeMensagem;
     private Thread consomeMensagem;
     private Usuario usuario;
@@ -154,9 +157,11 @@ public class PrincipalController {
     }
 
     public void vincularRotina() {
-        VincularRotinaView vincularRotina = new VincularRotinaView();
+        vincularRotina = new VincularRotinaView();
         vincularRotina.setLocationRelativeTo(view);
         vincularRotina.setUsuario(usuario);
+        vincularRotina.requisicaoPreencherRotinas();
+        vincularRotina.requisicaoPreencherUsuarios();
         vincularRotina.setVisible(true);
     }
 
@@ -177,4 +182,13 @@ public class PrincipalController {
         agendar.setLocationRelativeTo(view);
         agendar.setVisible(true);
     }
+    
+    public VincularRotinaView getVincularRotina() {
+        return vincularRotina;
+    }
+
+    public void setVincularRotina(VincularRotinaView vincularRotina) {
+        this.vincularRotina = vincularRotina;
+    }
+    
 }
