@@ -90,10 +90,12 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jListAno = new javax.swing.JList<>();
         jComboBoxAno = new javax.swing.JComboBox<>();
         jButtonApagaAno = new javax.swing.JButton();
-        jButtonPeriodoInterrogacao = new javax.swing.JButton();
+        jButtonPeriodoInformacoes = new javax.swing.JButton();
         jButtonPrioritarioInterrogacao = new javax.swing.JButton();
         jButtonReagendavelInterrogacao = new javax.swing.JButton();
         jButtonHorarioFixoInterrogacao = new javax.swing.JButton();
+        jButtonUsuarioInformacoes = new javax.swing.JButton();
+        jButtonRotinaInformacoes = new javax.swing.JButton();
         jPanelTopo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -415,13 +417,13 @@ public class VincularRotinaView extends javax.swing.JFrame {
         });
         jPanelFundo.add(jButtonApagaAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 320, 50, 25));
 
-        jButtonPeriodoInterrogacao.setText("?");
-        jButtonPeriodoInterrogacao.addActionListener(new java.awt.event.ActionListener() {
+        jButtonPeriodoInformacoes.setText("?");
+        jButtonPeriodoInformacoes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPeriodoInterrogacaoActionPerformed(evt);
+                jButtonPeriodoInformacoesActionPerformed(evt);
             }
         });
-        jPanelFundo.add(jButtonPeriodoInterrogacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 40, 20));
+        jPanelFundo.add(jButtonPeriodoInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 40, 20));
 
         jButtonPrioritarioInterrogacao.setText("?");
         jButtonPrioritarioInterrogacao.addActionListener(new java.awt.event.ActionListener() {
@@ -447,6 +449,22 @@ public class VincularRotinaView extends javax.swing.JFrame {
         });
         jPanelFundo.add(jButtonHorarioFixoInterrogacao, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 180, -1, 20));
 
+        jButtonUsuarioInformacoes.setText("?");
+        jButtonUsuarioInformacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUsuarioInformacoesActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jButtonUsuarioInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 40, 20));
+
+        jButtonRotinaInformacoes.setText("?");
+        jButtonRotinaInformacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRotinaInformacoesActionPerformed(evt);
+            }
+        });
+        jPanelFundo.add(jButtonRotinaInformacoes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 40, 20));
+
         jPanelPrincipal.add(jPanelFundo, java.awt.BorderLayout.CENTER);
 
         jPanelTopo.setBackground(new java.awt.Color(0, 51, 65));
@@ -466,7 +484,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVincularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVincularActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jButtonVincularActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -731,7 +749,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jComboBoxDia.setActionCommand("selecianaDia");
     }//GEN-LAST:event_jComboBoxDiaMouseClicked
 
-    private void jButtonPeriodoInterrogacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPeriodoInterrogacaoActionPerformed
+    private void jButtonPeriodoInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPeriodoInformacoesActionPerformed
         String periodo = (String) jComboBoxPeriodo.getSelectedItem();
         String mensagem = "";
         switch (periodo){
@@ -782,7 +800,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
             
         }
         JOptionPane.showMessageDialog(this, mensagem, "Período: "+periodo, 3);
-    }//GEN-LAST:event_jButtonPeriodoInterrogacaoActionPerformed
+    }//GEN-LAST:event_jButtonPeriodoInformacoesActionPerformed
 
     private void jButtonPrioritarioInterrogacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrioritarioInterrogacaoActionPerformed
         JOptionPane.showMessageDialog(this, "- Rotina agendada com prioridade."
@@ -815,6 +833,14 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private void jComboBoxRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRotinaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxRotinaActionPerformed
+
+    private void jButtonUsuarioInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUsuarioInformacoesActionPerformed
+        controller.informacoesUsuario();
+    }//GEN-LAST:event_jButtonUsuarioInformacoesActionPerformed
+
+    private void jButtonRotinaInformacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRotinaInformacoesActionPerformed
+        controller.informacoesRotina();
+    }//GEN-LAST:event_jButtonRotinaInformacoesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -860,9 +886,11 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonApagaMes;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonHorarioFixoInterrogacao;
-    private javax.swing.JButton jButtonPeriodoInterrogacao;
+    private javax.swing.JButton jButtonPeriodoInformacoes;
     private javax.swing.JButton jButtonPrioritarioInterrogacao;
     private javax.swing.JButton jButtonReagendavelInterrogacao;
+    private javax.swing.JButton jButtonRotinaInformacoes;
+    private javax.swing.JButton jButtonUsuarioInformacoes;
     private javax.swing.JButton jButtonVincular;
     private javax.swing.JCheckBox jCheckBoxHorarioFixo;
     private javax.swing.JCheckBox jCheckBoxPrioritario;

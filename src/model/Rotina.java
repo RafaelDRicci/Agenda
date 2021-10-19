@@ -64,8 +64,9 @@ public class Rotina implements Comparable<Rotina>{
     }
 
     public void setDataLimite(Date data){
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTimeInMillis(data.getTime());
+        dataLimite = new GregorianCalendar();
+        dataLimite.setTimeInMillis(data.getTime());
+
     }
     
     public String getDescricao() {

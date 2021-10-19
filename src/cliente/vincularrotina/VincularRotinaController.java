@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Rotina;
 import model.Usuario;
 import util.mensagens.MensagemRotina;
@@ -83,7 +84,18 @@ public class VincularRotinaController {
             }
     }
 
-    void preencherUsuarios(List<Usuario> usuarios) {
+    public void preencherUsuarios(List<Usuario> usuarios) {
         helper.preencherUsuarios(usuarios);
+    }
+
+    public void informacoesUsuario() {
+        Usuario usuarioSelecionado = (Usuario) view.getjComboBoxFuncionario().getSelectedItem();
+        JOptionPane.showMessageDialog(view, "Nome: "+usuarioSelecionado.getNome() + "\nCargo: "+usuarioSelecionado.getCargo() 
+                +"\nUnidade: "+usuarioSelecionado.getUnidade());
+    }
+
+    void informacoesRotina() {
+        Rotina rotinaSelecionada = (Rotina) view.getjComboBoxRotina().getSelectedItem();
+        JOptionPane.showMessageDialog(view, rotinaSelecionada.getDescricao());
     }
 }

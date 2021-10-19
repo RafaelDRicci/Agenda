@@ -24,14 +24,9 @@ public class ColorirTabelaRotinas extends DefaultTableCellRenderer{
         
         Object text = jTable.getValueAt(row, 2);
         
-        
-        
-        
         if(text != null && "Rotina A".equals(text.toString())){
             
         }
-        
-        
         
         setBackground(Color.WHITE);
         setForeground(Color.BLACK);

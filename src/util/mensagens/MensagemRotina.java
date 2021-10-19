@@ -6,6 +6,8 @@
 package util.mensagens;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -15,7 +17,7 @@ import java.util.logging.Logger;
 import model.Rotina;
 
 /**
- *
+ * 
  * @author rafaeld
  */
 public class MensagemRotina extends Mensagem<Rotina>{
@@ -46,13 +48,49 @@ public class MensagemRotina extends Mensagem<Rotina>{
     }
 
     @Override
-    public byte[] codificar(Rotina objeto) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public byte[] codificar(Rotina rotina) throws IOException {
+        
+        resetBAOS();
+        byte cod = 4;
+        setByte(cod);
+        
+        String nome = rotina.getNome();
+        setString(nome);
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        String dataLimite = sdf.format(rotina.getDataLimite().getTime());
+        setString(dataLimite);
+        
+        String descricao = rotina.getDescricao();
+        setString(descricao);
+        
+        return getMensagem();
     }
 
     @Override
     public Rotina decodificar() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        byte cod = getByte();
+        if(!(cod == 4)) throw new IllegalArgumentException("Código inválido para Registrar Rotina");
+        
+        String nome = getString();
+        Rotina rotina = new Rotina(nome);
+        
+        String dataString = getString();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        try {
+            
+            Date dataLimite = sdf.parse(dataString);
+            rotina.setDataLimite(dataLimite);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(MensagemRotina.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String descricao = getString();
+        rotina.setDescricao(descricao);
+        return rotina;
     }
     
     @Override

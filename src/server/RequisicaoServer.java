@@ -16,6 +16,7 @@ import util.communication.CodificaMensagem;
 import util.communication.DecodificaMensagem;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemSair;
+import util.mensagens.MensagemUsuario;
 
 /**
  *
@@ -28,13 +29,44 @@ public class RequisicaoServer {
     public RequisicaoServer(List<Usuario> usuarios){
         this.usuarios = usuarios;
     }
-    
+    /**
+     * Método do servidor que recebe a mensagem do cliente e age de acordo com o código da mensagem.<br>
+     * Decodifica a mensagem do cliente caso necessário, realiza uma ou um conjunto de operações,  
+     * codifica e envia uma resposta para o cliente.<br>
+     * Os códigos e como o servidor reagem são as seguinte:<br>
+     * 
+     * <br><b>Código = 0, Mensagem SAIR -> O cliente está se desconectando do servidor; Não é necessário decodificar a mensagem, pois
+     * ela possui apenas o código da mensagem. O cliente vai ser removido da lista de clientes e desconectado.</b><br>
+     * 
+     * <br><b>Código = 1, Mensagem AUTENTICAR CLIENTE -> O cliente está logando no sistema e precisa ser autenticado por meio do seu
+     * login e senha; Mensagem possui código da mensagem, login e senha do cliente. Foi criado um método auxiliar para realizar a autenticação.
+     * Após a autenticação e enviada uma mensagem resposta para o cliente, que pode ser uma resposta que não foi possível autenticar ou
+     * uma resposta positiva com o cliente autenticado e em seguida todos os dados do cliente salvo no banco de dados. As respostas possue um
+     * segundo código de identificação para as possíveis respostas, que são:<br>
+     * 0 - Cliente não existe (Login não foi encontrado no banco)<br>
+     * 1 - Senha expirada<br>
+     * 2 - Usuário bloqueado<br>
+     * 3 - Senha incorreta<br>
+     * 4 - Usuário autenticado, além do código vai ser enviado todos os dados do cliente</b><br> 
+     * 
+     * <br><b> Código = 2, Mensagem LISTAR ROTINAS -> Requisição de todas as rotinas salvas no banco. É feita a leitura das rotinas e posteriormente 
+     * a lista é codificada e enviada para o cliente. Para auxiliar esta operação foi instânciada um objeto da classe MensagemRotina.
+     * </b><br>
+     * 
+     * <br><b>Código = 3, Mensagem LISTAR USUÁRIOS -> Requisição de todos os usuário. É feita a leitura de todos os usuarios que são codificados 
+     * e enviados para o cliente. Foi também instânciado um objeto de uma classe(MensagemUsuario) para auxiliar a operação.</b><br>
+     * 
+     * @param mensagem byte[] - mensagem códificada na forma de um array de bytes
+     * @throws IOException
+     * @throws InterruptedException
+     * @throws SQLException 
+     */
     public void TrataMensagem(MensagemCliente mensagem) throws IOException, InterruptedException, SQLException{
              
             byte[] dados = mensagem.getMensagem();
             DecodificaMensagem dm = new DecodificaMensagem(dados);
             byte codigo = dm.getByte();
-             
+            
             switch(codigo){
                 //Sair
                 case 0: 
@@ -53,16 +85,7 @@ public class RequisicaoServer {
                     
                     autenticaUsuario(mensagem.getUsuario(), login, senha);
                     break;
-                /**
-                 * Listar rotinas
-                 * Código de resposta = 2
-                 * Número de Rotinas
-                 * Para cada rotina:
-                 * Código da rotina
-                 * Nome 
-                 * Data Limite
-                 * Descricao;
-                 */
+               //Todas as rotinas
                 case 2:
                     System.out.println("Rotinas");
                     RotinaDAO rotinaDAO = new RotinaDAO();
@@ -72,13 +95,21 @@ public class RequisicaoServer {
                     mensagem.getUsuario().enviarMensagem(mensagemRotina.getMensagem());
                     
                     break;
-                 
+                //Todos os usuários
+                case 3:
+                    System.out.println("Usuários");
+                    UsuarioDAO usuarioDAO = new UsuarioDAO();
+                    List<Usuario> todosUsuarios = usuarioDAO.listAll();
+                    MensagemUsuario mensagemUsuario = new MensagemUsuario();
+                    mensagemUsuario.codificar(todosUsuarios);
+                    mensagem.getUsuario().enviarMensagem(mensagemUsuario.getMensagem());
+                    break;
             }
             dm.close();
             
     }
     
-        public void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException, SQLException{
+        private void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException, SQLException{
 
                 UsuarioDAO dao = new UsuarioDAO();
                 usuario.setLogin(login);

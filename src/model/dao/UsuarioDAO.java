@@ -214,7 +214,8 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
         
         String sql  = "Select u.CODUSUARIO, u.NOMEUSUARIO, u.NOMEAPROVACAO, u.CARGO, u.UNIDADE"
                     + " from USUARIOS u"
-                    + " Where u.ATIVADO = 'S'" + novaCondicao;
+                    + " Where u.ATIVADO = 'S'" + novaCondicao
+                    + " ORDER BY u.NOMEAPROVACAO";
         
         PreparedStatement stm = con.prepareStatement(sql);
         

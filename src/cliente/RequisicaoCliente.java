@@ -50,7 +50,7 @@ public abstract class RequisicaoCliente {
             case 3:
                 //listar usuários
                 System.out.println("LISTAR USUÁRIO");
-                MensagemUsuario mensagemUsuario = new MensagemUsuario();
+                MensagemUsuario mensagemUsuario = new MensagemUsuario(mensagem);
                 List<Usuario> usuarios = mensagemUsuario.decodificarList();
                 principal.getVincularRotina().preencherUsuarios(usuarios);
             }

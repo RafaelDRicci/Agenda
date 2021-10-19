@@ -88,5 +88,21 @@ public class MensagemRotinaTest {
         assertTrue(igual);
     }
 
+    @Test
+    public void testEnviarNovaRotina() throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina("Rotina 1");
+        MensagemRotina mensagemRotina = new MensagemRotina();
+        mensagemRotina.codificar(rotinaEnviada);
+        
+        Rotina rotinaRecebida = mensagemRotina.decodificar();
+        
+        String esperado = rotinaEnviada.getNome();
+        String obtido = rotinaRecebida.getNome();
+        
+        assertEquals(esperado, obtido);
+        
+    }
+    
     
 }

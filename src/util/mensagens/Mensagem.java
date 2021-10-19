@@ -153,6 +153,10 @@ public abstract class Mensagem<T> {
         return null;
     }
     
+    public void resetBAOS(){
+        this.baos.reset();
+    }
+    
     public abstract byte[] codificar() throws IOException;
     
     public abstract byte[] codificar(T objeto) throws IOException;
