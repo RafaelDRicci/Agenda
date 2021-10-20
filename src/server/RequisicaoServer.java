@@ -91,7 +91,7 @@ public class RequisicaoServer {
                     RotinaDAO rotinaDAO = new RotinaDAO();
                     List<Rotina> rotinas = rotinaDAO.listAll();
                     MensagemRotina mensagemRotina = new MensagemRotina();
-                    mensagemRotina.codificar(rotinas);
+                    mensagemRotina.codificarList(rotinas);
                     mensagem.getUsuario().enviarMensagem(mensagemRotina.getMensagem());
                     
                     break;

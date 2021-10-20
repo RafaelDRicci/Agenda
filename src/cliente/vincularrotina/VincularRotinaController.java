@@ -51,7 +51,8 @@ public class VincularRotinaController {
             MensagemRotina mensagemRotina = new MensagemRotina();
            
             try {
-                usuario.enviarMensagem(mensagemRotina.codificar());
+                mensagemRotina.codificarRequestList();
+                usuario.enviarMensagem(mensagemRotina.getMensagem());
                 
             } catch (IOException ex) {
                 

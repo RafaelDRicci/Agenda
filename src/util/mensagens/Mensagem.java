@@ -29,6 +29,11 @@ public abstract class Mensagem<T> {
     
     private ByteArrayInputStream bais;
     private DataInputStream dis;
+    
+    //Identifica o tipo de mensagem
+    protected byte codMensagem;
+    //Identifica a operação a ser realizada
+    protected byte codOperacao;
 
     public Mensagem(){
         baos = new ByteArrayOutputStream ();
@@ -38,6 +43,22 @@ public abstract class Mensagem<T> {
     public Mensagem(byte[] bytes){
         bais = new ByteArrayInputStream(bytes);
         dis = new DataInputStream(bais);
+    }
+
+    public byte getCodMensagem() {
+        return codMensagem;
+    }
+
+    public void setCodMensagem(byte codMensagem) {
+        this.codMensagem = codMensagem;
+    }
+
+    public byte getCodOperacao() {
+        return codOperacao;
+    }
+
+    public void setCodOperacao(byte codOperacao) {
+        this.codOperacao = codOperacao;
     }
     
     /**
@@ -153,20 +174,35 @@ public abstract class Mensagem<T> {
         return null;
     }
     
+    
     public void resetBAOS(){
         this.baos.reset();
     }
     
-    public abstract byte[] codificar() throws IOException;
+    public abstract void codificarObjeto (T objeto) throws IOException;
     
-    public abstract byte[] codificar(T objeto) throws IOException;
+    public abstract T decodificarObjeto () throws IOException;
     
-    public abstract byte[] codificar(T ...objetos) throws IOException;
+    public abstract void codificarCreate(T objeto) throws IOException;
     
-    public abstract byte[] codificar(List<T> objetos) throws IOException;
+    public abstract T decodificarCreate() throws IOException;
     
-    public abstract T decodificar() throws IOException;
+    public abstract void codificarRead(int codRotina) throws IOException;
     
-    public abstract List<T> decodificarList()throws IOException;
-
+    public abstract T decodificarRead() throws IOException;
+    
+    public abstract void codificarUpdate(T objeto) throws IOException;
+    
+    public abstract T decodificarUpdate() throws IOException;
+    
+    public abstract void codificarDelete(T objeto) throws IOException;
+    
+    public abstract T decodificarDelete() throws IOException;
+    
+    public abstract void codificarRequestList() throws IOException;
+    
+    public abstract void codificarList(List<T> list) throws IOException;
+    
+    public abstract List<T> decodificarList()throws IOException;    
+ 
 }

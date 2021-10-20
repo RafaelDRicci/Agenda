@@ -57,7 +57,7 @@ public class RotinaDAO extends GenericDAO<Rotina>{
             String desc = rs.getString("DESCRICAO");
             
             consulta = new Rotina(nome);
-            consulta.setCodRotin(codRotina);
+            consulta.setCodRotina(codRotina);
             consulta.setDataLimite(data);
             consulta.setDescricao(desc);
         } else {

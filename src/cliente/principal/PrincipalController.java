@@ -161,7 +161,7 @@ public class PrincipalController {
         vincularRotina.setLocationRelativeTo(view);
         vincularRotina.setUsuario(usuario);
         vincularRotina.requisicaoPreencherRotinas();
-        vincularRotina.requisicaoPreencherUsuarios();
+        //vincularRotina.requisicaoPreencherUsuarios();
         vincularRotina.setVisible(true);
     }
 

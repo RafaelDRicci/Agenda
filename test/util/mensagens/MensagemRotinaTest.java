@@ -6,6 +6,7 @@
 package util.mensagens;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -19,29 +20,128 @@ import static org.junit.Assert.*;
  */
 public class MensagemRotinaTest {
     
-
-    @Test 
-    public void compararCodigoMensagem() throws IOException{
-        MensagemRotina enviada = new MensagemRotina();
+    /**
+     * Testando o código da Mensagem Rotina (2), codificando uma nova rotina
+     * @throws IOException 
+     */
+    @Test
+    public void testCodigoMensagemRotinaCodificarCreate() throws IOException{
         
-        List<Rotina> rotinasEnviadas = new ArrayList<>();
-        for(int i = 0 ; i < 5; i++){
-            Rotina rotina = new Rotina(i, "Rotina "+i);
-            rotinasEnviadas.add(rotina);
-        }
+        Rotina rotinaEnviada = new Rotina("Rotina 1");
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarObjeto(rotinaEnviada);
         
-        enviada.codificar(rotinasEnviadas);
-        MensagemRotina recebida = new MensagemRotina(enviada.getMensagem());
+        int esperado = 2;
+        int obtido = mensagemEnviada.getCodMensagem();
         
-        byte esperada = enviada.getMensagem()[0];
+        assertEquals(esperado, obtido);
         
-        byte obtida = recebida.getByte();
-        assertEquals(esperada, obtida);
+    }
+    
+    /**
+     * Testando o código Mensagem Rotina (2), decodificando uma rotina
+     * @throws IOException 
+     */
+    @Test
+    public void testCodigoMensagemRotinaDecodificarCreate()throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina("Rotina 1");
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        mensagemRecebida.decodificarObjeto();
+        
+        byte esperado = 2;
+        byte obtido = mensagemRecebida.getCodMensagem();
+        
+        assertEquals(esperado, obtido);
+        
+    }
+    
+    /**
+     * Cria uma rotina, codifica e decodifica. Com a rotida decodificada cria uma nova rotina. 
+     * No final os códigos das rotinas ( atributo codRotina) são comparados.
+     */
+    @Test
+    public void testComparandoRotinaCodificadaDecodificadaCodRotina() throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina(1, "Rotina 1");
+        rotinaEnviada.setDataLimite(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        rotinaEnviada.setDescricao("1 Rotina 1 "+sdf.format(rotinaEnviada.getDataLimite().getTime()));
+        
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        Rotina rotinaRecebida = mensagemRecebida.decodificarObjeto();
+        
+        assertEquals(rotinaEnviada.getCodRotina(), rotinaRecebida.getCodRotina());
+        
+    }
+    /**
+     * Teste que codifica e decodifica uma rotina e depois compara todos os atributos 
+     */
+    @Test
+    public void testComparandoRotinaCodificadaDecodificadaTodosAtributos() throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina(1, "Rotina 1");
+        rotinaEnviada.setDataLimite(Calendar.getInstance().getTime());
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        rotinaEnviada.setDescricao("1 Rotina 1 "+sdf.format(rotinaEnviada.getDataLimite().getTime()));
+        
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        Rotina rotinaRecebida = mensagemRecebida.decodificarObjeto();
+        
+        assertTrue(rotinaEnviada.igual(rotinaRecebida));
+        
+    }
+    
+    
+    /**
+     * Testando código da operacao Codificar Create (0)
+     * @throws IOException 
+     */
+    @Test
+    public void testCodigoOperacaoCodificarCreateRotina()throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina("Rotina 1");
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarCreate(rotinaEnviada);
+        
+        int esperado = 0;
+        int obtido = mensagemEnviada.getCodOperacao();
+        
+        assertEquals(esperado, obtido);
+        
+    }
+    /**
+     * Testando código da operação Decodificar Create (0)
+     * @throws IOException 
+     */
+    @Test
+    public void testCodigoOperacaoDecodificarCreateRotina() throws IOException{
+        
+        Rotina rotinaEnviada = new Rotina("Rotina 1");
+        MensagemRotina mensagemEnviada = new MensagemRotina();
+        mensagemEnviada.codificarCreate(rotinaEnviada);
+        
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        mensagemRecebida.decodificarCreate();
+        
+        int esperado = 0;
+        int obtido = mensagemRecebida.getCodOperacao();
+        
+        assertEquals(esperado, obtido);
     }
     
     @Test
     public void testTamanhoListaRotinas() throws IOException{
-        MensagemRotina enviada = new MensagemRotina();
+        MensagemRotina mensagemEnviada = new MensagemRotina();
         
         List<Rotina> rotinasEnviadas = new ArrayList<>();
         for(int i = 0 ; i < 30; i++){
@@ -49,20 +149,20 @@ public class MensagemRotinaTest {
             rotinasEnviadas.add(rotina);
         }
        
-        enviada.setInt(rotinasEnviadas.size());
-
-        MensagemRotina recebida = new MensagemRotina(enviada.getMensagem());
+        mensagemEnviada.codificarList(rotinasEnviadas);
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        
+        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarList();
         
         int esperado = rotinasEnviadas.size();
-
-        byte codMensagem = recebida.getByte();
-        int obtido = recebida.getInt();
+        int obtido = rotinasRecebidas.size();
+        
         assertEquals(esperado, obtido);
     }
     
     @Test
     public void enviarListaDeRotinas() throws IOException{
-        MensagemRotina enviada = new MensagemRotina();
+        MensagemRotina mensagemEnviada = new MensagemRotina();
         
         List<Rotina> rotinasEnviadas = new ArrayList<>();
         for(int i = 0 ; i < 5; i++){
@@ -71,9 +171,9 @@ public class MensagemRotinaTest {
             
         }
         
-        enviada.codificar(rotinasEnviadas);
-        MensagemRotina recebida = new MensagemRotina(enviada.getMensagem());
-        List<Rotina> rotinasRecebidas = recebida.decodificarList();
+        mensagemEnviada.codificarList(rotinasEnviadas);
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
+        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarList();
         
         boolean igual = true;
         
@@ -87,22 +187,4 @@ public class MensagemRotinaTest {
         
         assertTrue(igual);
     }
-
-    @Test
-    public void testEnviarNovaRotina() throws IOException{
-        
-        Rotina rotinaEnviada = new Rotina("Rotina 1");
-        MensagemRotina mensagemRotina = new MensagemRotina();
-        mensagemRotina.codificar(rotinaEnviada);
-        
-        Rotina rotinaRecebida = mensagemRotina.decodificar();
-        
-        String esperado = rotinaEnviada.getNome();
-        String obtido = rotinaRecebida.getNome();
-        
-        assertEquals(esperado, obtido);
-        
-    }
-    
-    
 }

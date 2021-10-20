@@ -39,7 +39,7 @@ public class Rotina implements Comparable<Rotina>{
         dataLimite.set(Calendar.getInstance().get(Calendar.YEAR)+10, 0, 1);
     }
     
-    public void setCodRotin(int cod){
+    public void setCodRotina(int cod){
         this.codRotina = cod;
     }
     
