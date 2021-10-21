@@ -6,14 +6,10 @@
 package util.mensagens;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Rotina;
 
 /**
@@ -24,27 +20,14 @@ import model.Rotina;
 public class MensagemRotina extends Mensagem<Rotina>{
 
     public MensagemRotina() {
-        super();
-        codMensagem = 2;
-        try {
-            setByte(codMensagem);
-        } catch (IOException ex) {
-            Logger.getLogger(MensagemRotina.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        super((byte)2);
     }
 
     public MensagemRotina(byte[] bytes) {
         super(bytes);
-        try{
-            codMensagem = getByte();
-        }catch (IOException ex) {
-            Logger.getLogger(MensagemRotina.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
     }
 
-    @Override
-    public void codificarObjeto(Rotina rotina) throws IOException{
+    private void codificarObjeto(Rotina rotina) throws IOException{
         
         int codRotina = rotina.getCodRotina();
         setInt(codRotina);
@@ -59,8 +42,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
         setString(descricao);
     }
     
-    @Override
-    public Rotina decodificarObjeto () throws IOException{
+    private Rotina decodificarObjeto () throws IOException{
     
         int codRotina = getInt();
         
@@ -79,7 +61,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
     
     /**
      * Enviar uma nova rotina para ser salva no banco
-     * Código da operação = 0
+     * Código da operação = 1
      * @param rotina
      * @return
      * @throws IOException 
@@ -87,9 +69,8 @@ public class MensagemRotina extends Mensagem<Rotina>{
     @Override
     public void codificarCreate(Rotina rotina) throws IOException {
         
-        codOperacao = 0;
+        codOperacao = 1;
         setByte(codOperacao);
-        
         codificarObjeto(rotina);
     }
 
@@ -102,8 +83,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
     public Rotina decodificarCreate() throws IOException {
         
         if(codMensagem != 2) throw new IllegalArgumentException("Código inválido para Rotina");
-        codOperacao = getByte();
-        if(codOperacao != 0) throw new IllegalArgumentException("Código inválido para operação Create Rotina");
+        if(codOperacao != 1) throw new IllegalArgumentException("Código inválido para operação Create Rotina");
         
         return decodificarObjeto();
     }
@@ -178,7 +158,6 @@ public class MensagemRotina extends Mensagem<Rotina>{
     public List<Rotina> decodificarList() throws IOException {
         
        if(codMensagem != 2) throw new IllegalArgumentException("Código inválido para Rotina");
-       codOperacao = getByte();
        if(codOperacao != 5) throw new IllegalArgumentException("Código inválido para operação Listar Rotinas");
        //Faz a leitura do número de rotinas
        int numeroRotinas = getInt();
@@ -190,5 +169,20 @@ public class MensagemRotina extends Mensagem<Rotina>{
            rotinas.add(rotina);
        }
        return rotinas;
+    }
+    
+    public void codificarRotina(Rotina rotina) throws IOException{
+        codOperacao = 6;
+        setByte(codOperacao);
+        codificarObjeto(rotina);
+    }
+    
+    public Rotina decodificarRotina() throws IOException{
+        
+        if(codMensagem != 2) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Rotina");
+        if(codOperacao != 6) throw new IllegalArgumentException("Código de operação inválido para Decodificar Rotina");
+        
+        Rotina rotina = decodificarObjeto();
+        return rotina;
     }
 }

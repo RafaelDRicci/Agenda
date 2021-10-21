@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import model.Rotina;
 import model.Usuario;
 import util.mensagens.MensagemRotina;
-import util.mensagens.MensagemSair;
 import util.mensagens.MensagemUsuario;
 
 
@@ -73,7 +72,8 @@ public class VincularRotinaController {
         MensagemUsuario mensagemUsuario = new MensagemUsuario();
 
             try {
-                usuario.enviarMensagem(mensagemUsuario.codificar());
+                mensagemUsuario.codificarRequestList();
+                usuario.enviarMensagem(mensagemUsuario.getMensagem());
 
             } catch (IOException ex) {
 
@@ -92,11 +92,11 @@ public class VincularRotinaController {
     public void informacoesUsuario() {
         Usuario usuarioSelecionado = (Usuario) view.getjComboBoxFuncionario().getSelectedItem();
         JOptionPane.showMessageDialog(view, "Nome: "+usuarioSelecionado.getNome() + "\nCargo: "+usuarioSelecionado.getCargo() 
-                +"\nUnidade: "+usuarioSelecionado.getUnidade());
+                +"\nUnidade: "+usuarioSelecionado.getUnidade(), "Dados do Usuário "+usuarioSelecionado, 1);
     }
 
     void informacoesRotina() {
         Rotina rotinaSelecionada = (Rotina) view.getjComboBoxRotina().getSelectedItem();
-        JOptionPane.showMessageDialog(view, rotinaSelecionada.getDescricao());
+        JOptionPane.showMessageDialog(view, rotinaSelecionada.getDescricao(), "Descrição de "+rotinaSelecionada, 1);
     }
 }

@@ -25,11 +25,11 @@ public class MensagemRotinaTest {
      * @throws IOException 
      */
     @Test
-    public void testCodigoMensagemRotinaCodificarCreate() throws IOException{
+    public void testCodigoMensagemRotinaCodificando() throws IOException{
         
         Rotina rotinaEnviada = new Rotina("Rotina 1");
         MensagemRotina mensagemEnviada = new MensagemRotina();
-        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        mensagemEnviada.codificarRotina(rotinaEnviada);
         
         int esperado = 2;
         int obtido = mensagemEnviada.getCodMensagem();
@@ -43,14 +43,14 @@ public class MensagemRotinaTest {
      * @throws IOException 
      */
     @Test
-    public void testCodigoMensagemRotinaDecodificarCreate()throws IOException{
+    public void testCodigoMensagemRotinaDecodificando()throws IOException{
         
         Rotina rotinaEnviada = new Rotina("Rotina 1");
         MensagemRotina mensagemEnviada = new MensagemRotina();
-        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        mensagemEnviada.codificarRotina(rotinaEnviada);
         
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
-        mensagemRecebida.decodificarObjeto();
+        mensagemRecebida.decodificarRotina();
         
         byte esperado = 2;
         byte obtido = mensagemRecebida.getCodMensagem();
@@ -72,10 +72,10 @@ public class MensagemRotinaTest {
         rotinaEnviada.setDescricao("1 Rotina 1 "+sdf.format(rotinaEnviada.getDataLimite().getTime()));
         
         MensagemRotina mensagemEnviada = new MensagemRotina();
-        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        mensagemEnviada.codificarRotina(rotinaEnviada);
         
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
-        Rotina rotinaRecebida = mensagemRecebida.decodificarObjeto();
+        Rotina rotinaRecebida = mensagemRecebida.decodificarRotina();
         
         assertEquals(rotinaEnviada.getCodRotina(), rotinaRecebida.getCodRotina());
         
@@ -92,10 +92,10 @@ public class MensagemRotinaTest {
         rotinaEnviada.setDescricao("1 Rotina 1 "+sdf.format(rotinaEnviada.getDataLimite().getTime()));
         
         MensagemRotina mensagemEnviada = new MensagemRotina();
-        mensagemEnviada.codificarObjeto(rotinaEnviada);
+        mensagemEnviada.codificarRotina(rotinaEnviada);
         
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
-        Rotina rotinaRecebida = mensagemRecebida.decodificarObjeto();
+        Rotina rotinaRecebida = mensagemRecebida.decodificarRotina();
         
         assertTrue(rotinaEnviada.igual(rotinaRecebida));
         
@@ -103,7 +103,7 @@ public class MensagemRotinaTest {
     
     
     /**
-     * Testando código da operacao Codificar Create (0)
+     * Testando código da operacao Codificar Create (1)
      * @throws IOException 
      */
     @Test
@@ -113,7 +113,7 @@ public class MensagemRotinaTest {
         MensagemRotina mensagemEnviada = new MensagemRotina();
         mensagemEnviada.codificarCreate(rotinaEnviada);
         
-        int esperado = 0;
+        int esperado = 1;
         int obtido = mensagemEnviada.getCodOperacao();
         
         assertEquals(esperado, obtido);
@@ -133,7 +133,7 @@ public class MensagemRotinaTest {
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
         mensagemRecebida.decodificarCreate();
         
-        int esperado = 0;
+        int esperado = 1;
         int obtido = mensagemRecebida.getCodOperacao();
         
         assertEquals(esperado, obtido);

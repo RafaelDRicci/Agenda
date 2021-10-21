@@ -10,6 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Rotina;
+import model.Usuario;
+import util.mensagens.MensagemRotina;
 
 /**
  *
@@ -19,6 +21,7 @@ public class SalvarRotinaController {
 
     private SalvarRotinaView view;
     private SalvarRotinaHelper helper;
+    private Usuario usuario;
     
     public SalvarRotinaController(SalvarRotinaView view) {
         this.view = view;
@@ -33,7 +36,9 @@ public class SalvarRotinaController {
         try {
             
             Rotina novaRotina = helper.novaRotina();
-            
+            MensagemRotina mensagem = new MensagemRotina();
+            mensagem.codificarCreate(novaRotina);
+            usuario.enviarMensagem(mensagem.getMensagem());
             
         } catch (Exception ex) {
             
@@ -42,5 +47,15 @@ public class SalvarRotinaController {
             
         }
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
     
 }

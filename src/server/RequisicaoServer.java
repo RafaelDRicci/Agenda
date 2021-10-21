@@ -88,12 +88,7 @@ public class RequisicaoServer {
                //Todas as rotinas
                 case 2:
                     System.out.println("Rotinas");
-                    RotinaDAO rotinaDAO = new RotinaDAO();
-                    List<Rotina> rotinas = rotinaDAO.listAll();
-                    MensagemRotina mensagemRotina = new MensagemRotina();
-                    mensagemRotina.codificarList(rotinas);
-                    mensagem.getUsuario().enviarMensagem(mensagemRotina.getMensagem());
-                    
+                    trataRotinas(mensagem);
                     break;
                 //Todos os usuários
                 case 3:
@@ -101,7 +96,7 @@ public class RequisicaoServer {
                     UsuarioDAO usuarioDAO = new UsuarioDAO();
                     List<Usuario> todosUsuarios = usuarioDAO.listAll();
                     MensagemUsuario mensagemUsuario = new MensagemUsuario();
-                    mensagemUsuario.codificar(todosUsuarios);
+                    mensagemUsuario.codificarList(todosUsuarios);
                     mensagem.getUsuario().enviarMensagem(mensagemUsuario.getMensagem());
                     break;
             }
@@ -165,6 +160,30 @@ public class RequisicaoServer {
                     usuario.enviarMensagem(cm.getMensagem());
                             
         }
+
+    private void trataRotinas(MensagemCliente mensagem) throws SQLException, IOException {
+       
+        MensagemRotina mensagemRecebida = new MensagemRotina(mensagem.getMensagem());
+        RotinaDAO rotinaDAO = new RotinaDAO();
+        
+        switch(mensagemRecebida.getCodOperacao()){
+            
+            case 1:
+                System.out.println("CREATE");
+                Rotina rotina = mensagemRecebida.decodificarCreate();
+                rotinaDAO.create(rotina);
+                break;
+            case 5:
+                System.out.println("LIST ALL");
+                List<Rotina> rotinas = rotinaDAO.listAll();
+                MensagemRotina mensagemResposta = new MensagemRotina();
+                mensagemResposta.codificarList(rotinas);
+                mensagem.getUsuario().enviarMensagem(mensagemResposta.getMensagem());
+                break;
+        }
+        
+        rotinaDAO.closeConnection();
+    }
  
         
 }

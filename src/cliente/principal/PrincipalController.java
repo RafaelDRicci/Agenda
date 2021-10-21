@@ -64,8 +64,7 @@ public class PrincipalController {
         login.setPrincipal(view);
         login.setVisible(true);
         view.setEnabled(false);
-        
-           
+
     }
     
     public void preencheUsuario(){
@@ -145,9 +144,10 @@ public class PrincipalController {
     }
 
     public void novaRotina() {
-        SalvarRotinaView salvarRotinca = new SalvarRotinaView();
-        salvarRotinca.setLocationRelativeTo(view);
-        salvarRotinca.setVisible(true);
+        SalvarRotinaView salvarRotina = new SalvarRotinaView();
+        salvarRotina.setLocationRelativeTo(view);
+        salvarRotina.setUsuario(usuario);
+        salvarRotina.setVisible(true);
     }
 
     public void editarRotina() {
@@ -161,7 +161,7 @@ public class PrincipalController {
         vincularRotina.setLocationRelativeTo(view);
         vincularRotina.setUsuario(usuario);
         vincularRotina.requisicaoPreencherRotinas();
-        //vincularRotina.requisicaoPreencherUsuarios();
+        vincularRotina.requisicaoPreencherUsuarios();
         vincularRotina.setVisible(true);
     }
 

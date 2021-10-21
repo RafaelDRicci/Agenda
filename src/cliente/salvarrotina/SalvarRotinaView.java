@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Rotina;
+import model.Usuario;
 
 /**
  *
@@ -270,4 +271,12 @@ public class SalvarRotinaView extends javax.swing.JFrame {
         return jTextFieldNomeRotina;
     }
 
+    
+    public void setUsuario(Usuario usuario){
+        controller.setUsuario(usuario);
+    }
+    
+    public Usuario getUsuario(){
+        return controller.getUsuario();
+    }
 }

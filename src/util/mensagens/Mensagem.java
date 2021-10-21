@@ -35,14 +35,30 @@ public abstract class Mensagem<T> {
     //Identifica a operação a ser realizada
     protected byte codOperacao;
 
-    public Mensagem(){
+    public Mensagem(byte codMensagem){
         baos = new ByteArrayOutputStream ();
         dos = new DataOutputStream(baos);
+        
+        this.codMensagem = codMensagem;
+        try {
+            setByte(codMensagem);
+        } catch (IOException ex) {
+            Logger.getLogger(MensagemUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
-    
+
     public Mensagem(byte[] bytes){
         bais = new ByteArrayInputStream(bytes);
         dis = new DataInputStream(bais);
+        
+        try {
+            codMensagem = getByte();
+            codOperacao = getByte();
+        } catch (IOException ex) {
+            Logger.getLogger(MensagemUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public byte getCodMensagem() {
@@ -178,10 +194,6 @@ public abstract class Mensagem<T> {
     public void resetBAOS(){
         this.baos.reset();
     }
-    
-    public abstract void codificarObjeto (T objeto) throws IOException;
-    
-    public abstract T decodificarObjeto () throws IOException;
     
     public abstract void codificarCreate(T objeto) throws IOException;
     
