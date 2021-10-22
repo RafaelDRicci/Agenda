@@ -65,18 +65,10 @@ public abstract class Mensagem<T> {
         return codMensagem;
     }
 
-    public void setCodMensagem(byte codMensagem) {
-        this.codMensagem = codMensagem;
-    }
-
     public byte getCodOperacao() {
         return codOperacao;
     }
-
-    public void setCodOperacao(byte codOperacao) {
-        this.codOperacao = codOperacao;
-    }
-    
+ 
     /**
      * 
      * @param codigo
@@ -126,13 +118,44 @@ public abstract class Mensagem<T> {
             dos.writeChars(string);
             dos.flush();
         }
-
     }
     
     public void setData(Date data) throws IOException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String string = sdf.format(data);
         setString(string);
+    }
+    
+    public void setIntArray(int[] intArray) throws IOException{
+        
+        if(intArray == null){
+            dos.writeInt(0);
+            dos.flush();
+        } else{
+            int tamanho = intArray.length;
+            dos.writeInt(tamanho);
+            for(int i = 0; i < tamanho; i++){
+                dos.writeInt(intArray[i]);
+                dos.flush();
+            }
+        }
+    }
+    
+    public void setByteArray(byte[] byteArray) throws IOException{
+        int tamanho = byteArray.length;
+        dos.writeInt(tamanho);
+        dos.write(byteArray);
+    }
+    
+    public byte[] getByteArray()throws IOException{
+        
+        int tamanho = dis.readInt();
+        byte[] array = new byte[tamanho];
+        for(int i = 0; i < tamanho ; i++){
+            array[i] = dis.readByte();
+        }
+        
+        return array;
     }
     
     /**
@@ -190,7 +213,16 @@ public abstract class Mensagem<T> {
         return null;
     }
     
+    public int[] getIntArray() throws IOException{
+        int tamanho = dis.readInt();
+        int[] array = new int[tamanho];
+        for(int i = 0; i < tamanho; i++){
+            array[i] = dis.readInt();
+        }
+        return array;
+    }
     
+
     public void resetBAOS(){
         this.baos.reset();
     }

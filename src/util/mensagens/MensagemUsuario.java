@@ -28,16 +28,16 @@ public class MensagemUsuario extends Mensagem<Usuario> {
     
     private void codificarObjeto(Usuario usuario) throws IOException {
         
-            //código de usuário
-            setInt(usuario.getCodUsuario());
-            //Nome de Aprovação
-            setString(usuario.getNomeAprovacao());
-            //Cargo
-            setString(usuario.getCargo());
-            //Nome completo
-            setString(usuario.getNome());
-            //Unidade
-            setString(usuario.getUnidade());
+        //código de usuário
+        setInt(usuario.getCodUsuario());
+        //Nome de Aprovação
+        setString(usuario.getNomeAprovacao());
+        //Cargo
+        setString(usuario.getCargo());
+        //Nome completo
+        setString(usuario.getNome());
+        //Unidade
+        setString(usuario.getUnidade());
         
     }
 
