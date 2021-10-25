@@ -6,18 +6,20 @@
 package util.mensagens;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
+import model.vincularrotina.DataUnica;
 
 /**
  *
  * @author rafaeld
  */
-public class MensagemVincularRotina extends Mensagem{
+public class MensagemVincularRotina extends Mensagem<VincularRotina>{
     
     public MensagemVincularRotina(){
         super((byte)4);
@@ -27,16 +29,6 @@ public class MensagemVincularRotina extends Mensagem{
         super(mensagem);
     }
 
-    /**
-    protected Usuario usuario;
-    protected Rotina rotina;
-    protected boolean prioritario;
-    protected boolean reagendavel;
-    protected boolean horarioFixo;
-    protected int[] horarios;
-    protected String periodo;
-     * @param vincular 
-     */
     
     public void setRotina(Rotina rotina) throws IOException{
         
@@ -55,6 +47,7 @@ public class MensagemVincularRotina extends Mensagem{
     }
     
     public Rotina getRotina() throws IOException{
+        
         int codRotina = getInt();
         String nome = getString();
         Rotina rotina = new Rotina(codRotina, nome);
@@ -103,8 +96,6 @@ public class MensagemVincularRotina extends Mensagem{
         return usuario;
     }
     
-    
-    
     protected void codificarObjeto(VincularRotina vincular) throws IOException{
         
         Rotina rotina = vincular.getRotina();
@@ -123,6 +114,16 @@ public class MensagemVincularRotina extends Mensagem{
         setIntArray(horarios);
         String periodo = vincular.getPeriodo();
         setString(periodo);
+        
+        switch(periodo){
+            case "DataUnica":
+                DataUnica dataUnica = (DataUnica)vincular;
+                System.out.println(dataUnica.getData());
+                
+                break;
+            default:
+                break;
+        }
     }
     
     protected VincularRotina decodificarObjeto()throws IOException{
@@ -142,66 +143,138 @@ public class MensagemVincularRotina extends Mensagem{
         String periodo = getString();
         vincular.setPeriodo(periodo);
         
+        switch(periodo){
+            case "DataUnica":
+                DataUnica dataUnica = (DataUnica)vincular;
+                System.out.println(dataUnica.getData());
+                
+                break;
+            default:
+                break;
+        }
+        
         return vincular;
-    }
-    
-    @Override
-    public void codificarCreate(Object objeto) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object decodificarCreate() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void codificarCreate(VincularRotina vincularRotina) throws IOException {
+        
+        codOperacao = 1;
+        setByte(codOperacao);
+        
+        codificarObjeto(vincularRotina);
+    }
+
+    @Override
+    public VincularRotina decodificarCreate() throws IOException {
+        
+        if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
+        if(codOperacao != 1) throw new IllegalArgumentException("Código de operação inválido para Decodificar Create");
+        
+        VincularRotina vincularRotina = decodificarObjeto();
+        return vincularRotina;
     }
 
     @Override
     public void codificarRead(int codRotina) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public void codificarReadVincularRotina(Rotina rotina, Usuario usuario) throws IOException{
+        
+        codOperacao = 2;
+        setByte(codOperacao);
+        
+        setInt(rotina.getCodRotina());
+        setInt(usuario.getCodUsuario());
+        
+    }
 
     @Override
-    public Object decodificarRead() throws IOException {
+    public int[] decodificarRead() throws IOException{
+        
+        if(codMensagem != 4 ) throw new IllegalArgumentException("Código inválido para mensagem Vincular Rotina");
+        if(codOperacao != 2 ) throw new IllegalArgumentException("Código inválido para READ");
+        
+        int codRotina = getInt();
+        int codUsuario = getInt();
+        
+        int[] codigos = new int[2];
+        codigos[0] = codRotina;
+        codigos[1] = codUsuario;
+        
+        return codigos;
+    }
+
+    @Override
+    public void codificarUpdate(VincularRotina objeto) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void codificarUpdate(Object objeto) throws IOException {
+    public VincularRotina decodificarUpdate() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Object decodificarUpdate() throws IOException {
+    public void codificarDelete(VincularRotina objeto) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void codificarDelete(Object objeto) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object decodificarDelete() throws IOException {
+    public VincularRotina decodificarDelete() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void codificarRequestList() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        codOperacao = 5;
+        setByte(codOperacao);
     }
 
     @Override
-    public void codificarList(List list) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void codificarList(List<VincularRotina> vinculacoes) throws IOException {
+        codOperacao = 5;
+        setByte(codOperacao);
+        int numeroVinculacoes = vinculacoes.size();
+        setInt(numeroVinculacoes);
+        for(VincularRotina vincular: vinculacoes){
+            codificarObjeto(vincular);
+        }
     }
 
     @Override
-    public List decodificarList() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public List<VincularRotina> decodificarList() throws IOException {
+       
+       if(codMensagem != 4) throw new IllegalArgumentException("Código inválido para Vincular Rotina");
+       if(codOperacao != 5) throw new IllegalArgumentException("Código inválido para operação Listar");
+       
+       int numeroVinculacoes = getInt();
 
-    void setByte(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+       List<VincularRotina> vinculacoes = new ArrayList<>();
 
+       for(int i = 0; i < numeroVinculacoes; i++){
+           VincularRotina vincular = decodificarObjeto();
+           vinculacoes.add(vincular);
+       }
+       return vinculacoes;
+    }
+    
+    
+    public void codificarVincularRotina(VincularRotina vincularRotina) throws IOException{
+        
+        codOperacao = 6;
+        setByte(codOperacao);
+        codificarObjeto(vincularRotina);
+        
+    }
+    
+    public VincularRotina decodificarVincularRotina() throws IOException{
+        
+        if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
+        if(codOperacao != 6) throw new IllegalArgumentException("Código de operação inválido para Decodificar Vincular Rotina");
+        
+        VincularRotina vincularRotina = decodificarObjeto();
+        return vincularRotina;
+    }
 }

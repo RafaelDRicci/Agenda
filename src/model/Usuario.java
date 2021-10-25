@@ -42,6 +42,10 @@ public class Usuario {
         tentativaLogin = 0;
         conectado = false;
         autenticado = false;
+        nomeAprovacao = "";
+        cargo = "";
+        nome = "";
+        unidade = "";
     }
     
     public Usuario(int codUsuario){
@@ -49,6 +53,10 @@ public class Usuario {
         tentativaLogin = 0;
         conectado = false;
         autenticado = false;
+        nomeAprovacao = "";
+        cargo = "";
+        nome = "";
+        unidade = "";
     }
  
     public void tentativaLogin(){

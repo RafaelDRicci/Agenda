@@ -6,7 +6,9 @@
 package util.mensagens;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -94,10 +96,6 @@ public class MensagemTest {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
-        @Override
-        public Object decodificarRead() throws IOException {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
 
         @Override
         public void codificarUpdate(Object objeto) throws IOException {
@@ -131,6 +129,11 @@ public class MensagemTest {
 
         @Override
         public List decodificarList() throws IOException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public int[] decodificarRead() throws IOException, SQLException, NoSuchElementException {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 

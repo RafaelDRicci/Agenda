@@ -10,9 +10,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -233,7 +235,7 @@ public abstract class Mensagem<T> {
     
     public abstract void codificarRead(int codRotina) throws IOException;
     
-    public abstract T decodificarRead() throws IOException;
+    public abstract int[] decodificarRead() throws IOException;
     
     public abstract void codificarUpdate(T objeto) throws IOException;
     

@@ -86,4 +86,45 @@ public class VincularRotina {
         return this.rotina + " vinculada para " + this.usuario + " com período " + periodo;
     }
     
+    public boolean comparaValoresArraysInt(int[] array1, int[] array2){
+        
+        if(array1.length != array2.length) return false;
+        
+        boolean igual = true;
+        
+        for(int i = 0; i < array1.length; i++){
+            if(array1[i] != array2[i]){
+                igual = false;
+                break;
+            }
+        }
+        
+        return igual;
+        
+    }
+    
+    public boolean comparaValoresArraysString(String[] array1, String[] array2){
+        
+        if(array1.length != array2.length) return false;
+        boolean igual = true;
+        
+        for(int i = 0; i < array1.length; i++){
+            if(!array1[i].equals(array2[i])){
+                igual = false;
+                break;
+            }
+        }
+        
+        return igual;
+
+    }
+    
+    public boolean igual(VincularRotina vincularRotina){
+        
+        return ((rotina.igual(vincularRotina.getRotina()) && (usuario.igual(vincularRotina.getUsuario()))  &&
+                (this.horarioFixo == vincularRotina.isHorarioFixo()) && (this.prioritario == vincularRotina.isPrioritario()) &&
+                (this.reagendavel == vincularRotina.isReagendavel()) && (comparaValoresArraysInt(this.horarios, vincularRotina.getHorarios())) &&  
+                (this.periodo.equals(vincularRotina.getPeriodo())) ));
+    }
+    
 }

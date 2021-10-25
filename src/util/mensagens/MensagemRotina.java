@@ -94,7 +94,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
     }
 
     @Override
-    public Rotina decodificarRead() throws IOException {
+    public int[] decodificarRead() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -6,8 +6,10 @@
 package util.mensagens;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
@@ -74,12 +76,13 @@ public class MensagemUsuario extends Mensagem<Usuario> {
     public void codificarRead(int codRotina) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
     @Override
-    public Usuario decodificarRead() throws IOException {
+    public int[] decodificarRead() throws IOException, SQLException, NoSuchElementException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void codificarUpdate(Usuario objeto) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
