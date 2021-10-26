@@ -27,7 +27,8 @@ public class MensagemRotina extends Mensagem<Rotina>{
         super(bytes);
     }
 
-    private void codificarObjeto(Rotina rotina) throws IOException{
+    @Override
+    public void setObjeto(Rotina rotina) throws IOException{
         
         int codRotina = rotina.getCodRotina();
         setInt(codRotina);
@@ -42,7 +43,8 @@ public class MensagemRotina extends Mensagem<Rotina>{
         setString(descricao);
     }
     
-    private Rotina decodificarObjeto () throws IOException{
+    @Override
+    public Rotina getObjeto () throws IOException{
     
         int codRotina = getInt();
         
@@ -71,7 +73,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
         
         codOperacao = 1;
         setByte(codOperacao);
-        codificarObjeto(rotina);
+        setObjeto(rotina);
     }
 
     /**
@@ -85,7 +87,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
         if(codMensagem != 2) throw new IllegalArgumentException("Código inválido para Rotina");
         if(codOperacao != 1) throw new IllegalArgumentException("Código inválido para operação Create Rotina");
         
-        return decodificarObjeto();
+        return getObjeto();
     }
 
     @Override
@@ -145,7 +147,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
         setInt(numeroRotinas);
         //codificando cada rotina
         for(Rotina rotina: rotinas){
-            codificarObjeto(rotina);
+            setObjeto(rotina);
         }
     }
     
@@ -165,7 +167,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
        List<Rotina> rotinas = new ArrayList<>();
        //faz um loop para leitura de cada rotina
        for(int i = 0; i < numeroRotinas; i++){
-           Rotina rotina = decodificarObjeto();
+           Rotina rotina = getObjeto();
            rotinas.add(rotina);
        }
        return rotinas;
@@ -174,7 +176,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
     public void codificarRotina(Rotina rotina) throws IOException{
         codOperacao = 6;
         setByte(codOperacao);
-        codificarObjeto(rotina);
+        setObjeto(rotina);
     }
     
     public Rotina decodificarRotina() throws IOException{
@@ -182,7 +184,7 @@ public class MensagemRotina extends Mensagem<Rotina>{
         if(codMensagem != 2) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Rotina");
         if(codOperacao != 6) throw new IllegalArgumentException("Código de operação inválido para Decodificar Rotina");
         
-        Rotina rotina = decodificarObjeto();
+        Rotina rotina = getObjeto();
         return rotina;
     }
 }

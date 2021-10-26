@@ -7,9 +7,11 @@ package util.mensagens;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
@@ -96,7 +98,8 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         return usuario;
     }
     
-    protected void codificarObjeto(VincularRotina vincular) throws IOException{
+    @Override
+    public void setObjeto(VincularRotina vincular) throws IOException{
         
         Rotina rotina = vincular.getRotina();
         setRotina(rotina);
@@ -105,54 +108,55 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         setUsuario(usuario);
 
         boolean prioritario = vincular.isPrioritario();
-        setBoolean(prioritario);
         boolean reagendavel = vincular.isReagendavel();
-        setBoolean(reagendavel);
         boolean horarioFixo = vincular.isHorarioFixo();
-        setBoolean(horarioFixo);
         int[] horarios = vincular.getHorarios();
-        setIntArray(horarios);
         String periodo = vincular.getPeriodo();
+
+        setBoolean(prioritario);
+        setBoolean(reagendavel);
+        setBoolean(horarioFixo);
+        setIntArray(horarios);
         setString(periodo);
         
         switch(periodo){
             case "DataUnica":
-                DataUnica dataUnica = (DataUnica)vincular;
-                System.out.println(dataUnica.getData());
-                
+                Date data = ((DataUnica)vincular).getData().getTime();
+                setData(data);
                 break;
-            default:
-                break;
-        }
+        }  
     }
     
-    protected VincularRotina decodificarObjeto()throws IOException{
+    @Override
+    public VincularRotina getObjeto()throws IOException{
         
         Rotina rotina = getRotina();
         Usuario usuario = getUsuario();
-        VincularRotina vincular = new VincularRotina(rotina, usuario);
         
         boolean prioritario = getBoolean();
-        vincular.setPrioritario(prioritario);
         boolean reagendavel = getBoolean();
-        vincular.setReagendavel(reagendavel);
-        boolean horarioFixo = getBoolean();
-        vincular.setHorarioFixo(horarioFixo);
+        boolean horarioFixo = getBoolean();  
         int[] horarios = getIntArray();
-        vincular.setHorarios(horarios);
         String periodo = getString();
-        vincular.setPeriodo(periodo);
-        
+
+        VincularRotina vincular = null;
         switch(periodo){
             case "DataUnica":
-                DataUnica dataUnica = (DataUnica)vincular;
-                System.out.println(dataUnica.getData());
-                
+                vincular = new DataUnica(rotina, usuario);
+                GregorianCalendar data = new GregorianCalendar();
+                data.setTime(getData());
+                ((DataUnica)vincular).setData(data);
                 break;
             default:
+                vincular = new VincularRotina(rotina,usuario);
                 break;
         }
-        
+        vincular.setPrioritario(prioritario);
+        vincular.setReagendavel(reagendavel);
+        vincular.setHorarioFixo(horarioFixo);
+        vincular.setHorarios(horarios);
+        vincular.setPeriodo(periodo);
+         
         return vincular;
     }
 
@@ -162,7 +166,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         codOperacao = 1;
         setByte(codOperacao);
         
-        codificarObjeto(vincularRotina);
+        setObjeto(vincularRotina);
     }
 
     @Override
@@ -171,7 +175,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
         if(codOperacao != 1) throw new IllegalArgumentException("Código de operação inválido para Decodificar Create");
         
-        VincularRotina vincularRotina = decodificarObjeto();
+        VincularRotina vincularRotina = getObjeto();
         return vincularRotina;
     }
 
@@ -205,7 +209,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         
         return codigos;
     }
-
+    //3
     @Override
     public void codificarUpdate(VincularRotina objeto) throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -215,15 +219,25 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
     public VincularRotina decodificarUpdate() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    //4
     @Override
-    public void codificarDelete(VincularRotina objeto) throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void codificarDelete(VincularRotina vinculacao) throws IOException {
+        
+        codOperacao = 4;
+        setByte(codOperacao);
+      
+        setObjeto(vinculacao);
+    
     }
 
     @Override
     public VincularRotina decodificarDelete() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        if(codMensagem != 4 ) throw new IllegalArgumentException("Código inválido para mensagem Vincular Rotina");
+        if(codOperacao != 4 ) throw new IllegalArgumentException("Código inválido para DELETE");
+        
+        VincularRotina vinculacao = getObjeto();
+        return vinculacao;
     }
 
     @Override
@@ -239,7 +253,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         int numeroVinculacoes = vinculacoes.size();
         setInt(numeroVinculacoes);
         for(VincularRotina vincular: vinculacoes){
-            codificarObjeto(vincular);
+            setObjeto(vincular);
         }
     }
 
@@ -254,7 +268,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
        List<VincularRotina> vinculacoes = new ArrayList<>();
 
        for(int i = 0; i < numeroVinculacoes; i++){
-           VincularRotina vincular = decodificarObjeto();
+           VincularRotina vincular = getObjeto();
            vinculacoes.add(vincular);
        }
        return vinculacoes;
@@ -265,7 +279,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         
         codOperacao = 6;
         setByte(codOperacao);
-        codificarObjeto(vincularRotina);
+        setObjeto(vincularRotina);
         
     }
     
@@ -274,7 +288,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
         if(codOperacao != 6) throw new IllegalArgumentException("Código de operação inválido para Decodificar Vincular Rotina");
         
-        VincularRotina vincularRotina = decodificarObjeto();
+        VincularRotina vincularRotina = getObjeto();
         return vincularRotina;
     }
 }

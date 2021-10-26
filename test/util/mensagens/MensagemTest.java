@@ -7,6 +7,9 @@ package util.mensagens;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.NoSuchElementException;
 import org.junit.Test;
@@ -64,6 +67,22 @@ public class MensagemTest {
             if(arrayRecebido[i] != arrayEnviado[i]) igual = false;
         }
         assertTrue(igual);
+    }
+    
+    @Test
+    public void testCodificaDecodificaData() throws IOException{
+        
+        GregorianCalendar dataEnviada = new GregorianCalendar(2022, 5, 11);
+        MensagemImpl mensagemEnviada = new MensagemImpl((byte)0);
+        mensagemEnviada.setByte((byte)0);
+        mensagemEnviada.setData(dataEnviada.getTime());
+        
+        MensagemImpl mensagemRecebida = new MensagemImpl(mensagemEnviada.getMensagem());
+
+        GregorianCalendar dataRecebida = new GregorianCalendar();
+        dataRecebida.setTime(mensagemRecebida.getData());
+        
+        assertEquals(dataEnviada, dataRecebida);
     }
     
     
@@ -133,12 +152,21 @@ public class MensagemTest {
         }
 
         @Override
-        public int[] decodificarRead() throws IOException, SQLException, NoSuchElementException {
+        public int[] decodificarRead() throws IOException {
             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
-       
+        @Override
+        public void setObjeto(Object objeto) throws IOException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
 
+        @Override
+        public Object getObjeto() throws IOException {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+  
     }
     
 }

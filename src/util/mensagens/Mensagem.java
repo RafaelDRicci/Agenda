@@ -128,21 +128,7 @@ public abstract class Mensagem<T> {
         setString(string);
     }
     
-    public void setIntArray(int[] intArray) throws IOException{
-        
-        if(intArray == null){
-            dos.writeInt(0);
-            dos.flush();
-        } else{
-            int tamanho = intArray.length;
-            dos.writeInt(tamanho);
-            for(int i = 0; i < tamanho; i++){
-                dos.writeInt(intArray[i]);
-                dos.flush();
-            }
-        }
-    }
-    
+
     public void setByteArray(byte[] byteArray) throws IOException{
         int tamanho = byteArray.length;
         dos.writeInt(tamanho);
@@ -215,6 +201,21 @@ public abstract class Mensagem<T> {
         return null;
     }
     
+    public void setIntArray(int[] intArray) throws IOException{
+        
+        if(intArray == null){
+            dos.writeInt(0);
+            dos.flush();
+        } else{
+            int tamanho = intArray.length;
+            dos.writeInt(tamanho);
+            for(int i = 0; i < tamanho; i++){
+                dos.writeInt(intArray[i]);
+                dos.flush();
+            }
+        }
+    }
+    
     public int[] getIntArray() throws IOException{
         int tamanho = dis.readInt();
         int[] array = new int[tamanho];
@@ -228,6 +229,11 @@ public abstract class Mensagem<T> {
     public void resetBAOS(){
         this.baos.reset();
     }
+    
+    
+    public abstract void setObjeto(T objeto) throws IOException;
+    
+    public abstract T getObjeto() throws IOException;
     
     public abstract void codificarCreate(T objeto) throws IOException;
     

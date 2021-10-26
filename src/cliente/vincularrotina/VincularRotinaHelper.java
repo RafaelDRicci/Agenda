@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
+import model.vincularrotina.DataUnica;
 
 /**
  *
@@ -32,5 +34,39 @@ public class VincularRotinaHelper {
         for(Usuario usuario : usuarios){
             view.getjComboBoxFuncionario().addItem(usuario);
         }
+    }
+
+    public VincularRotina obterVinculacao() {
+        Rotina rotina = (Rotina) view.getjComboBoxRotina().getSelectedItem();
+        Usuario usuario = (Usuario) view.getjComboBoxFuncionario().getSelectedItem();
+        
+        boolean prioritario = view.getjCheckBoxPrioritario().isSelected();
+        boolean reagendavel = view.getjCheckBoxReagendavel().isSelected();
+        boolean horarioFixo = view.getjCheckBoxHorarioFixo().isSelected();
+        
+        String periodo = (String) view.getjComboBoxPeriodo().getSelectedItem();
+        
+        int tamanhoHorarios = view.getjListHorario().getModel().getSize();
+        int[] horarios = new int[tamanhoHorarios];
+        for(int i = 0; i < tamanhoHorarios; i++){
+            String elemento = view.getjListHorario().getModel().getElementAt(i);
+            horarios[i] = Integer.parseInt(elemento.split("h")[0]);
+            System.out.println(horarios[i]);
+        }
+        
+        VincularRotina vincular;
+        
+        switch(periodo){
+            case("DataUnica"):
+                vincular = new DataUnica(rotina, usuario);
+                break;
+            default:
+                vincular = new VincularRotina(rotina, usuario);
+        }
+        
+        vincular.setPrioritario(prioritario);
+        vincular.setReagendavel(reagendavel);
+        vincular.setHorarioFixo(horarioFixo);
+        return vincular;
     }
 }

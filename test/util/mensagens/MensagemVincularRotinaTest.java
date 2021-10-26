@@ -69,10 +69,10 @@ public class MensagemVincularRotinaTest {
         vinculacaoEnviada.setHorarios(horarios);
         MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
         mensagemEnviada.setByte((byte)0);
-        mensagemEnviada.codificarObjeto(vinculacaoEnviada);
+        mensagemEnviada.setObjeto(vinculacaoEnviada);
         
         MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagemEnviada.getMensagem());
-        VincularRotina vinculacaoRecebida = mensagemRecebida.decodificarObjeto();
+        VincularRotina vinculacaoRecebida = mensagemRecebida.getObjeto();
         
         assertTrue(vinculacaoEnviada.igual(vinculacaoRecebida));
         
@@ -89,6 +89,8 @@ public class MensagemVincularRotinaTest {
         usuario.setNomeAprovacao("Usuario");
         
         VincularRotina vinculacaoEnviada = new VincularRotina(rotina, usuario);
+        int[] horarios = {7, 8, 9};
+        vinculacaoEnviada.setHorarios(horarios);
         MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
         mensagemEnviada.codificarVincularRotina(vinculacaoEnviada);
         
@@ -113,13 +115,17 @@ public class MensagemVincularRotinaTest {
         usuario.setNomeAprovacao("Usuario");
         
         DataUnica vinculacaoEnviada = new DataUnica(rotina, usuario);
+        int[] horarios = {7, 8, 9};
+        vinculacaoEnviada.setHorarios(horarios);
+        vinculacaoEnviada.setData(Calendar.getInstance());
         MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
         mensagemEnviada.codificarVincularRotina(vinculacaoEnviada);
         
         byte[] arrayEnviado = mensagemEnviada.getMensagem();
         
         MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(arrayEnviado);
-        DataUnica vinculacaoRecebida = (DataUnica) mensagemRecebida.decodificarVincularRotina();
+        DataUnica vinculacaoRecebida = (DataUnica)mensagemRecebida.decodificarVincularRotina();
+        
         
         String esperado = vinculacaoEnviada.toString();
         String recebido = vinculacaoRecebida.toString();
@@ -171,7 +177,7 @@ public class MensagemVincularRotinaTest {
         
     }
     
-     @Test
+    @Test
     public void testReadCodUsuario()throws IOException{
         
         MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
@@ -220,5 +226,23 @@ public class MensagemVincularRotinaTest {
             
             assertTrue(igual);
             
+    }
+    
+    @Test
+    public void testCodificaDecodificaDelete() throws IOException{
+        
+       Rotina rotina = new Rotina(1, "Rotina 1");
+       Usuario usuario = new Usuario(1);
+        
+       VincularRotina vinculacao = new VincularRotina(rotina, usuario);
+       MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
+       mensagemEnviada.codificarDelete(vinculacao);
+       
+       MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagemEnviada.getMensagem());
+       
+       byte esperado = 4;
+       byte recebido = mensagemRecebida.getCodOperacao();
+       
+       assertEquals(esperado, recebido);
     }
 }

@@ -8,7 +8,9 @@ package cliente.vincularrotina;
 import java.util.Calendar;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import model.Rotina;
 import model.Usuario;
@@ -484,7 +486,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVincularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVincularActionPerformed
-
+        controller.registrarVinculacao();
     }//GEN-LAST:event_jButtonVincularActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -1020,7 +1022,55 @@ public class VincularRotinaView extends javax.swing.JFrame {
         controller.setUsuario(usuario);
     }
 
+    public JCheckBox getjCheckBoxHorarioFixo() {
+        return jCheckBoxHorarioFixo;
+    }
+
+    public void setjCheckBoxHorarioFixo(JCheckBox jCheckBoxHorarioFixo) {
+        this.jCheckBoxHorarioFixo = jCheckBoxHorarioFixo;
+    }
+
+    public JCheckBox getjCheckBoxPrioritario() {
+        return jCheckBoxPrioritario;
+    }
+
+    public void setjCheckBoxPrioritario(JCheckBox jCheckBoxPrioritario) {
+        this.jCheckBoxPrioritario = jCheckBoxPrioritario;
+    }
+
+    public JCheckBox getjCheckBoxReagendavel() {
+        return jCheckBoxReagendavel;
+    }
+
+    public void setjCheckBoxReagendavel(JCheckBox jCheckBoxReagendavel) {
+        this.jCheckBoxReagendavel = jCheckBoxReagendavel;
+    }
+
+    public JList<String> getjListAno() {
+        return jListAno;
+    }
+
+    public JList<String> getjListDia() {
+        return jListDia;
+    }
+
+    public JList<String> getjListDiaSemana() {
+        return jListDiaSemana;
+    }
+
+    public JList<String> getjListDiaUtil() {
+        return jListDiaUtil;
+    }
+
+    public JList<String> getjListHorario() {
+        return jListHorario;
+    }
+
+    public JList<String> getjListMes() {
+        return jListMes;
+    }
+
     
- 
+    
     
 }

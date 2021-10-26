@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemUsuario;
 
@@ -98,5 +99,9 @@ public class VincularRotinaController {
     void informacoesRotina() {
         Rotina rotinaSelecionada = (Rotina) view.getjComboBoxRotina().getSelectedItem();
         JOptionPane.showMessageDialog(view, rotinaSelecionada.getDescricao(), "Descrição de "+rotinaSelecionada, 1);
+    }
+
+    void registrarVinculacao() {
+        VincularRotina VincularRotina = helper.obterVinculacao();
     }
 }

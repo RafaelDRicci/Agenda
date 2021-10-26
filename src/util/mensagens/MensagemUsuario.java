@@ -6,12 +6,8 @@
 package util.mensagens;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import model.Usuario;
 
 /**
@@ -28,7 +24,8 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         super(mensagem);
     }
     
-    private void codificarObjeto(Usuario usuario) throws IOException {
+    @Override
+    public void setObjeto(Usuario usuario) throws IOException {
         
         //código de usuário
         setInt(usuario.getCodUsuario());
@@ -43,7 +40,8 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         
     }
 
-    private Usuario decodificarObjeto() throws IOException {
+    @Override
+    public Usuario getObjeto() throws IOException {
         //Código de usuário
         int codUsuario = getInt();
         Usuario usuario = new Usuario(codUsuario);
@@ -79,7 +77,7 @@ public class MensagemUsuario extends Mensagem<Usuario> {
     
 
     @Override
-    public int[] decodificarRead() throws IOException, SQLException, NoSuchElementException {
+    public int[] decodificarRead() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -117,7 +115,7 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         setInt(usuarios.size());
         //percorre a lista de usuários, codificando cada um
         for(Usuario usuario : usuarios){
-            codificarObjeto(usuario);
+            setObjeto(usuario);
         }
     }
     
@@ -132,7 +130,7 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         //lista de usuários 
         List<Usuario> usuarios = new ArrayList<>();
         for(int i = 0; i < numeroUsuarios; i++ ){
-           Usuario usuario = decodificarObjeto();
+           Usuario usuario = getObjeto();
            usuarios.add(usuario);
         }
         return usuarios;
@@ -141,7 +139,7 @@ public class MensagemUsuario extends Mensagem<Usuario> {
     public void codificaUsuario(Usuario usuario) throws IOException{
         codOperacao = 6;
         setByte(codOperacao);
-        codificarObjeto(usuario);
+        setObjeto(usuario);
     }
     
     public Usuario decodificarUsuario() throws IOException{
@@ -149,7 +147,7 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         if(codMensagem != 3) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Usuário");
         if(codOperacao != 6) throw new IllegalArgumentException("Código de operação inválido para Decodificar Usuário");
         
-        Usuario usuario = decodificarObjeto();
+        Usuario usuario = getObjeto();
         return usuario;
     }
 }

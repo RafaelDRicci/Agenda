@@ -5,16 +5,20 @@
         <group>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/util/mensagens/MensagemTest.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Usuario.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaHelper.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/mensagens/MensagemVincularRotina.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/util/mensagens/MensagemUsuarioTest.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/vincularrotina/DataUnica.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/server/Servidor.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/Rotina.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/util/mensagens/MensagemRotinaTest.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/mensagens/MensagemRotina.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/mensagens/MensagemUsuario.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaView.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/test/util/mensagens/MensagemVincularRotinaTest.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/mensagens/Mensagem.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/util/mensagens/MensagemSair.java</file>
+            <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/cliente/vincularrotina/VincularRotinaController.java</file>
             <file>file:/C:/Users/rafaeld/Documents/Projetos/Java/Agenda/src/model/VincularRotina.java</file>
         </group>
     </open-files>
