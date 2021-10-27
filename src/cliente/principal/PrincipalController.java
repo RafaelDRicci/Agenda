@@ -19,6 +19,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Usuario;
 import util.mensagens.MensagemSair;
+import util.mensagens.MensagemVincularRotina;
 
 /**
  *
@@ -165,10 +166,20 @@ public class PrincipalController {
         vincularRotina.setVisible(true);
     }
 
-    public void listarRotina() {
+    public void listarRotinasVinculadas() {
         ListarRotinaView listarRotina = new ListarRotinaView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
+        MensagemVincularRotina mensagem = new MensagemVincularRotina();
+        
+        try {
+            
+            mensagem.codificarRequestList();
+            usuario.enviarMensagem(mensagem.getMensagem());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void desvincularRotina() {

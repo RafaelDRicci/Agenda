@@ -149,10 +149,10 @@ public class MensagemRotinaTest {
             rotinasEnviadas.add(rotina);
         }
        
-        mensagemEnviada.codificarList(rotinasEnviadas);
+        mensagemEnviada.codificarListAll(rotinasEnviadas);
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
         
-        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarList();
+        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarListAll();
         
         int esperado = rotinasEnviadas.size();
         int obtido = rotinasRecebidas.size();
@@ -171,9 +171,9 @@ public class MensagemRotinaTest {
             
         }
         
-        mensagemEnviada.codificarList(rotinasEnviadas);
+        mensagemEnviada.codificarListAll(rotinasEnviadas);
         MensagemRotina mensagemRecebida = new MensagemRotina(mensagemEnviada.getMensagem());
-        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarList();
+        List<Rotina> rotinasRecebidas = mensagemRecebida.decodificarListAll();
         
         boolean igual = true;
         

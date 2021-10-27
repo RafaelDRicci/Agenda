@@ -71,7 +71,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jButtonNovaRotina = new javax.swing.JButton();
         jButtonEditarRotina = new javax.swing.JButton();
         jButtonVincularRotina = new javax.swing.JButton();
-        jButtonListarRotinas = new javax.swing.JButton();
+        jButtonListarRotinasVinculadas = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jScrollPaneRotinas = new javax.swing.JScrollPane();
         jTableRotinas = new javax.swing.JTable();
@@ -242,15 +242,15 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jPanelBotoes.add(jButtonVincularRotina);
 
-        jButtonListarRotinas.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonListarRotinas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonListarRotinas.setText("Listar");
-        jButtonListarRotinas.addActionListener(new java.awt.event.ActionListener() {
+        jButtonListarRotinasVinculadas.setBackground(new java.awt.Color(151, 154, 0));
+        jButtonListarRotinasVinculadas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButtonListarRotinasVinculadas.setText("Vinculadas");
+        jButtonListarRotinasVinculadas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonListarRotinasActionPerformed(evt);
+                jButtonListarRotinasVinculadasActionPerformed(evt);
             }
         });
-        jPanelBotoes.add(jButtonListarRotinas);
+        jPanelBotoes.add(jButtonListarRotinasVinculadas);
 
         jButtonSair.setBackground(new java.awt.Color(151, 154, 0));
         jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -365,9 +365,9 @@ public class PrincipalView extends javax.swing.JFrame {
         controller.vincularRotina();
     }//GEN-LAST:event_jButtonVincularRotinaActionPerformed
 
-    private void jButtonListarRotinasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarRotinasActionPerformed
-        controller.listarRotina();
-    }//GEN-LAST:event_jButtonListarRotinasActionPerformed
+    private void jButtonListarRotinasVinculadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarRotinasVinculadasActionPerformed
+        controller.listarRotinasVinculadas();
+    }//GEN-LAST:event_jButtonListarRotinasVinculadasActionPerformed
 
     private void jButtonJustificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJustificarActionPerformed
         controller.desvincularRotina();
@@ -419,7 +419,7 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JButton jButtonEditarRotina;
     private javax.swing.JButton jButtonFeito;
     private javax.swing.JButton jButtonJustificar;
-    private javax.swing.JButton jButtonListarRotinas;
+    private javax.swing.JButton jButtonListarRotinasVinculadas;
     private javax.swing.JButton jButtonNovaRotina;
     private javax.swing.JButton jButtonReagendar;
     private javax.swing.JButton jButtonSair;

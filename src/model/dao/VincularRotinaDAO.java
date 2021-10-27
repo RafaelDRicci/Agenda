@@ -468,13 +468,25 @@ public class VincularRotinaDAO{
         stm.execute();
         stm.close();
     }
+    
+    public List<VincularRotina> listAll() throws SQLException{
+        String sql = "Select * from AGENDA_VINCULARROTINA";
+        PreparedStatement stm = con.prepareStatement(sql);
+        return list(stm);
+    }
  
-    public List<VincularRotina> listAll() throws SQLException, NoSuchElementException {
+     public List<VincularRotina> listAllUsuario(Usuario usuario) throws SQLException {
+        
+         String sql = " Select * from AGENDA_VINCULARROTINA where CODUSUARIO = ?";
+        PreparedStatement stm = con.prepareStatement(sql);
+        stm.setInt(1, usuario.getCodUsuario());
+        return list(stm);
+        
+    }
+    
+    public List<VincularRotina> list(PreparedStatement stm) throws SQLException {
         List<VincularRotina> lista = new ArrayList<>();
         
-        String sql = "Select * from AGENDA_VINCULARROTINA";
-        
-        PreparedStatement stm = con.prepareStatement(sql);
         ResultSet rs = stm.executeQuery();
         
         while(rs.next()){
@@ -589,6 +601,5 @@ public class VincularRotinaDAO{
         
         return lista;
     }
-    
     
 }

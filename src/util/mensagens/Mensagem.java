@@ -10,14 +10,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.NoSuchElementException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Rotina;
 import util.communication.CodificaMensagem;
 
 /**
@@ -81,6 +81,10 @@ public abstract class Mensagem<T> {
         dos.writeByte(codigo);
     }
     
+    public byte getByte() throws IOException{
+        return dis.readByte();  
+    }
+    
     
     /**
      * 
@@ -92,6 +96,10 @@ public abstract class Mensagem<T> {
         dos.writeInt(i);
     }
     
+    public int getInt() throws IOException{
+        return dis.readInt();
+    }
+    
     /**
      * 
      * @param b
@@ -100,6 +108,10 @@ public abstract class Mensagem<T> {
      */
     public void setBoolean(boolean b) throws IOException{
         dos.writeBoolean(b);
+    }
+    
+    public boolean getBoolean() throws IOException{
+        return dis.readBoolean();
     }
     
     /**
@@ -122,12 +134,33 @@ public abstract class Mensagem<T> {
         }
     }
     
+    public String getString() throws IOException{
+        
+        int size = dis.readInt();
+        String string = "";
+        for(int i = 0; i < size; i++){
+            string += dis.readChar();
+        }
+            
+        return string;
+    }
+    
     public void setData(Date data) throws IOException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String string = sdf.format(data);
         setString(string);
     }
     
+    
+    public Date getData() throws IOException{
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return sdf.parse(getString());
+        } catch (ParseException ex) {
+            Logger.getLogger(Mensagem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     public void setByteArray(byte[] byteArray) throws IOException{
         int tamanho = byteArray.length;
@@ -144,61 +177,6 @@ public abstract class Mensagem<T> {
         }
         
         return array;
-    }
-    
-    /**
-     * 
-     * @return 
-     * Vetor de bytes
-     */
-    public byte[] getMensagem(){
-        return baos.toByteArray();
-    }
-    
-    
-    /**
-     * Finaliza os componentes abertos
-     */
-    public void close(){
-        try {
-            baos.close();
-            dos.close();
-        } catch (IOException ex) {
-            Logger.getLogger(CodificaMensagem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    public byte getByte() throws IOException{
-        return dis.readByte();  
-    }
-        
-    public int getInt() throws IOException{
-        return dis.readInt();
-    }
-    
-    public boolean getBoolean() throws IOException{
-        return dis.readBoolean();
-    }
-    
-    public String getString() throws IOException{       
-        int size = dis.readInt();
-        String string = "";
-        for(int i = 0; i < size; i++){
-            string += dis.readChar();
-        }
-            
-        return string;
-    }
-    
-    public Date getData() throws IOException{
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            return sdf.parse(getString());
-        } catch (ParseException ex) {
-            Logger.getLogger(Mensagem.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
     }
     
     public void setIntArray(int[] intArray) throws IOException{
@@ -225,7 +203,55 @@ public abstract class Mensagem<T> {
         return array;
     }
     
-
+    /**
+     * 
+     * @return 
+     * Vetor de bytes
+     */
+    public byte[] getMensagem(){
+        return baos.toByteArray();
+    }
+    
+    
+    /**
+     * Finaliza os componentes abertos
+     */
+    public void close(){
+        try {
+            baos.close();
+            dos.close();
+        } catch (IOException ex) {
+            Logger.getLogger(CodificaMensagem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void setList(List<T> objetos) throws IOException{
+        
+        int numeroRotinas = objetos.size();
+        setInt(numeroRotinas);
+        //codificando cada objeto
+        for(T objeto: objetos){
+            setObjeto(objeto);
+        }
+        
+    }
+    
+    public  List<T> getList() throws IOException{
+        
+       //Faz a leitura do número de objetos
+       int numeroObjetos = getInt();
+       //Cria uma Lista de objetos
+       List<T> objetos = new ArrayList<>();
+       //faz um loop para leitura de cada objeto
+       for(int i = 0; i < numeroObjetos; i++){
+           T objeto = getObjeto();
+           objetos.add(objeto);
+       }
+       return objetos;
+   
+    }
+    
     public void resetBAOS(){
         this.baos.reset();
     }
@@ -234,6 +260,8 @@ public abstract class Mensagem<T> {
     public abstract void setObjeto(T objeto) throws IOException;
     
     public abstract T getObjeto() throws IOException;
+    
+
     
     public abstract void codificarCreate(T objeto) throws IOException;
     
@@ -250,11 +278,6 @@ public abstract class Mensagem<T> {
     public abstract void codificarDelete(T objeto) throws IOException;
     
     public abstract T decodificarDelete() throws IOException;
-    
-    public abstract void codificarRequestList() throws IOException;
-    
-    public abstract void codificarList(List<T> list) throws IOException;
-    
-    public abstract List<T> decodificarList()throws IOException;    
+
  
 }

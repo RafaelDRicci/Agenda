@@ -101,39 +101,24 @@ public class MensagemUsuario extends Mensagem<Usuario> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void codificarRequestList() throws IOException {
+   
+    public void requestListAll() throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
     }
 
-    @Override
-    public void codificarList(List<Usuario> usuarios) throws IOException {
+    public void codificarListAll(List<Usuario> usuarios) throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
-        //numero de usuarios
-        setInt(usuarios.size());
-        //percorre a lista de usuários, codificando cada um
-        for(Usuario usuario : usuarios){
-            setObjeto(usuario);
-        }
+        setList(usuarios);
     }
     
-    @Override
-    public List<Usuario> decodificarList() throws IOException {
+    public List<Usuario> decodificarListAll() throws IOException {
         
         if(codMensagem != 3) throw new IllegalArgumentException("Código da mensagem inválido para Mensagem Usuário");
         //Verifica se o código (5), código de listar usuário
         if(!(codOperacao == 5)) throw new IllegalArgumentException("Código inválido para Listar Usuários");
-        //numero de usuarios
-        int numeroUsuarios = getInt();
-        //lista de usuários 
-        List<Usuario> usuarios = new ArrayList<>();
-        for(int i = 0; i < numeroUsuarios; i++ ){
-           Usuario usuario = getObjeto();
-           usuarios.add(usuario);
-        }
-        return usuarios;
+        return getList();
     }
     
     public void codificaUsuario(Usuario usuario) throws IOException{

@@ -44,14 +44,14 @@ public abstract class RequisicaoCliente {
                 //listar rotinas
                 System.out.println("PREENCER ROTINAS");
                 MensagemRotina mensagemRotinas = new MensagemRotina(mensagem);
-                List<Rotina> rotinas = mensagemRotinas.decodificarList();
+                List<Rotina> rotinas = mensagemRotinas.decodificarListAll();
                 principal.getVincularRotina().preencherRotinas(rotinas);
                 break;
             case 3:
                 //listar usuários
                 System.out.println("LISTAR USUÁRIO");
                 MensagemUsuario mensagemUsuario = new MensagemUsuario(mensagem);
-                List<Usuario> usuarios = mensagemUsuario.decodificarList();
+                List<Usuario> usuarios = mensagemUsuario.decodificarListAll();
                 principal.getVincularRotina().preencherUsuarios(usuarios);
             }
             

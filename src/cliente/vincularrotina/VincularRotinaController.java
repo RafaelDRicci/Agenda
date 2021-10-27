@@ -7,7 +7,6 @@ package cliente.vincularrotina;
 
 import cliente.login.LoginController;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +16,7 @@ import model.Usuario;
 import model.VincularRotina;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemUsuario;
+import util.mensagens.MensagemVincularRotina;
 
 
 /**
@@ -51,7 +51,7 @@ public class VincularRotinaController {
             MensagemRotina mensagemRotina = new MensagemRotina();
            
             try {
-                mensagemRotina.codificarRequestList();
+                mensagemRotina.requestListAll();
                 usuario.enviarMensagem(mensagemRotina.getMensagem());
                 
             } catch (IOException ex) {
@@ -73,7 +73,7 @@ public class VincularRotinaController {
         MensagemUsuario mensagemUsuario = new MensagemUsuario();
 
             try {
-                mensagemUsuario.codificarRequestList();
+                mensagemUsuario.requestListAll();
                 usuario.enviarMensagem(mensagemUsuario.getMensagem());
 
             } catch (IOException ex) {
@@ -102,6 +102,17 @@ public class VincularRotinaController {
     }
 
     void registrarVinculacao() {
-        VincularRotina VincularRotina = helper.obterVinculacao();
+        try{
+            
+            VincularRotina vinculacao = helper.obterVinculacao();
+            MensagemVincularRotina mensagem = new MensagemVincularRotina();
+            mensagem.codificarCreate(vinculacao);
+            usuario.enviarMensagem(mensagem.getMensagem());
+            
+        } catch(Exception ex){
+            JOptionPane.showMessageDialog(view, ex.getMessage(), "Erro ao Salvar!",  0 );
+        }
+        
+        
     }
 }

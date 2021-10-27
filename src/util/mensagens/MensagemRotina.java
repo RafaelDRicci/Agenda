@@ -121,34 +121,32 @@ public class MensagemRotina extends Mensagem<Rotina>{
     }
     
     /**
-     * Requisição da lista de rotinas
-     * Código da operação = 0;
+     * Requisição de uma lista de rotinas com todas as rotinas salvas no banco.
+     * A mansagem não possui nenhuma informação além do código da operação, pois apenas faz uma requisição para o sistema
+     * Código da operação = 5;
      * @return
      * @throws IOException 
      */
-    @Override
-    public void codificarRequestList() throws IOException {
+    
+    public void requestListAll() throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
     }
     
     /**
-     * Codificar uma lista de rotinas
+     * Codifica uma lista de rotinas contendo todas as rotinas salvas no banco.
+     * A mensagem possui o código de operação (5) para essa requisição e uma lista de rotinas com todas salvas
+     * no banco. obs: Todos os métodos de listagem são bem parecidos, a única mudança é o valor de codOperação, que informa
+     * ao sistema qual a lista que o usuário solicitou.
      * @param rotinas
      * @return
      * @throws IOException 
      */
-    @Override
-    public void codificarList(List<Rotina> rotinas) throws IOException {
+    
+    public void codificarListAll(List<Rotina> rotinas) throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
-        //número de rotinas
-        int numeroRotinas = rotinas.size();
-        setInt(numeroRotinas);
-        //codificando cada rotina
-        for(Rotina rotina: rotinas){
-            setObjeto(rotina);
-        }
+        setList(rotinas);
     }
     
     /**
@@ -156,21 +154,13 @@ public class MensagemRotina extends Mensagem<Rotina>{
      * @return
      * @throws IOException 
      */
-    @Override
-    public List<Rotina> decodificarList() throws IOException {
+    
+    public List<Rotina> decodificarListAll() throws IOException {
         
        if(codMensagem != 2) throw new IllegalArgumentException("Código inválido para Rotina");
-       if(codOperacao != 5) throw new IllegalArgumentException("Código inválido para operação Listar Rotinas");
-       //Faz a leitura do número de rotinas
-       int numeroRotinas = getInt();
-       //Cria uma Lista de rotinas
-       List<Rotina> rotinas = new ArrayList<>();
-       //faz um loop para leitura de cada rotina
-       for(int i = 0; i < numeroRotinas; i++){
-           Rotina rotina = getObjeto();
-           rotinas.add(rotina);
-       }
-       return rotinas;
+       if(codOperacao != 5) throw new IllegalArgumentException("Código inválido para operação Listar Todas as Rotinas");
+       
+       return getList();
     }
     
     public void codificarRotina(Rotina rotina) throws IOException{

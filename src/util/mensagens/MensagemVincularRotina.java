@@ -7,11 +7,9 @@ package util.mensagens;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Set;
 import model.Rotina;
 import model.Usuario;
 import model.VincularRotina;
@@ -240,38 +238,23 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         return vinculacao;
     }
 
-    @Override
     public void codificarRequestList() throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
     }
 
-    @Override
-    public void codificarList(List<VincularRotina> vinculacoes) throws IOException {
+    public void codificarListAll(List<VincularRotina> vinculacoes) throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
-        int numeroVinculacoes = vinculacoes.size();
-        setInt(numeroVinculacoes);
-        for(VincularRotina vincular: vinculacoes){
-            setObjeto(vincular);
-        }
+        setList(vinculacoes);
     }
 
-    @Override
-    public List<VincularRotina> decodificarList() throws IOException {
+    public List<VincularRotina> decodificarListAll() throws IOException {
        
        if(codMensagem != 4) throw new IllegalArgumentException("Código inválido para Vincular Rotina");
        if(codOperacao != 5) throw new IllegalArgumentException("Código inválido para operação Listar");
        
-       int numeroVinculacoes = getInt();
-
-       List<VincularRotina> vinculacoes = new ArrayList<>();
-
-       for(int i = 0; i < numeroVinculacoes; i++){
-           VincularRotina vincular = getObjeto();
-           vinculacoes.add(vincular);
-       }
-       return vinculacoes;
+       return getList();
     }
     
     

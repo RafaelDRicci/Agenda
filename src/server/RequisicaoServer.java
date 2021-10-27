@@ -10,13 +10,16 @@ import java.sql.SQLException;
 import java.util.List;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
 import model.dao.RotinaDAO;
 import model.dao.UsuarioDAO;
+import model.dao.VincularRotinaDAO;
 import util.communication.CodificaMensagem;
 import util.communication.DecodificaMensagem;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemSair;
 import util.mensagens.MensagemUsuario;
+import util.mensagens.MensagemVincularRotina;
 
 /**
  *
@@ -96,15 +99,19 @@ public class RequisicaoServer {
                     UsuarioDAO usuarioDAO = new UsuarioDAO();
                     List<Usuario> todosUsuarios = usuarioDAO.listAll();
                     MensagemUsuario mensagemUsuario = new MensagemUsuario();
-                    mensagemUsuario.codificarList(todosUsuarios);
+                    mensagemUsuario.codificarListAll(todosUsuarios);
                     mensagem.getUsuario().enviarMensagem(mensagemUsuario.getMensagem());
                     break;
+                    
+                case 4:
+                    System.out.println("Vincular Rotina");
+                    trataVincularRotina(mensagem);
             }
             dm.close();
             
     }
     
-        private void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException, SQLException{
+    private void autenticaUsuario(Usuario usuario, String login, String senha) throws IOException, SQLException{
 
                 UsuarioDAO dao = new UsuarioDAO();
                 usuario.setLogin(login);
@@ -177,7 +184,7 @@ public class RequisicaoServer {
                 System.out.println("LIST ALL");
                 List<Rotina> rotinas = rotinaDAO.listAll();
                 MensagemRotina mensagemResposta = new MensagemRotina();
-                mensagemResposta.codificarList(rotinas);
+                mensagemResposta.codificarListAll(rotinas);
                 mensagem.getUsuario().enviarMensagem(mensagemResposta.getMensagem());
                 break;
         }
@@ -185,5 +192,24 @@ public class RequisicaoServer {
         rotinaDAO.closeConnection();
     }
  
+    private void trataVincularRotina(MensagemCliente mensagem) throws IOException, SQLException{
         
+        MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagem.getMensagem());
+        VincularRotina vincular = mensagemRecebida.decodificarCreate();
+        VincularRotinaDAO vincularDAO = new VincularRotinaDAO();
+        switch(mensagemRecebida.getCodOperacao()){
+            case 1:
+               
+                vincularDAO.create(vincular);
+                
+                break;
+            case 7:
+                
+                //List<VincularRotina> vincularRotina = vincularDAO.listAllUsuario(usuario);
+                
+                break;
+                
+        }
+        
+    }
 }

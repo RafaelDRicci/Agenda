@@ -897,8 +897,8 @@ public class VincularRotinaView extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBoxHorarioFixo;
     private javax.swing.JCheckBox jCheckBoxPrioritario;
     private javax.swing.JCheckBox jCheckBoxReagendavel;
-    private javax.swing.JComboBox<Integer> jComboBoxAno;
-    private javax.swing.JComboBox<Integer> jComboBoxDia;
+    private javax.swing.JComboBox<String> jComboBoxAno;
+    private javax.swing.JComboBox<String> jComboBoxDia;
     private javax.swing.JComboBox<String> jComboBoxDiaSemana;
     private javax.swing.JComboBox<String> jComboBoxDiaUtil;
     private javax.swing.JComboBox<Usuario> jComboBoxFuncionario;
@@ -945,7 +945,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         Calendar dataHoje = Calendar.getInstance();
         int ano = dataHoje.get(Calendar.YEAR);
         for(int i = 0; i < 10; i++){
-            jComboBoxAno.addItem(ano+i);
+            jComboBoxAno.addItem(""+(ano+i));
         }
     }
     
@@ -962,7 +962,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         jComboBoxDia.setActionCommand("selecionaMes");
         jComboBoxDia.removeAllItems();
         for(int i = 1; i<= nDias; i++){
-            jComboBoxDia.addItem(i);
+            jComboBoxDia.addItem(""+i);
         }
     }
     
@@ -982,7 +982,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         controller.preencherUsuarios(usuarios);
     }
     
-    public JComboBox<Integer> getjComboBoxDia() {
+    public JComboBox<String> getjComboBoxDia() {
         return jComboBoxDia;
     }
 
@@ -1014,7 +1014,7 @@ public class VincularRotinaView extends javax.swing.JFrame {
         return jComboBoxRotina;
     }
 
-    public JComboBox<Integer> getjComboBoxAno() {
+    public JComboBox<String> getjComboBoxAno() {
         return jComboBoxAno;
     }
 
