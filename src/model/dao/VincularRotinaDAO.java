@@ -475,7 +475,7 @@ public class VincularRotinaDAO{
         return list(stm);
     }
  
-     public List<VincularRotina> listAllUsuario(Usuario usuario) throws SQLException {
+     public List<VincularRotina> listAllVinculadasCom(Usuario usuario) throws SQLException {
         
          String sql = " Select * from AGENDA_VINCULARROTINA where CODUSUARIO = ?";
         PreparedStatement stm = con.prepareStatement(sql);

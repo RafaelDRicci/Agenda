@@ -18,6 +18,7 @@ import model.Usuario;
 import util.communication.DecodificaMensagem;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemUsuario;
+import util.mensagens.MensagemVincularRotina;
 
 /**
  *
@@ -28,9 +29,10 @@ public abstract class RequisicaoCliente {
     public static void trataMensagem(byte[] mensagem, PrincipalView principal) throws IOException{
                
         DecodificaMensagem dm = new DecodificaMensagem(mensagem);
-        byte codigo = dm.getByte();
+        byte codMensagem = dm.getByte();
+        byte codOperacao = dm.getByte();
                
-        switch(codigo){
+        switch(codMensagem){
             case 0:
                 System.out.println("SAIR");
                 principal.getUsuario().desconectar();
@@ -42,7 +44,7 @@ public abstract class RequisicaoCliente {
                 
             case 2:
                 //listar rotinas
-                System.out.println("PREENCER ROTINAS");
+                System.out.println("PREENCHER ROTINAS");
                 MensagemRotina mensagemRotinas = new MensagemRotina(mensagem);
                 List<Rotina> rotinas = mensagemRotinas.decodificarListAll();
                 principal.getVincularRotina().preencherRotinas(rotinas);
@@ -53,7 +55,12 @@ public abstract class RequisicaoCliente {
                 MensagemUsuario mensagemUsuario = new MensagemUsuario(mensagem);
                 List<Usuario> usuarios = mensagemUsuario.decodificarListAll();
                 principal.getVincularRotina().preencherUsuarios(usuarios);
+            case 4:
+                System.out.println("Rotinas Vinculadas");
+                trataVincularRotina(mensagem);
+                break;
             }
+        
             
             
         dm.close();
@@ -116,4 +123,8 @@ public abstract class RequisicaoCliente {
                 Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
     } 
+
+    private static void trataVincularRotina(byte[] mensagem) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

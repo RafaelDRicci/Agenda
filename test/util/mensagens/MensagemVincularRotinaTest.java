@@ -210,10 +210,10 @@ public class MensagemVincularRotinaTest {
             }
             
             MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
-            mensagemEnviada.codificarList(vinculacoesEnviadas);
+            mensagemEnviada.codificarListAll(vinculacoesEnviadas);
             
             MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagemEnviada.getMensagem());
-            List<VincularRotina> vinculacoesRecebidas = mensagemRecebida.decodificarList();
+            List<VincularRotina> vinculacoesRecebidas = mensagemRecebida.decodificarListAll();
             
             boolean igual = true;
             

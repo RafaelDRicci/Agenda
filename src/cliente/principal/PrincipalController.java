@@ -170,12 +170,12 @@ public class PrincipalController {
         ListarRotinaView listarRotina = new ListarRotinaView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
-        MensagemVincularRotina mensagem = new MensagemVincularRotina();
+        MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina();
         
         try {
             
-            mensagem.codificarRequestList();
-            usuario.enviarMensagem(mensagem.getMensagem());
+            mensagemVincularRotina.requestListVinculadasUsuario(usuario);
+            usuario.enviarMensagem(mensagemVincularRotina.getMensagem());
             
         } catch (IOException ex) {
             Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);

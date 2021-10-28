@@ -6,7 +6,6 @@
 package util.mensagens;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -238,7 +237,7 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         return vinculacao;
     }
 
-    public void codificarRequestList() throws IOException {
+    public void requestListAll() throws IOException {
         codOperacao = 5;
         setByte(codOperacao);
     }
@@ -273,5 +272,13 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         
         VincularRotina vincularRotina = getObjeto();
         return vincularRotina;
+    }
+    
+    public void requestListVinculadasUsuario(Usuario usuario) throws IOException{
+        
+        codOperacao = 7;
+        setByte(codOperacao);
+        setUsuario(usuario);
+        
     }
 }

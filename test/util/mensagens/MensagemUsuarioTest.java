@@ -130,7 +130,7 @@ public class MensagemUsuarioTest {
     public void testCodificaRequisicaoListaUsuarios() throws IOException{
         
         MensagemUsuario mensagemRequisicao = new MensagemUsuario();
-        mensagemRequisicao.codificarRequestList();
+        mensagemRequisicao.requestListAll();
                
         int esperado = 5;
         int recebido = mensagemRequisicao.getCodOperacao();
@@ -142,7 +142,7 @@ public class MensagemUsuarioTest {
     public void testDecodificaRequisicaoListaUsuarios() throws IOException{
         
         MensagemUsuario mensagemRequisicao = new MensagemUsuario();
-        mensagemRequisicao.codificarRequestList();
+        mensagemRequisicao.requestListAll();
         
         MensagemUsuario mensagemRecebida = new MensagemUsuario(mensagemRequisicao.getMensagem());
         
@@ -167,10 +167,10 @@ public class MensagemUsuarioTest {
             usuario.setUnidade("Unidade "+i);
         }
         MensagemUsuario mensagemEnviada = new MensagemUsuario();
-        mensagemEnviada.codificarList(usuariosEnviados);
+        mensagemEnviada.codificarListAll(usuariosEnviados);
         
         MensagemUsuario mensagemRecebida = new MensagemUsuario(mensagemEnviada.getMensagem());
-        List<Usuario> usuariosRecebidos = mensagemRecebida.decodificarList();
+        List<Usuario> usuariosRecebidos = mensagemRecebida.decodificarListAll();
         
         int esperado = usuariosEnviados.size();
         int obtido = usuariosRecebidos.size();
@@ -195,10 +195,10 @@ public class MensagemUsuarioTest {
             usuariosEnviados.add(usuario);
         }
         MensagemUsuario mensagemEnviada = new MensagemUsuario();
-        mensagemEnviada.codificarList(usuariosEnviados);
+        mensagemEnviada.codificarListAll(usuariosEnviados);
         
         MensagemUsuario mensagemRecebida = new MensagemUsuario(mensagemEnviada.getMensagem());
-        List<Usuario> usuariosRecebidos = mensagemRecebida.decodificarList();
+        List<Usuario> usuariosRecebidos = mensagemRecebida.decodificarListAll();
         
         boolean igual = true;
         for(int i = 0; i < 5; i++){
