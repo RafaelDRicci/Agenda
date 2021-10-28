@@ -37,6 +37,7 @@ public class PrincipalController {
     private Usuario usuario;
     private LinkedBlockingQueue<byte[]> filaMensagens;
     private LoginView login;
+    ListarRotinaView listarRotina;
 
     public PrincipalController(PrincipalView view) {
         this.view = view;
@@ -167,14 +168,14 @@ public class PrincipalController {
     }
 
     public void listarRotinasVinculadas() {
-        ListarRotinaView listarRotina = new ListarRotinaView();
+        listarRotina = new ListarRotinaView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
         MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina();
         
         try {
             
-            mensagemVincularRotina.requestListVinculadasUsuario(usuario);
+            mensagemVincularRotina.requestListAllVinculadasComUsuario(usuario);
             usuario.enviarMensagem(mensagemVincularRotina.getMensagem());
             
         } catch (IOException ex) {
@@ -200,6 +201,10 @@ public class PrincipalController {
 
     public void setVincularRotina(VincularRotinaView vincularRotina) {
         this.vincularRotina = vincularRotina;
+    }
+
+    public ListarRotinaView getListarRotinaView() {
+        return listarRotina;
     }
     
 }

@@ -205,7 +205,10 @@ public class RequisicaoServer {
                 break;
             case 7:
                 
-                List<VincularRotina> vincularRotina = vincularDAO.listAllVinculadasCom( mensagem.getUsuario());
+                List<VincularRotina> rotinasVinculadas = vincularDAO.listAllVinculadasCom(mensagem.getUsuario());
+                MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
+                mensagemEnviada.codificarListAllVinculadasComUsuario(rotinasVinculadas);
+                mensagem.getUsuario().enviarMensagem(mensagemEnviada.getMensagem());
                 
                 break;
                 

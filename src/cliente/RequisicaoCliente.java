@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Rotina;
 import model.Usuario;
+import model.VincularRotina;
 import util.communication.DecodificaMensagem;
 import util.mensagens.MensagemRotina;
 import util.mensagens.MensagemUsuario;
@@ -30,7 +31,6 @@ public abstract class RequisicaoCliente {
                
         DecodificaMensagem dm = new DecodificaMensagem(mensagem);
         byte codMensagem = dm.getByte();
-        byte codOperacao = dm.getByte();
                
         switch(codMensagem){
             case 0:
@@ -57,18 +57,12 @@ public abstract class RequisicaoCliente {
                 principal.getVincularRotina().preencherUsuarios(usuarios);
             case 4:
                 System.out.println("Rotinas Vinculadas");
-                trataVincularRotina(mensagem);
+                trataVincularRotina(principal, mensagem);
                 break;
-            }
-        
-            
-            
-        dm.close();
-            
-            
-           
-        
+            } 
+        dm.close();       
     }
+    
     private static void logar(PrincipalView principal, DecodificaMensagem dm){
         
             Usuario usuario = principal.getUsuario();
@@ -124,7 +118,19 @@ public abstract class RequisicaoCliente {
             }
     } 
 
-    private static void trataVincularRotina(byte[] mensagem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void trataVincularRotina(PrincipalView principal, byte[] mensagem) throws IOException {
+        
+        
+        MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina(mensagem);
+        
+        switch(mensagemVincularRotina.getCodOperacao()){
+            case 7:
+                
+                List<VincularRotina> rotinasVinculadas = mensagemVincularRotina.decodificarListAllVinculadasComUsuario();
+                principal.getListarRotinaView().preencherVincularRotinas(rotinasVinculadas);
+                
+                break;
+        }
+        
     }
 }

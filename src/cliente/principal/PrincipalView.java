@@ -5,6 +5,7 @@
  */
 package cliente.principal;
 
+import cliente.listarrotina.ListarRotinaView;
 import cliente.login.LoginView;
 import cliente.vincularrotina.VincularRotinaView;
 import java.util.Locale;
@@ -502,6 +503,10 @@ public class PrincipalView extends javax.swing.JFrame {
 
     public VincularRotinaView getVincularRotina() {
         return controller.getVincularRotina();
+    }
+
+    public ListarRotinaView getListarRotinaView() {
+        return controller.getListarRotinaView();
     }
     
     

@@ -124,9 +124,6 @@ public class Servidor{
         
     }
     
-    
-    
-
     public static void main(String [] args){
         Servidor Servidor = new Servidor();
         Servidor.start();

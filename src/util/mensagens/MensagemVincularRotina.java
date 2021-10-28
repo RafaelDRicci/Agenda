@@ -274,11 +274,29 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
         return vincularRotina;
     }
     
-    public void requestListVinculadasUsuario(Usuario usuario) throws IOException{
+    public void requestListAllVinculadasComUsuario(Usuario usuario) throws IOException{
         
         codOperacao = 7;
         setByte(codOperacao);
         setUsuario(usuario);
+        
+    }
+    
+    public void codificarListAllVinculadasComUsuario(List<VincularRotina> rotinasVinculadas) throws IOException{
+        
+        if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
+        if(codOperacao != 7) throw new IllegalArgumentException("Código de operação inválido para Decodificar Vincular Rotina com Usuário");
+        
+        setList(rotinasVinculadas);
+        
+    }
+
+    public List<VincularRotina> decodificarListAllVinculadasComUsuario() throws IOException {
+        
+        if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
+        if(codOperacao != 7) throw new IllegalArgumentException("Código de operação inválido para Decodificar Vincular Rotina com Usuário");
+        
+        return getList();
         
     }
 }
