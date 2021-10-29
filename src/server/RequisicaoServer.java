@@ -195,11 +195,12 @@ public class RequisicaoServer {
     private void trataVincularRotina(MensagemCliente mensagem) throws IOException, SQLException{
         
         MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagem.getMensagem());
-        VincularRotina vincular = mensagemRecebida.decodificarCreate();
         VincularRotinaDAO vincularDAO = new VincularRotinaDAO();
+        
         switch(mensagemRecebida.getCodOperacao()){
             case 1:
-               
+                
+                VincularRotina vincular = mensagemRecebida.decodificarCreate();
                 vincularDAO.create(vincular);
                 
                 break;

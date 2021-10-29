@@ -6,6 +6,8 @@
 package cliente.listarrotina;
 
 import cliente.salvarrotina.SalvarRotinaView;
+import java.util.List;
+import model.VincularRotina;
 
 /**
  *
@@ -29,6 +31,10 @@ public class ListarRotinaController {
         SalvarRotinaView salvarRotina = new SalvarRotinaView();
         salvarRotina.setLocationRelativeTo(view);
         salvarRotina.setVisible(true);
+    }
+
+    void preencheRotinasVinculadas(List<VincularRotina> rotinasVinculadas) {
+        helper.preencherRotinasVinculadas(rotinasVinculadas);
     }
     
 }

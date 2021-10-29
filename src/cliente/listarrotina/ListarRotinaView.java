@@ -101,6 +101,21 @@ public class ListarRotinaView extends javax.swing.JFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -174,12 +189,8 @@ public class ListarRotinaView extends javax.swing.JFrame {
     private javax.swing.JTable jTableRotinas;
     // End of variables declaration//GEN-END:variables
 
-    public void preencherVincularRotinas(List<VincularRotina> rotinasVinculadas) {
-        String mensagem = "";
-        for(VincularRotina vinculada : rotinasVinculadas){
-            mensagem += vinculada.toString()+"\n";
-        }
-        JOptionPane.showMessageDialog(this, mensagem);
+    public void preencherVincularRotinas(List<VincularRotina> rotinasVinculadas) {       
+        controller.preencheRotinasVinculadas(rotinasVinculadas);
     }
 
 }

@@ -284,8 +284,8 @@ public class MensagemVincularRotina extends Mensagem<VincularRotina>{
     
     public void codificarListAllVinculadasComUsuario(List<VincularRotina> rotinasVinculadas) throws IOException{
         
-        if(codMensagem != 4) throw new IllegalArgumentException("Código de mensagem inválido para Mensagem Vincular Rotina");
-        if(codOperacao != 7) throw new IllegalArgumentException("Código de operação inválido para Decodificar Vincular Rotina com Usuário");
+        codOperacao = 7;
+        setByte(codOperacao);
         
         setList(rotinasVinculadas);
         
