@@ -8,7 +8,7 @@ package cliente.principal;
 import cliente.RequisicaoCliente;
 import cliente.agendarrotina.AgendarRotinaView;
 import cliente.justificarrotina.JustificarRotinaView;
-import cliente.listarrotina.ListarRotinaVinculadasView;
+import cliente.listarvincularrotina.ListarRotinaVinculadasView;
 import cliente.login.LoginController;
 import cliente.login.LoginView;
 import cliente.salvarrotina.SalvarRotinaView;

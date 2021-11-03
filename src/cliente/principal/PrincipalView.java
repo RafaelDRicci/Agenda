@@ -5,7 +5,7 @@
  */
 package cliente.principal;
 
-import cliente.listarrotina.ListarRotinaVinculadasView;
+import cliente.listarvincularrotina.ListarRotinaVinculadasView;
 import cliente.login.LoginView;
 import cliente.vincularrotina.VincularRotinaView;
 import java.util.Locale;

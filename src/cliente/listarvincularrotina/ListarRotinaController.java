@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cliente.listarrotina;
+package cliente.listarvincularrotina;
 
 import cliente.salvarrotina.SalvarRotinaView;
 import java.util.List;

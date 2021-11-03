@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package cliente.listarrotina;
+package cliente.listarvincularrotina;
 
 import java.util.List;
 import javax.swing.JOptionPane;
