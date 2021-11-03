@@ -80,11 +80,27 @@ public class VincularRotina {
     public void setPeriodo(String periodo) {
         this.periodo = periodo;
     }
-    
+
     @Override
-    public String toString(){
-        return this.rotina + " vinculada para " + this.usuario + " com período " + periodo;
+    public String toString() {
+        String stringHorarios = "";
+        for(int horario: horarios){
+            if(stringHorarios.equals("")){
+                stringHorarios += horario+"h";
+            }else stringHorarios += " "+horario+"h";
+            
+        }
+        return 
+                "Usuario: " + usuario + "\n"
+              + "Rotina: " + rotina + "\n"
+              + "Prioritario: " + (prioritario ? " Sim" : " Não") + "\n"
+              + "Reagendavel: " + (reagendavel ? " Sim" : " Não") + "\n"
+              + "Horario Fixo: " + (horarioFixo ? " Sim" : " Não") + "\n"
+              + "Horarios: " + stringHorarios + "\n"
+              + "Periodo: " + periodo;
     }
+    
+
     
     public boolean comparaValoresArraysInt(int[] array1, int[] array2){
         
@@ -117,6 +133,16 @@ public class VincularRotina {
         
         return igual;
 
+    }
+    
+    
+    public String converteHorasEmString(){
+        String horas = "";
+        for (int i = 0; i < horarios.length; i++){
+            horas += horarios[i]+"h ";
+        }
+        
+        return horas;
     }
     
     public boolean igual(VincularRotina vincularRotina){

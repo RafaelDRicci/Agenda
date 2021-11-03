@@ -40,7 +40,8 @@ public class DataUnica extends VincularRotina{
     @Override
     public String toString(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy - EEEE");
-        return super.toString() + ": "+sdf.format(data.getTime());
+        return super.toString() + "\n"
+                +sdf.format(data.getTime());
     }
     
 }

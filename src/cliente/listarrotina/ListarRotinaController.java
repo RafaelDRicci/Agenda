@@ -15,10 +15,10 @@ import model.VincularRotina;
  */
 public class ListarRotinaController {
 
-    private ListarRotinaView view;
+    private ListarRotinaVinculadasView view;
     private ListarRotinaHelper helper;
     
-    ListarRotinaController(ListarRotinaView view) {
+    ListarRotinaController(ListarRotinaVinculadasView view) {
         this.view = view;
         helper = new ListarRotinaHelper(view);
     }
@@ -35,6 +35,10 @@ public class ListarRotinaController {
 
     void preencheRotinasVinculadas(List<VincularRotina> rotinasVinculadas) {
         helper.preencherRotinasVinculadas(rotinasVinculadas);
+    }
+
+    void exibeItemSelecionado() {
+        helper.exibeRotinaVinculadaSelecionada();
     }
     
 }

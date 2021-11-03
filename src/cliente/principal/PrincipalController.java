@@ -8,7 +8,7 @@ package cliente.principal;
 import cliente.RequisicaoCliente;
 import cliente.agendarrotina.AgendarRotinaView;
 import cliente.justificarrotina.JustificarRotinaView;
-import cliente.listarrotina.ListarRotinaView;
+import cliente.listarrotina.ListarRotinaVinculadasView;
 import cliente.login.LoginController;
 import cliente.login.LoginView;
 import cliente.salvarrotina.SalvarRotinaView;
@@ -37,7 +37,7 @@ public class PrincipalController {
     private Usuario usuario;
     private LinkedBlockingQueue<byte[]> filaMensagens;
     private LoginView login;
-    ListarRotinaView listarRotina;
+    ListarRotinaVinculadasView listarRotina;
 
     public PrincipalController(PrincipalView view) {
         this.view = view;
@@ -168,7 +168,7 @@ public class PrincipalController {
     }
 
     public void listarRotinasVinculadas() {
-        listarRotina = new ListarRotinaView();
+        listarRotina = new ListarRotinaVinculadasView();
         listarRotina.setLocationRelativeTo(view);
         listarRotina.setVisible(true);
         MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina();
@@ -203,8 +203,24 @@ public class PrincipalController {
         this.vincularRotina = vincularRotina;
     }
 
-    public ListarRotinaView getListarRotinaView() {
+    public ListarRotinaVinculadasView getListarRotinaView() {
         return listarRotina;
+    }
+
+    void listarTodas() {
+        listarRotina = new ListarRotinaVinculadasView();
+        listarRotina.setLocationRelativeTo(view);
+        listarRotina.setVisible(true);
+        MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina();
+        
+        try {
+            
+            mensagemVincularRotina.requestListAll();
+            usuario.enviarMensagem(mensagemVincularRotina.getMensagem());
+            
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

@@ -120,14 +120,20 @@ public abstract class RequisicaoCliente {
 
     private static void trataVincularRotina(PrincipalView principal, byte[] mensagem) throws IOException {
         
-        
+        List<VincularRotina> rotinasVinculadas;
         MensagemVincularRotina mensagemVincularRotina = new MensagemVincularRotina(mensagem);
         
         switch(mensagemVincularRotina.getCodOperacao()){
+            case 5:
+                
+                rotinasVinculadas = mensagemVincularRotina.decodificarListAll();
+                principal.getListarRotinaVinculadasView().preencherVincularRotinas(rotinasVinculadas);
+                
+                break;
             case 7:
                 
-                List<VincularRotina> rotinasVinculadas = mensagemVincularRotina.decodificarListAllVinculadasComUsuario();
-                principal.getListarRotinaView().preencherVincularRotinas(rotinasVinculadas);
+                rotinasVinculadas = mensagemVincularRotina.decodificarListAllVinculadasComUsuario();
+                principal.getListarRotinaVinculadasView().preencherVincularRotinas(rotinasVinculadas);
                 
                 break;
         }

@@ -8,17 +8,19 @@ package cliente.listarrotina;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.TableModel;
 import model.VincularRotina;
 
 /**
  *
  * @author rafaeld
  */
-public class ListarRotinaView extends javax.swing.JFrame {
+public class ListarRotinaVinculadasView extends javax.swing.JFrame {
 
     private ListarRotinaController controller;
     
-    public ListarRotinaView() {
+    public ListarRotinaVinculadasView() {
         controller = new ListarRotinaController(this);
         initComponents();
     }
@@ -39,6 +41,7 @@ public class ListarRotinaView extends javax.swing.JFrame {
         jButtonDesvincular = new javax.swing.JButton();
         jButtonEditar = new javax.swing.JButton();
         jButtonVoltar = new javax.swing.JButton();
+        jButtonExibir = new javax.swing.JButton();
         jPanelCentro = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableRotinas = new javax.swing.JTable();
@@ -90,6 +93,16 @@ public class ListarRotinaView extends javax.swing.JFrame {
         });
         jPanelBaixo.add(jButtonVoltar);
 
+        jButtonExibir.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonExibir.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonExibir.setText("Exibir");
+        jButtonExibir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExibirActionPerformed(evt);
+            }
+        });
+        jPanelBaixo.add(jButtonExibir);
+
         jPanelFundo.add(jPanelBaixo, java.awt.BorderLayout.PAGE_END);
 
         jPanelCentro.setBackground(new java.awt.Color(0, 51, 65));
@@ -98,28 +111,28 @@ public class ListarRotinaView extends javax.swing.JFrame {
         jTableRotinas.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTableRotinas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Rotina", "Período", "Horário", "Data"
+                "Rotina", "Período", "Horário"
             }
         ));
         jScrollPane1.setViewportView(jTableRotinas);
@@ -141,6 +154,10 @@ public class ListarRotinaView extends javax.swing.JFrame {
         controller.editarRotina();
     }//GEN-LAST:event_jButtonEditarActionPerformed
 
+    private void jButtonExibirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExibirActionPerformed
+        controller.exibeItemSelecionado();
+    }//GEN-LAST:event_jButtonExibirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -158,20 +175,20 @@ public class ListarRotinaView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ListarRotinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarRotinaVinculadasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ListarRotinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarRotinaVinculadasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ListarRotinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarRotinaVinculadasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ListarRotinaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ListarRotinaVinculadasView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListarRotinaView().setVisible(true);
+                new ListarRotinaVinculadasView().setVisible(true);
             }
         });
     }
@@ -179,6 +196,7 @@ public class ListarRotinaView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDesvincular;
     private javax.swing.JButton jButtonEditar;
+    private javax.swing.JButton jButtonExibir;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelBaixo;
@@ -192,5 +210,15 @@ public class ListarRotinaView extends javax.swing.JFrame {
     public void preencherVincularRotinas(List<VincularRotina> rotinasVinculadas) {       
         controller.preencheRotinasVinculadas(rotinasVinculadas);
     }
+    
+    public void setTableModel(TableModel tm){
+        jTableRotinas.setModel(tm);
+    }
+
+    public JTable getjTableRotinas() {
+        return jTableRotinas;
+    }
+    
+    
 
 }

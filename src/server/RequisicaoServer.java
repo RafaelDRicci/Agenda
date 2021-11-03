@@ -196,6 +196,8 @@ public class RequisicaoServer {
         
         MensagemVincularRotina mensagemRecebida = new MensagemVincularRotina(mensagem.getMensagem());
         VincularRotinaDAO vincularDAO = new VincularRotinaDAO();
+        List<VincularRotina> rotinasVinculadas;
+        MensagemVincularRotina mensagemEnviada;
         
         switch(mensagemRecebida.getCodOperacao()){
             case 1:
@@ -204,10 +206,19 @@ public class RequisicaoServer {
                 vincularDAO.create(vincular);
                 
                 break;
+            case 5:
+                
+                rotinasVinculadas = vincularDAO.listAll();
+                mensagemEnviada = new MensagemVincularRotina();
+                mensagemEnviada.codificarListAll(rotinasVinculadas);
+                mensagem.getUsuario().enviarMensagem(mensagemEnviada.getMensagem());
+                
+                break;
+                
             case 7:
                 
-                List<VincularRotina> rotinasVinculadas = vincularDAO.listAllVinculadasCom(mensagem.getUsuario());
-                MensagemVincularRotina mensagemEnviada = new MensagemVincularRotina();
+                rotinasVinculadas = vincularDAO.listAllVinculadasCom(mensagem.getUsuario());
+                mensagemEnviada = new MensagemVincularRotina();
                 mensagemEnviada.codificarListAllVinculadasComUsuario(rotinasVinculadas);
                 mensagem.getUsuario().enviarMensagem(mensagemEnviada.getMensagem());
                 

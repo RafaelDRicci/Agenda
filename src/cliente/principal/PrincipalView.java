@@ -5,14 +5,13 @@
  */
 package cliente.principal;
 
-import cliente.listarrotina.ListarRotinaView;
+import cliente.listarrotina.ListarRotinaVinculadasView;
 import cliente.login.LoginView;
 import cliente.vincularrotina.VincularRotinaView;
 import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import model.Usuario;
-import model.VincularRotina;
 import util.cliente.ColorirTabelaRotinas;
 
 /**
@@ -56,6 +55,7 @@ public class PrincipalView extends javax.swing.JFrame {
         jButtonFeito = new javax.swing.JButton();
         jButtonJustificar = new javax.swing.JButton();
         jButtonReagendar = new javax.swing.JButton();
+        jButtonSair = new javax.swing.JButton();
         jPanelCentroCentroCentro = new javax.swing.JPanel();
         jLabelNomeRotina = new javax.swing.JLabel();
         jLabelDataRotina = new javax.swing.JLabel();
@@ -69,11 +69,6 @@ public class PrincipalView extends javax.swing.JFrame {
         jTextFieldNomeRotina = new javax.swing.JTextField();
         jLabelEstadoRotina = new javax.swing.JLabel();
         jPanelBotoes = new javax.swing.JPanel();
-        jButtonNovaRotina = new javax.swing.JButton();
-        jButtonEditarRotina = new javax.swing.JButton();
-        jButtonVincularRotina = new javax.swing.JButton();
-        jButtonListarRotinasVinculadas = new javax.swing.JButton();
-        jButtonSair = new javax.swing.JButton();
         jScrollPaneRotinas = new javax.swing.JScrollPane();
         jTableRotinas = new javax.swing.JTable();
         jPanelBaixo = new javax.swing.JPanel();
@@ -81,6 +76,14 @@ public class PrincipalView extends javax.swing.JFrame {
         jLabelCargoUsuario = new javax.swing.JLabel();
         jLabelUnidadeUsuario = new javax.swing.JLabel();
         jPanelDireita = new javax.swing.JPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenuRotinas = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemListAll = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Agenda de Rotinas");
@@ -148,6 +151,16 @@ public class PrincipalView extends javax.swing.JFrame {
         });
         jPanelCentralSuperiorInferior.add(jButtonReagendar);
 
+        jButtonSair.setBackground(new java.awt.Color(151, 158, 0));
+        jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonSair.setText("Sair");
+        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSairActionPerformed(evt);
+            }
+        });
+        jPanelCentralSuperiorInferior.add(jButtonSair);
+
         jPanelCentroCima.add(jPanelCentralSuperiorInferior, java.awt.BorderLayout.PAGE_END);
 
         jPanelCentroCentroCentro.setBackground(new java.awt.Color(0, 54, 65));
@@ -212,57 +225,6 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelBotoes.setBackground(new java.awt.Color(0, 51, 64));
         jPanelBotoes.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 1, new java.awt.Color(151, 158, 0)));
         jPanelBotoes.setLayout(new java.awt.GridLayout(5, 1, 5, 5));
-
-        jButtonNovaRotina.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonNovaRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonNovaRotina.setText("Nova");
-        jButtonNovaRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovaRotinaActionPerformed(evt);
-            }
-        });
-        jPanelBotoes.add(jButtonNovaRotina);
-
-        jButtonEditarRotina.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonEditarRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonEditarRotina.setText("Editar");
-        jButtonEditarRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditarRotinaActionPerformed(evt);
-            }
-        });
-        jPanelBotoes.add(jButtonEditarRotina);
-
-        jButtonVincularRotina.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonVincularRotina.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonVincularRotina.setText("Vincular");
-        jButtonVincularRotina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVincularRotinaActionPerformed(evt);
-            }
-        });
-        jPanelBotoes.add(jButtonVincularRotina);
-
-        jButtonListarRotinasVinculadas.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonListarRotinasVinculadas.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonListarRotinasVinculadas.setText("Vinculadas");
-        jButtonListarRotinasVinculadas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonListarRotinasVinculadasActionPerformed(evt);
-            }
-        });
-        jPanelBotoes.add(jButtonListarRotinasVinculadas);
-
-        jButtonSair.setBackground(new java.awt.Color(151, 154, 0));
-        jButtonSair.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButtonSair.setText("Sair");
-        jButtonSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSairActionPerformed(evt);
-            }
-        });
-        jPanelBotoes.add(jButtonSair);
-
         jPanelCentroCima.add(jPanelBotoes, java.awt.BorderLayout.LINE_START);
 
         jPanelCentro.add(jPanelCentroCima);
@@ -345,30 +307,62 @@ public class PrincipalView extends javax.swing.JFrame {
         jPanelDireita.setBackground(new java.awt.Color(151, 158, 0));
         getContentPane().add(jPanelDireita, java.awt.BorderLayout.LINE_END);
 
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        jMenuRotinas.setText("Rotinas");
+
+        jMenuItem1.setText("Nova");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuRotinas.add(jMenuItem1);
+
+        jMenuItem4.setText("Todas");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenuRotinas.add(jMenuItem4);
+
+        jMenuBar1.add(jMenuRotinas);
+
+        jMenu2.setText("Vinculações");
+
+        jMenuItem3.setText("Vincular Rotina");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem2.setText("Minha Vinculações");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuItemListAll.setText("Listar Todas ");
+        jMenuItemListAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListAllActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemListAll);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         bindingGroup.bind();
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
-        controller.sair();
-    }//GEN-LAST:event_jButtonSairActionPerformed
-
-    private void jButtonNovaRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovaRotinaActionPerformed
-        controller.novaRotina();
-    }//GEN-LAST:event_jButtonNovaRotinaActionPerformed
-
-    private void jButtonEditarRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditarRotinaActionPerformed
-        controller.editarRotina();
-    }//GEN-LAST:event_jButtonEditarRotinaActionPerformed
-
-    private void jButtonVincularRotinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVincularRotinaActionPerformed
-        controller.vincularRotina();
-    }//GEN-LAST:event_jButtonVincularRotinaActionPerformed
-
-    private void jButtonListarRotinasVinculadasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListarRotinasVinculadasActionPerformed
-        controller.listarRotinasVinculadas();
-    }//GEN-LAST:event_jButtonListarRotinasVinculadasActionPerformed
 
     private void jButtonJustificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonJustificarActionPerformed
         controller.desvincularRotina();
@@ -377,6 +371,30 @@ public class PrincipalView extends javax.swing.JFrame {
     private void jButtonReagendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReagendarActionPerformed
         controller.reagendar();
     }//GEN-LAST:event_jButtonReagendarActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        controller.listarRotinasVinculadas();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        controller.vincularRotina();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        controller.novaRotina();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
+        controller.sair();
+    }//GEN-LAST:event_jButtonSairActionPerformed
+
+    private void jMenuItemListAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListAllActionPerformed
+        controller.listarTodas();
+    }//GEN-LAST:event_jMenuItemListAllActionPerformed
 
     
     /**
@@ -417,14 +435,10 @@ public class PrincipalView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditarRotina;
     private javax.swing.JButton jButtonFeito;
     private javax.swing.JButton jButtonJustificar;
-    private javax.swing.JButton jButtonListarRotinasVinculadas;
-    private javax.swing.JButton jButtonNovaRotina;
     private javax.swing.JButton jButtonReagendar;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JButton jButtonVincularRotina;
     private javax.swing.JLabel jLabelAgenda;
     private javax.swing.JLabel jLabelCargoUsuario;
     private javax.swing.JLabel jLabelDataRotina;
@@ -435,6 +449,14 @@ public class PrincipalView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPeriodoRotina;
     private javax.swing.JLabel jLabelRotina;
     private javax.swing.JLabel jLabelUnidadeUsuario;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItemListAll;
+    private javax.swing.JMenu jMenuRotinas;
     private javax.swing.JPanel jPanelBaixo;
     private javax.swing.JPanel jPanelBotoes;
     private javax.swing.JPanel jPanelCentralSuperiorInferior;
@@ -505,7 +527,7 @@ public class PrincipalView extends javax.swing.JFrame {
         return controller.getVincularRotina();
     }
 
-    public ListarRotinaView getListarRotinaView() {
+    public ListarRotinaVinculadasView getListarRotinaVinculadasView() {
         return controller.getListarRotinaView();
     }
     
